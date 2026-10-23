@@ -1,0 +1,1 @@
+{"name":"painting-studio-v1","version":"1.0.0","private":true,"description":"Buildless studio website prototype","scripts":{"check":"node --check dist/app.js","start":"node preview.mjs"}}
