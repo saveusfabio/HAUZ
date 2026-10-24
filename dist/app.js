@@ -2,6 +2,7 @@
   'use strict';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   document.documentElement.classList.add('js');
+  const smoothScroll = window.Lenis ? new window.Lenis({ autoRaf: true, anchors: true, lerp: .085 }) : null;
   const reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {

@@ -103,9 +103,9 @@ Se o conteúdo crescer, ajustar o layout antes de reduzir o tamanho da tipografi
 
 ## 7. Grid e linhas
 
-O container tem quatro colunas iguais no desktop. O início do conteúdo principal cai frequentemente em 25% da largura. Labels podem ocupar a primeira coluna; o conteúdo ocupa as três restantes. No processo e no estúdio, trabalhar com duas metades. No mobile, usar duas faixas de grid e reorganizar todo conteúdo em uma coluna.
+O Cresta usa uma régua comum com quatro colunas iguais: duas linhas definem as margens do conteúdo e outras três indicam as divisões internas. Na captura de 1265 px, observei os limites em aproximadamente x=40 e x=1210, com guias em x=334, 626 e 918. A régua permanece alinhada ao passar do hero para as seções claras. Labels e títulos se posicionam em relação a ela; os elementos não ganham caixas decorativas próprias por causa da grade.
 
-As linhas devem ser discretas, de 1 px, sem dominar a fotografia ou reduzir contraste. Usar divisórias horizontais entre seções e nos accordions. Cruzes de 15 × 15 px aparecem em pontos específicos; não distribuir cruzes aleatoriamente por toda a tela. A leitura desejada é de régua, alinhamento e precisão.
+Na V1, aplicar as guias na mesma largura máxima e nos mesmos gutters em cada seção, com linhas de 1 px a 7% no fundo claro e 10% no hero. Mostrar a borda externa esquerda e direita, além das três guias internas. Sobre a foto, usar branco em baixa opacidade. Em telas estreitas, mudar para duas colunas. As guias ficam abaixo do conteúdo, não viram contornos de cards. Divisórias horizontais permanecem independentes e discretas. Usar cruzes de 15 × 15 px só em pontos específicos.
 
 ## 8. Motion specification
 
@@ -124,13 +124,13 @@ Estes valores são decisões da V1, não medidas de tempo do Cresta.
 | Antes/depois | Troca explícita por botões; fade + Y 5 px; 450 ms | Controle do usuário e comparação clara |
 | Accordion | Abertura nativa; resposta fade + Y 5 px, 350 ms | Sem sacrificar teclado e semântica |
 | Sinal de mais | Rotação da haste vertical; 300 ms | Comunicar aberto/fechado |
-| Âncoras | Scroll suave nativo | Preservar comportamento do navegador |
+| Scroll vertical e âncoras | Lenis 1.3.27, `lerp: .085`, `anchors: true`, `autoRaf: true` | Inércia curta, com âncoras suaves |
 
 ### Scroll e sensação de fluidez
 
-Nesta V1 a roda do mouse e o gesto de toque continuam nativos. Não há interceptação de wheel, transformação do documento inteiro ou biblioteca de scroll virtual. A suavidade vem de ritmo de espaços, revelações com desaceleração, parallax leve e âncoras suaves. O deslocamento nativo também respeita busca da página, histórico, teclado e preferências do usuário.
+Na V1, Lenis mantém o scroll nativo e acrescenta inércia suave à roda do mouse e às âncoras. Gestos de toque continuam no comportamento padrão do dispositivo. Manter `anchors: true` para navegação entre seções e `autoRaf: true` para sincronizar o movimento. O ajuste `.085` é deliberadamente suave, sem travar o deslocamento por um tempo fixo.
 
-Se a próxima revisão pedir uma inércia maior, medir primeiro em mouse e trackpad; só então experimentar uma biblioteca específica. Não afirmar que a V1 replica a física exata do Cresta. Esse parâmetro não foi medido.
+Lenis respeita `prefers-reduced-motion` por padrão: quando o visitante pede movimento reduzido, a interpolação é desativada. A navegação sem JavaScript mantém `scroll-behavior: smooth` como fallback do navegador. Não afirmar que a V1 replica a física exata do Cresta: não foi possível medir sua inércia.
 
 ### Cursor
 
