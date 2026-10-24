@@ -128,7 +128,7 @@ Estes valores são decisões da V1, não medidas de tempo do Cresta.
 
 ### Scroll e sensação de fluidez
 
-Na V1, Lenis mantém o scroll nativo e acrescenta inércia suave à roda do mouse e às âncoras. Gestos de toque continuam no comportamento padrão do dispositivo. Manter `anchors: true` para navegação entre seções e `autoRaf: true` para sincronizar o movimento. O ajuste `.085` é deliberadamente suave, sem travar o deslocamento por um tempo fixo.
+Na V1, Lenis 1.3.27 está hospedado junto aos arquivos locais do Site, mantém o scroll nativo e acrescenta inércia suave à roda do mouse e às âncoras. Gestos de toque continuam no comportamento padrão do dispositivo. Manter `anchors: true` para navegação entre seções e `autoRaf: true` para sincronizar o movimento. O ajuste `.085` é deliberadamente suave, sem travar o deslocamento por um tempo fixo. A licença MIT da dependência está em `docs/LENIS-LICENSE.txt`.
 
 Lenis respeita `prefers-reduced-motion` por padrão: quando o visitante pede movimento reduzido, a interpolação é desativada. A navegação sem JavaScript mantém `scroll-behavior: smooth` como fallback do navegador. Não afirmar que a V1 replica a física exata do Cresta: não foi possível medir sua inércia.
 
