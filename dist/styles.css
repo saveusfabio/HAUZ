@@ -9,3 +9,8 @@
 .grid-lines{--line:rgba(32,35,31,.07);border-left:1px solid var(--line)}
 .hero-frame{--line:rgba(255,255,255,.10)}
 html.lenis.lenis-smooth{scroll-behavior:auto!important}
+
+/* The page grid should guide alignment quietly, never frame the content. */
+.grid-lines{--grid-line:rgba(32,35,31,.045);background-image:linear-gradient(to right,var(--grid-line) 1px,transparent 1px);border-left:0;border-right:0}
+.hero-frame{--grid-line:rgba(255,255,255,.065)}
+@media(max-width:760px){.grid-lines{--grid-line:rgba(32,35,31,.035)}}
