@@ -14,3 +14,10 @@ html.lenis.lenis-smooth{scroll-behavior:auto!important}
 .grid-lines{--grid-line:rgba(32,35,31,.045);background-image:linear-gradient(to right,var(--grid-line) 1px,transparent 1px);border-left:0;border-right:0}
 .hero-frame{--grid-line:rgba(255,255,255,.065)}
 @media(max-width:760px){.grid-lines{--grid-line:rgba(32,35,31,.035)}}
+
+/* Let the construction grid yield anywhere it would visually cross copy. */
+.grid-lines{--grid-line:rgba(32,35,31,.022);background-image:linear-gradient(to right,var(--grid-line) 1px,transparent 1px)}
+.hero-frame{--grid-line:rgba(255,255,255,.04)}
+.section-heading>div,.process-steps,.faq-list{background:var(--paper)}
+.studio-layout>div:last-child{background:#e8ebdf}
+@media(max-width:760px){.grid-lines{--grid-line:rgba(32,35,31,.016)}}
