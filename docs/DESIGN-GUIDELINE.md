@@ -78,11 +78,12 @@ Nossa diferenciação vem do redesign demonstrado, da linguagem específica para
 | Paper | `#f4f4f0` | Fundo com leve calor |
 | Ink | `#20231f` | Texto principal |
 | Muted | `#686c63` | Texto secundário em fundo claro |
-| Grid light | `rgba(32,35,31,.12)` | Linhas no fundo claro |
+| Grid light | `rgba(32,35,31,.022)` | Guias muito discretas no fundo claro |
 | Lime | `#b5d173` | Cursor, CTA final e pequenos detalhes |
 | Dark | `#252d27` | Contato e navegação móvel |
 | Studio wash | `#e8ebdf` | Bloco editorial sobre o estúdio |
-| Grid dark | Branco a 12–15% | Linhas em fundo escuro |
+| Grid hero | `rgba(255,255,255,.04)` | Guias sutis sobre a fotografia do hero |
+| Grid mobile | `rgba(32,35,31,.016)` | Guias ainda mais leves em telas estreitas |
 | Container | Até 1320 px | Quatro colunas principais |
 | Gutters | 48 / 32 / 24 / 20 px | Desktop amplo / intermediário / móvel / muito estreito |
 | Padding de seção | 120 / 90 / 72 px | Desktop / tablet / mobile |
@@ -105,7 +106,11 @@ Se o conteúdo crescer, ajustar o layout antes de reduzir o tamanho da tipografi
 
 O Cresta usa uma régua comum com quatro colunas iguais: duas linhas definem as margens do conteúdo e outras três indicam as divisões internas. Na captura de 1265 px, observei os limites em aproximadamente x=40 e x=1210, com guias em x=334, 626 e 918. A régua permanece alinhada ao passar do hero para as seções claras. Labels e títulos se posicionam em relação a ela; os elementos não ganham caixas decorativas próprias por causa da grade.
 
-Na V1, aplicar as guias na mesma largura máxima e nos mesmos gutters em cada seção, com linhas de 1 px a 7% no fundo claro e 10% no hero. Mostrar a borda externa esquerda e direita, além das três guias internas. Sobre a foto, usar branco em baixa opacidade. Em telas estreitas, mudar para duas colunas. As guias ficam abaixo do conteúdo, não viram contornos de cards. Divisórias horizontais permanecem independentes e discretas. Usar cruzes de 15 × 15 px só em pontos específicos.
+Na V1, as guias seguem a mesma largura máxima e os mesmos gutters do layout, mas sua função é orientar alinhamento sem competir com leitura. Usar linhas internas de 1 px a 2,2% no fundo claro, 4% em branco sobre a fotografia do hero e 1,6% em telas estreitas. Não desenhar bordas verticais externas que emoldurem cada seção.
+
+**A tipografia tem prioridade sobre a grade.** Uma linha não deve atravessar visualmente letras ou parágrafos. Em áreas de texto denso — como etapas do processo, lista de FAQ e coluna editorial do estúdio — o fundo opaco do próprio bloco interrompe a guia, usando exatamente a cor da seção para que a proteção não pareça um cartão. Títulos de seção também recebem esse tratamento quando ocupam a coluna de conteúdo. Assim, as linhas continuam visíveis nos espaços livres e perto de imagens, mas cedem sob a cópia. Divisórias horizontais são independentes e discretas. Usar cruzes de 15 × 15 px só em pontos específicos.
+
+Essa regra foi refinada depois de observar linhas verticais passando por trás de títulos e parágrafos na V1: mesmo com pouco contraste, o cruzamento fazia o texto parecer cortado. Se novos layouts criarem o mesmo conflito, proteger a leitura primeiro e atualizar esta especificação junto com a implementação.
 
 ## 8. Motion specification
 
@@ -142,23 +147,40 @@ Manter o cursor nativo; o ponto é um complemento decorativo. Não capturar cliq
 
 ## 9. Estrutura aprovada e implementação
 
-1. **Hero:** identifica painting contractors; estabelece a promessa; CTA para conversa e link para ver a transformação. A V1 testa “Your work. A better first impression.” como headline e conserva a frase aprovada na descrição.
+1. **Hero:** fala diretamente com empresas de pintura e conecta a qualidade do trabalho à apresentação no site. Copy atual: “You do good work. Your website should show it.” CTA para conversar e link para um redesign demonstrativo.
 2. **Prova visual:** conceito Oak & Co. Painting com estados Before/After. Rótulo explícito de conceito; nunca tratar a demonstração como case real ou como prova de conversão.
-3. **Oferta:** apresentação dos trabalhos, copy, experiência responsiva e caminho para orçamento. Quatro benefícios com escopo compreensível.
-4. **Processo:** Start with your story / Build it together / Make a fresh start. Etapas expansíveis.
-5. **Estúdio:** afinidade com o cuidado de quem pinta. Na ausência de bio/foto fornecida, usar manifesto curto e símbolo provisório; substituir por pessoa real em revisão futura.
-6. **FAQ:** preço, prazo, materiais, domínio, suporte e expectativa de leads. Não inventar valores, prazo fixo ou resultados garantidos.
-7. **Contato:** formulário curto e contexto de próxima etapa. Nesta V1, somente preview local dos dados. Não enviar, armazenar ou prometer retorno automático.
+3. **O que o site precisa fazer:** mostrar trabalhos concluídos, listar serviços e cidades atendidas, funcionar bem no telefone e facilitar o pedido de uma estimativa.
+4. **Processo:** “Tell us about your business / We put the site together / Review it before launch.” Etapas expansíveis, descritas sem jargão de produção.
+5. **Estúdio:** explicar por que um site deve mostrar o cuidado colocado em cada trabalho. Na ausência de bio/foto fornecida, não inventar história do fundador; usar texto provisório e símbolo provisório.
+6. **FAQ:** custo, prazo, materiais necessários, endereço do site, propriedade após o lançamento e expectativa de novos trabalhos. Não inventar valores, prazo fixo ou resultados garantidos.
+7. **Contato:** formulário curto. Nesta V1, somente prévia local da mensagem; o formulário informa com clareza que nada foi enviado nem armazenado.
 
 Os labels numerados começam no primeiro bloco após a abertura, por isso há seis índices além do hero.
 
 ## 10. Copy e tom de voz
 
-Inglês americano simples, específico e seguro. Preferir painting contractors, painting companies, homeowners, craftsmanship, service area e request an estimate. Evitar “home painters” como rótulo principal da categoria, pois pode soar menos natural neste contexto comercial.
+Escrever em inglês americano simples, direto e respeitoso. Falar com quem administra uma empresa de pintura, sem fazê-lo decifrar vocabulário de agência. Preferir frases curtas, verbos concretos e nomes de trabalhos que um pintor e um proprietário de casa reconheçam.
 
-Falar com respeito pelo negócio atual: o trabalho pode ser bom mesmo quando o site está desatualizado. Evitar ridicularizar o site ou presumir incompetência do proprietário. Conectar beleza a clareza, confiança e facilidade de contato; não alegar aumento de receita sem comprovação.
+### Vocabulário do setor
+
+Pesquisa de páginas de agências voltadas a painting contractors encontrou termos recorrentes e compreensíveis: **painting company / painting contractor**, **interior and exterior painting**, **cabinet refinishing**, **finished work**, **prep**, **service area**, **estimate** e **request an estimate**. Esses termos descrevem a atividade e o caminho comercial. Use “painting company” em frases conversacionais e “painting contractor” quando identificar a categoria. Nomeie apenas serviços que o negócio realmente oferece; os exemplos não são uma promessa de escopo para todo cliente.
+
+Amostra consultada em 24/10/2026: [Painter Web Lab](https://painterweblab.com/en/), [PaintingPPC](https://paintingppc.com/services/painting-company-websites/) e [Wasatch Made](https://wasatchmade.com/painting/). A pesquisa serve para entender vocabulário do setor, não para adotar promessas de marketing, claims de desempenho ou o tom de venda dessas empresas.
+
+Uma regra útil de copy: diga qual trabalho a empresa faz, mostre por que isso importa para o cliente da empresa e deixe claro o próximo passo. Exemplo: “Show your finished work. Explain your services. Make it easy to request an estimate.”
+
+### O que evitar
+
+- Jargão de agência ou tecnologia em copy voltada ao pintor: “conversion funnel”, “digital presence”, “lead-generation engine”, “omnichannel”, “AI-powered” e “high-converting”.
+- Generalidades quando há uma palavra concreta disponível: preferir “finished rooms” ou “cabinet refinishing” a “solutions”; “ask for an estimate” a “convert”; “your website address” antes de “domain” quando a explicação precisa ser acessível.
+- Ridicularizar o site atual ou presumir que o trabalho do pintor é ruim. Um site antigo não diminui a qualidade do serviço.
+- Garantir ligações, estimativas ou novos trabalhos sem evidência. Uma boa apresentação ajuda o visitante a entender o negócio e entrar em contato; não controla tráfego, reputação, mercado ou contratação.
 
 Não abrir com IA, revolução, automação ou transformação digital. Não usar “10x leads”, ranking garantido, depoimentos inventados ou números decorativos de clientes. Definir condições comerciais antes de acrescentar preço, planos, garantias ou prazo de entrega.
+
+### Direção atual da copy
+
+A copy da V1 deve soar como uma conversa clara sobre o website e o trabalho de pintura, não como uma promessa abstrata de branding. Exemplo de direção aprovada para o hero: **“You do good work. Your website should show it.”** Abaixo, explicar em linguagem simples o benefício concreto: apresentar trabalhos concluídos, esclarecer serviços e área atendida, e facilitar o pedido de uma estimativa. Revisar esta direção junto com o texto do site quando a oferta comercial for definida.
 
 ## 11. Fotografia
 
@@ -201,3 +223,5 @@ Nome e identidade finais; apresentação real do fundador; escopo e preço; pol�
 ## 15. Instrução para futuras implementações
 
 Preserve a promessa, as sete seções, o grid de construção e o cuidado de movimento. Faça alterações a partir de `dist/index.html`, `dist/styles.css` e `dist/app.js`. Não transformar a página em um template genérico de cards arredondados. Trate efeitos como acabamento: o conteúdo, a clareza e o ritmo devem funcionar antes deles. Mantenha separados fatos observados na referência, escolhas deste projeto e afirmações que ainda precisam de aprovação comercial.
+
+Este guideline é um documento vivo e deve acompanhar o desenvolvimento. Ao introduzir uma nova lógica visual, de interação, movimento, conteúdo ou layout, atualize aqui a decisão, seus valores relevantes e o motivo no mesmo trabalho. Corrija especificações antigas que ficarem contraditórias. Não registre cada detalhe incidental de código: preserve princípios reutilizáveis e sinalize o que ainda é proposta ou decisão pendente. As instruções permanentes para o agente estão em `AGENTS.md`.
