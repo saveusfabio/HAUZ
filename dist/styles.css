@@ -732,3 +732,21 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .hero-paint .paint-picker:hover .paint-chip-mark{border-radius:4px;transform:rotate(-6deg)}
 .hero-paint .paint-picker .paint-chip-mark{background-color:var(--paint-color,#56664e)}
 .hero-paint .paint-picker .paint-story-dot{background:var(--paint-color,#56664e)}
+
+/* Unified paint sample and commercial offer — 31/10/2026 */
+@media(min-width:761px){.hero-paint{height:auto;max-height:none}.hero-paint .hero-frame{min-height:860px;padding-top:128px;row-gap:44px;padding-bottom:24px}}
+.hero-paint .hero-art.paint-sample-card{width:min(100%,460px);justify-self:center;align-self:center;box-sizing:border-box;padding:28px 24px 20px;gap:16px;border:1px solid #20231f20;border-radius:18px;background:linear-gradient(150deg,#fff9,#ffffff30);box-shadow:0 18px 50px -36px #20231f50;overflow:hidden}
+.hero-paint .paint-sample-card .paint-field{width:min(100%,330px);margin:0 auto}
+.hero-paint .paint-sample-card .paint-picker{width:100%;max-width:none;padding:16px 0 0;border:0;border-top:1px solid #20231f22;border-radius:0;background:none;box-shadow:none}
+.hero-paint .paint-sample-card .paint-chip-mark,.hero-paint .paint-sample-card .paint-picker:hover .paint-chip-mark{transform:none;box-shadow:none}
+.hero-paint .paint-sample-card .paint-swatch,.hero-paint .paint-sample-card .paint-swatch.is-selected,.hero-paint .paint-sample-card .paint-swatch:has(+.paint-swatch:hover),.hero-paint .paint-sample-card .paint-swatch:hover+.paint-swatch{transform:none}
+.hero-paint .paint-sample-card .paint-swatch:hover,.hero-paint .paint-sample-card .paint-swatch:focus-visible{transform:translateY(-2px);border-color:var(--swatch);box-shadow:0 0 0 1px var(--swatch),0 5px 12px #20231f12}
+.hero-paint .hero-actions{flex-wrap:wrap}.hero-paint .hero-actions .button{white-space:normal;text-align:left}[aria-disabled=true]{cursor:default}
+.pricing-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid #20231f26;background:#f8f8f3;padding:0}
+.pricing-intro{display:flex;flex-direction:column;align-items:flex-start;padding:clamp(28px,5vw,72px);background:#242d25;color:#f4f4ed;min-height:580px}
+.pricing-intro .eyebrow{color:#d6ddce;margin-bottom:64px}.pricing-intro h2{font-size:clamp(36px,4.1vw,64px);line-height:1.06;text-transform:none;letter-spacing:-.045em}.pricing-intro h2 span{color:#c4d3b9}.pricing-intro>p:not(.eyebrow){font-size:19px;line-height:1.6;margin:28px 0 50px}.pricing-mark{font-size:80px;line-height:1;margin:auto 0 0 auto;color:#c4d3b9}
+.pricing-details{padding:clamp(28px,4vw,64px);min-width:0}.pricing-price{display:flex;align-items:center;gap:24px;margin-bottom:34px}.pricing-price strong{font-size:clamp(64px,7vw,112px);font-weight:450;line-height:1;letter-spacing:-.07em}.pricing-price .mono{font-size:12px;line-height:1.9}
+.pricing-details ul{list-style:none;margin:0 0 32px;padding:0}.pricing-details li{display:flex;gap:14px;border-top:1px solid #20231f23;padding:20px 0;font-size:16px;line-height:1.5}.pricing-details li:before{content:'↗';color:var(--accent-text,#56664e)}
+.pricing-action{width:100%;justify-content:space-between;text-align:left;gap:18px;background:var(--action-accent,#56664e);color:var(--accent-ink,#fff);padding:22px 24px;white-space:normal}.pricing-support{margin-top:32px;padding-top:26px;border-top:1px solid #20231f23;font-size:15px;line-height:1.6}.pricing-support p+p{margin-top:8px;color:#62685e}
+@media(max-width:760px){.hero-paint .hero-art.paint-sample-card{max-width:360px;padding:20px 16px 14px;gap:12px}.hero-paint .paint-sample-card .paint-field{width:210px;max-width:100%}.pricing-card{grid-template-columns:1fr}.pricing-intro{min-height:0;padding:28px}.pricing-intro .eyebrow{margin-bottom:34px}.pricing-intro h2{font-size:38px}.pricing-mark{font-size:50px}.pricing-details{padding:28px 24px}.pricing-price strong{font-size:80px}}
+@media(prefers-reduced-motion:reduce){.hero-paint .paint-sample-card .paint-swatch:hover,.hero-paint .paint-sample-card .paint-swatch:focus-visible{transform:none}}
