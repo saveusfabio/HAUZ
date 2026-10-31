@@ -107,7 +107,6 @@
       swatch.addEventListener('click', () => {
         picker.style.setProperty('--paint-color', swatch.dataset.paint);
         hero.style.setProperty('--hero-paint-color', swatch.dataset.paint);
-        document.querySelector('[data-paint-field-name]').textContent = swatch.dataset.name;
         document.documentElement.style.setProperty('--site-accent', swatch.dataset.paint);
         applyActionTone(swatch.dataset.paint);
         const hex = swatch.dataset.paint.slice(1);
