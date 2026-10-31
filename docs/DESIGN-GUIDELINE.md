@@ -419,7 +419,7 @@ O símbolo proposto parte de um contorno de casa traçado à mão, com interrup�
 
 ## Revisão comercial e cartela — 31/10/2026
 
-Implementado: kicker DESIGN & TECHNOLOGY FOR HANDS-ON BUSINESSES; novo CTA de conversa e título do processo solicitados. A hero reúne círculo, legenda e seletor num único card de amostras. Esta regra substitui os painéis separados e o hover inclinado anteriores: elevar apenas a amostra ativa 2 px, sem girar ou mover vizinhas; manter check e foco. Reduced motion remove a elevação.
+Implementado: kicker DESIGN & TECHNOLOGY FOR HANDS-ON BUSINESSES; novo CTA de conversa e título do processo solicitados. A hero reúne a faixa de tinta e seletor num único card. A legenda redundante sob a faixa e a divisória foram removidas; a instrução da paleta explica a analogia com escolher tinta para casa e que o site muda com a escolha. As fichas individuais mantêm hover sem rotação. O card como conjunto inclina até 2° conforme ponteiro preciso, com profundidade discreta, retorna ao repouso ao sair, não inclina em toque e respeita reduced motion.
 
 Oferta fornecida pelo usuário: $999 USD one-time; até três páginas (Home, Gallery, Contact), design personalizado e até três revisões. Domínio, hosting e suporte opcionais por $99/mês. Substitui a orientação de preço ainda indefinido. Painel editorial verde escuro e painel claro com preço/escopo, empilhados no mobile. A seção precede o FAQ, renumerado 06 e atualizado com os valores. Não inventar prazos ou políticas adicionais.
 
@@ -451,9 +451,9 @@ Current site / Redesign e Transform this site controlam os mesmos dois estados. 
 Padrão reutilizável: substituir conteúdo e diagnóstico por dados específicos do cliente; manter o shell editorial do estúdio. Não impor a estética do site fictício a todos os redesigns.
 
 ### Faixa de tinta na hero — 31/10/2026
-A superfície COLOR IN MOTION passa de círculo para faixa retangular horizontal de baixa altura, com o crop preenchendo a largura interna do card. Preservar mesma imagem, canvas, textura, movimento, interação de ponteiro e seleção de cor; esta alteração é somente de proporção visual. Desktop 100–150 px conforme viewport; mobile 96 px. Caption permanece legível abaixo/na faixa segundo seu posicionamento atual; validar no browser.
+A superfície COLOR IN MOTION passa de círculo para faixa retangular horizontal de baixa altura, com o crop preenchendo a largura interna do card. Preservar mesma imagem, canvas, textura, movimento, interação de ponteiro e seleção de cor; esta alteração é somente de proporção visual. Desktop 100–150 px conforme viewport; mobile 96 px. A faixa fica sem legenda sobreposta; a copy contextual fica na cartela.
 
-Correção da faixa: remover border-radius circular de todas as camadas. Canvas usa proporção real da superfície e coordenadas de textura com cover centralizado, cortando sobras sem esticar a arte. Fallback img mantém object-fit:cover. Caption permanece abaixo. O motor de ondas e inércia continua o mesmo.
+Correção da faixa: remover border-radius circular de todas as camadas. Canvas usa proporção real da superfície e coordenadas de textura com cover centralizado, cortando sobras sem esticar a arte. Fallback img mantém object-fit:cover. Não sobrepor legenda à faixa. O motor de ondas e inércia continua o mesmo.
 
 ### Teste de altura da faixa — 31/10/2026
 Teste visual solicitado: ampliar a faixa para 150–205 px no desktop e 132 px no mobile. A ideia é revelar uma área maior da imagem e reduzir a sensação de achatamento causada pelo recorte muito panorâmico. Manter `object-fit:cover`, superfície retangular e renderer/aspect ratio reais, sem deformar os pixels. Avaliar no navegador antes de tratar esta altura como definitiva.
