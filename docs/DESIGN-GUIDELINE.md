@@ -422,3 +422,15 @@ Implementado: kicker DESIGN & TECHNOLOGY FOR HANDS-ON BUSINESSES; novo CTA de co
 Oferta fornecida pelo usuário: $999 USD one-time; até três páginas (Home, Gallery, Contact), design personalizado e até três revisões. Domínio, hosting e suporte opcionais por $99/mês. Substitui a orientação de preço ainda indefinido. Painel editorial verde escuro e painel claro com preço/escopo, empilhados no mobile. A seção precede o FAQ, renumerado 06 e atualizado com os valores. Não inventar prazos ou políticas adicionais.
 
 Por decisão explícita do usuário, os botões de conversa permanecem sem destino, com aria-disabled e sem envio. Conectar quando o contato for definido.
+
+## Cartela física digital — 31/10/2026
+
+**Pesquisa:** Sherwin-Williams apresenta color chips de 2 × 3 polegadas e amostras peel & stick para testar cores no ambiente (https://www.sherwin-williams.com/homeowners/discovery/samples). Suvinil enfatiza teste no ambiente e comparação entre tons (https://suvinil.com.br/cores). Pantone descreve seus Formula Guides como leques portáteis para comparar e comunicar cor; a página retornou 403 na abertura, portanto a leitura ficou limitada ao resultado indexado (https://www.pantone.com/products/graphics/formula-guide-coated-uncoated).
+
+**Interpretação implementada, não teste com usuários:** pequenas fichas de papel alinhadas são familiares ao ofício e permitem ver as cinco opções simultaneamente. Bordas quase retas, lâminas de papel simuladas por sombras estáticas, área de pigmento fosca com textura SVG estática leve e faixa branca para o nome. Não usar logos, códigos de fabricante ou sugerir equivalência com tintas comerciais.
+
+**Comunicação:** título “Give this site a fresh coat.” e instrução “Pick a color. Watch the details change across the site.” deixam explícito o efeito da ferramenta. “APPLIED TO THIS SITE” identifica o nome já selecionado. A instrução também é associada ao grupo por aria-describedby. Não reintroduzir descrição filosófica por cor.
+
+**Interação atual:** hover preciso eleva somente a ficha apontada em 5 px, sem rotação ou deslocar vizinhas; clique comprime 1 px; check e contorno persistem na seleção. Foco escuro independente, transição de 200 ms; reduced motion remove transformações e transições. Substitui as especificações de hover da revisão anterior. Fichas de 112 px desktop e 96 px mobile, nomes e números de 12 px. Nenhuma biblioteca ou loop adicionado.
+
+**Preservado:** DOM, dimensões, imagem, shader, resposta ao ponteiro e inércia do círculo; dados, eventos, assets e lógica de aplicação das cinco cores. O painel cresce naturalmente para acomodar a instrução, sem redimensionar a tinta.
