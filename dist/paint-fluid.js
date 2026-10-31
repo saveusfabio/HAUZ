@@ -53,6 +53,7 @@
     uniform float uActive;
     uniform vec2 uMomentum;
     uniform vec2 uTouch;
+    uniform vec2 uCover;
     void main() {
       vec2 uv = vUv;
       // Two slow, overlapping flows bend the veins without moving a cutout.
@@ -76,6 +77,7 @@
       vec2 sampleUv = (uv - .5) * .90 + .5 + flow + carry + refraction;
       // Mirror only at the outer texture edge, avoiding stretched border pixels.
       sampleUv = 1. - abs(mod(sampleUv, 2.) - 1.);
+      sampleUv = (sampleUv - .5) * uCover + .5;
       gl_FragColor = vec4(texture2D(uImage, sampleUv).rgb, 1.);
     }
   `;
@@ -120,7 +122,12 @@
     width = Math.max(1, field.clientWidth);
     if (!canvas) return;
     const size = Math.min(400, Math.round(width * Math.min(devicePixelRatio || 1, 1.25)));
-    if (canvas.width !== size) canvas.width = canvas.height = size;
+    canvas.width = size;
+    canvas.height = Math.max(1, Math.round(size * field.clientHeight / width));
+    const surfaceAspect = width / Math.max(1, field.clientHeight);
+    const imageAspect = image.naturalWidth / Math.max(1, image.naturalHeight);
+    gl.useProgram(imageProgram);
+    gl.uniform2f(gl.getUniformLocation(imageProgram, 'uCover'), Math.min(1, surfaceAspect / imageAspect), Math.min(1, imageAspect / surfaceAspect));
   }
   function init() {
     initialized = true;

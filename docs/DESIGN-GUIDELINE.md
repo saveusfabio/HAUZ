@@ -452,3 +452,5 @@ Padrão reutilizável: substituir conteúdo e diagnóstico por dados específico
 
 ### Faixa de tinta na hero — 31/10/2026
 A superfície COLOR IN MOTION passa de círculo para faixa retangular horizontal de baixa altura, com o crop preenchendo a largura interna do card. Preservar mesma imagem, canvas, textura, movimento, interação de ponteiro e seleção de cor; esta alteração é somente de proporção visual. Desktop 100–150 px conforme viewport; mobile 96 px. Caption permanece legível abaixo/na faixa segundo seu posicionamento atual; validar no browser.
+
+Correção da faixa: remover border-radius circular de todas as camadas. Canvas usa proporção real da superfície e coordenadas de textura com cover centralizado, cortando sobras sem esticar a arte. Fallback img mantém object-fit:cover. Caption permanece abaixo. O motor de ondas e inércia continua o mesmo.
