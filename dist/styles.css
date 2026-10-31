@@ -783,9 +783,9 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .hero-paint .paint-sample-card .paint-field{aspect-ratio:auto;border-radius:0;clip-path:none;mask-image:none;box-shadow:none}
 .hero-paint .paint-sample-card .paint-field-texture,.hero-paint .paint-sample-card .paint-fluid,.hero-paint .paint-sample-card .paint-field-tint,.hero-paint .paint-sample-card .paint-field:before{border-radius:0;clip-path:none;mask-image:none}
 
-/* Test revision: reveal more vertical detail in the paint strip. */
-@media(min-width:761px){.hero-paint .paint-sample-card .paint-field{height:clamp(150px,17vw,205px)}}
-@media(max-width:760px){.hero-paint .paint-sample-card .paint-field{height:132px}}
+/* Compact paint strip; crop the square source instead of stretching it. */
+@media(min-width:761px){.hero-paint .paint-sample-card .paint-field{height:clamp(100px,12vw,150px)}}
+@media(max-width:760px){.hero-paint .paint-sample-card .paint-field{height:96px}}
 
 /* Palette card: stationary hover depth with pointer-following light, no magnetic movement. */
 .hero-paint .paint-sample-card{position:relative;transition:box-shadow .3s ease,border-color .3s ease}

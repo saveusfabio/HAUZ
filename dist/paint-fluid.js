@@ -254,24 +254,30 @@
     if (!source) return;
     const request = ++textureRequest;
     const expectedUrl = new URL(source, document.baseURI).href;
+    const selectedImage = new Image();
+    selectedImage.decoding = 'async';
+    selectedImage.src = expectedUrl;
     try {
-      // Decode the selected source before touching the existing WebGL texture.
-      // This also prevents a quick second selection from uploading an older image.
-      if (typeof image.decode === 'function') await image.decode();
-      else if (!image.complete || !image.naturalWidth) await new Promise((resolve, reject) => {
-        image.addEventListener('load', resolve, { once: true });
-        image.addEventListener('error', reject, { once: true });
+      // Decode an isolated image so rapid src changes on the fallback <img>
+      // cannot make WebGL upload the previous or an incomplete selection.
+      if (typeof selectedImage.decode === 'function') await selectedImage.decode();
+      else if (!selectedImage.complete || !selectedImage.naturalWidth) await new Promise((resolve, reject) => {
+        selectedImage.addEventListener('load', resolve, { once: true });
+        selectedImage.addEventListener('error', reject, { once: true });
       });
-      if (request !== textureRequest || image.currentSrc !== expectedUrl || !image.naturalWidth) return;
+      if (request !== textureRequest || !selectedImage.naturalWidth) return;
+      image.src = expectedUrl;
       if (ready && gl && photo) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, photo);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, selectedImage);
         gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, displacement);
+        resize();
         sync();
       }
     } catch (error) {
       if (request === textureRequest) {
+        image.src = expectedUrl;
         console.warn('Paint color texture could not be uploaded; showing the selected still image.', error);
         fallback();
       }

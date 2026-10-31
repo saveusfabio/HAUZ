@@ -106,8 +106,6 @@
     swatches.forEach((swatch, index) => {
       swatch.addEventListener('click', () => {
         picker.style.setProperty('--paint-color', swatch.dataset.paint);
-        const fieldImage = document.querySelector('.paint-field-texture');
-        if (fieldImage && swatch.dataset.texture) fieldImage.src = swatch.dataset.texture;
         hero.style.setProperty('--hero-paint-color', swatch.dataset.paint);
         document.querySelector('[data-paint-field-name]').textContent = swatch.dataset.name;
         document.documentElement.style.setProperty('--site-accent', swatch.dataset.paint);

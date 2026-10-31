@@ -455,8 +455,8 @@ A superfície COLOR IN MOTION passa de círculo para faixa retangular horizontal
 
 Correção da faixa: remover border-radius circular de todas as camadas. Canvas usa proporção real da superfície e coordenadas de textura com cover centralizado, cortando sobras sem esticar a arte. Fallback img mantém object-fit:cover. Não sobrepor legenda à faixa. O motor de ondas e inércia continua o mesmo.
 
-### Teste de altura da faixa — 31/10/2026
-Teste visual solicitado: ampliar a faixa para 150–205 px no desktop e 132 px no mobile. A ideia é revelar uma área maior da imagem e reduzir a sensação de achatamento causada pelo recorte muito panorâmico. Manter `object-fit:cover`, superfície retangular e renderer/aspect ratio reais, sem deformar os pixels. Avaliar no navegador antes de tratar esta altura como definitiva.
+### Ajuste da faixa e sincronização das imagens — 31/10/2026
+A faixa volta a uma altura mais compacta: 100–150 px no desktop e 96 px no mobile. A imagem continua preenchendo a superfície com crop central (`object-fit: cover` no fallback e `uCover` no WebGL); nunca esticar a arte para caber. Cada swatch troca a imagem correspondente e os accents da página. Para evitar a textura WebGL ficar presa à primeira cor ou carregar uma escolha obsoleta em cliques rápidos, decodificar uma imagem isolada por seleção, ignorar respostas antigas e só então atualizar a imagem visível e a textura existente. Não recriar o programa WebGL nem alterar o efeito de movimento.
 
 
 
