@@ -434,3 +434,6 @@ Por decisão explícita do usuário, os botões de conversa permanecem sem desti
 **Interação atual:** hover preciso eleva somente a ficha apontada em 5 px, sem rotação ou deslocar vizinhas; clique comprime 1 px; check e contorno persistem na seleção. Foco escuro independente, transição de 200 ms; reduced motion remove transformações e transições. Substitui as especificações de hover da revisão anterior. Fichas de 112 px desktop e 96 px mobile, nomes e números de 12 px. Nenhuma biblioteca ou loop adicionado.
 
 **Preservado:** DOM, dimensões, imagem, shader, resposta ao ponteiro e inércia do círculo; dados, eventos, assets e lógica de aplicação das cinco cores. O painel cresce naturalmente para acomodar a instrução, sem redimensionar a tinta.
+
+### Equilíbrio do card com a copy — 31/10/2026
+A rodada anterior deixou a cartela alta demais. Reduzir o círculo de 330 para 260 px no desktop e de 210 para 190 px no mobile, preservando renderer e interação. Compactar amostras para 88 px e espaçamentos internos. Hierarquia: tinta como foco visual, título de 21 px, instrução de 14 px, nome ativo de 17 px e metadados de 12 px. A altura acompanha conteúdo, sem altura fixa que corte texto ou prejudique zoom; o objetivo é equilíbrio visual com a coluna esquerda.

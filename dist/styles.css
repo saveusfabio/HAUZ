@@ -772,3 +772,7 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .hero-paint .paint-sample-card .paint-swatch:focus-visible{outline:2px solid #20231f;outline-offset:4px}
 @media(max-width:760px){.paint-deck-intro h3{font-size:21px}.paint-deck-intro{margin-bottom:17px}.hero-paint .paint-sample-card .paint-swatches{gap:6px}.hero-paint .paint-sample-card .paint-swatch{height:96px;padding:3px}.hero-paint .paint-sample-card .paint-chip-copy .mono{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.hero-paint .paint-sample-card .paint-swatch{transition:none}.hero-paint .paint-sample-card .paint-swatch:hover,.hero-paint .paint-sample-card .paint-swatch:active{transform:none}}
+/* Compact sample card: balance with the editorial column. */
+@media(min-width:761px){.hero-paint .paint-sample-card .paint-field{width:260px}.hero-paint .hero-art.paint-sample-card{padding:22px 24px 18px;gap:10px}.hero-paint .paint-sample-card .paint-picker{padding-top:12px}.hero-paint .paint-sample-card .paint-swatch{height:88px}}
+.paint-deck-intro{margin-bottom:12px}.paint-deck-intro h3{font-size:21px}.paint-deck-intro p{margin-top:5px;max-width:none;font-size:14px}.hero-paint .paint-sample-card .paint-chip{padding-bottom:4px;min-height:40px}.hero-paint .paint-sample-card .paint-chip-copy .mono{font-size:12px}.hero-paint .paint-sample-card .paint-swatches{padding-top:8px}
+@media(max-width:760px){.paint-deck-intro h3{font-size:20px}.hero-paint .paint-sample-card .paint-field{width:190px}.hero-paint .paint-sample-card .paint-swatch{height:88px}}
