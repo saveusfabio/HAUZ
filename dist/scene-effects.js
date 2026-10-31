@@ -41,7 +41,9 @@
   const shell = document.createElement('div');
   shell.className = 'project-shell';
   card.before(shell);
-  shell.append(card);
+  const previewToolbar=document.createElement('div');previewToolbar.className='work-preview-toolbar';previewToolbar.setAttribute('role','group');previewToolbar.setAttribute('aria-label','Choose website version');
+  previewToolbar.innerHTML='<span class="mono">PREVIEW</span><button type="button" data-preview-mode="before" aria-pressed="true">Current site</button><button type="button" data-preview-mode="after" aria-pressed="false">Redesign</button>';
+  shell.append(previewToolbar,card);
   const dots = card.querySelector('.browser-dots');
   dots.innerHTML = '<i></i><i></i><i></i>';
   const light = document.createElement('canvas');
@@ -98,8 +100,40 @@
     later(()=>card.classList.remove('redesign-reward'),1500);
   };
   const before=document.querySelector('#before-demo'), after=document.querySelector('#after-demo');
-  let busy=false, timers=[];
-  const later=(fn,delay)=>timers.push(setTimeout(fn,delay));
+  const previewModes=[...previewToolbar.querySelectorAll('[data-preview-mode]')];
+  const noteIndex=document.querySelector('[data-review-index]'),noteTitle=document.querySelector('[data-review-title]'),noteCopy=document.querySelector('[data-review-copy]'),noteProgress=document.querySelector('[data-review-progress]');
+  const syncReviewLive=()=>document.querySelector('.work-design-note').setAttribute('aria-live',innerWidth<=760?'off':'polite');
+  syncReviewLive();addEventListener('resize',syncReviewLive,{passive:true});
+  const noteChapters=[...after.querySelectorAll('.modern-hero,.modern-services,.modern-work,.modern-contact')];
+  const reviewNotes=[
+    ['FIRST IMPRESSION','A vague introduction.','The service and location get lost among competing messages.','Clarity from the first glance.','Service, location and one clear next step help homeowners recognize the right fit.'],
+    ['SERVICES','Everything competes.','A dense list makes different services difficult to compare.','A place for every project.','Distinct painting services make it easier to find the right fit.'],
+    ['THE WORK','The work deserves more room.','Repeated thumbnails give little context or detail.','Details worth a closer look.','Larger photos make prep, siding and finish easier to see.'],
+    ['NEXT STEP','An unclear invitation.','Urgent messages compete without explaining what happens next.','A simple way to begin.','One clear invitation explains how to ask for an estimate.']
+  ];
+  const reviewToast=document.createElement('div');reviewToast.hidden=true;reviewToast.className='work-review-toast';reviewToast.setAttribute('role','status');reviewToast.setAttribute('aria-live','polite');reviewToast.setAttribute('aria-atomic','true');reviewToast.innerHTML='<span class="work-review-toast-mark" aria-hidden="true">↗</span><span class="work-review-toast-copy"><span class="mono" data-toast-index></span><strong data-toast-title></strong><span data-toast-copy></span></span>';
+  document.querySelector('.work').append(reviewToast);
+  let activeReview=0,reviewFrame=0,toastTimer=0;
+  const updateReview=(index,notify=false)=>{
+    activeReview=Math.max(0,Math.min(reviewNotes.length-1,index));
+    const n=reviewNotes[activeReview],redesigned=!after.hidden,offset=redesigned?3:1;
+    noteIndex.textContent=`0${activeReview+1} / ${n[0]}`;noteTitle.textContent=n[offset];noteCopy.textContent=n[offset+1];noteProgress.style.width=`${(activeReview+1)*25}%`;
+    if(redesigned)previewModes.forEach(mode=>mode.setAttribute('aria-pressed',String(mode.dataset.previewMode==='after')));
+    if(notify&&redesigned&&innerWidth<=760){
+      reviewToast.querySelector('[data-toast-index]').textContent=`0${activeReview+1} / ${n[0]}`;
+      reviewToast.querySelector('[data-toast-title]').textContent=n[3];reviewToast.querySelector('[data-toast-copy]').textContent=n[4];
+      reviewToast.hidden=false;reviewToast.classList.remove('is-visible');requestAnimationFrame(()=>reviewToast.classList.add('is-visible'));
+      clearTimeout(toastTimer);toastTimer=setTimeout(()=>{reviewToast.classList.remove('is-visible');setTimeout(()=>{reviewToast.hidden=true;},220);},4200);
+    }else if(!redesigned){reviewToast.classList.remove('is-visible');reviewToast.hidden=true;clearTimeout(toastTimer);}
+  };
+  const syncReviewToScroll=()=>{
+    reviewFrame=0;if(after.hidden||!noteChapters.length)return;
+    const box=after.getBoundingClientRect(),line=box.top+Math.min(box.height*.38,220);let index=0;
+    noteChapters.forEach((chapter,i)=>{if(chapter.getBoundingClientRect().top<=line)index=i;});
+    if(index!==activeReview)updateReview(index,true);
+  };
+  after.addEventListener('scroll',()=>{if(!reviewFrame)reviewFrame=requestAnimationFrame(syncReviewToScroll);},{passive:true});
+  let busy=false, timers=[];  const later=(fn,delay)=>timers.push(setTimeout(fn,delay));
   const setView=showAfter=>{
     before.hidden=showAfter;after.hidden=!showAfter;
     before.inert=showAfter;after.inert=!showAfter;
@@ -108,7 +142,10 @@
     button.setAttribute('aria-pressed',String(showAfter));
     label.textContent=showAfter?'See the original website':'Transform this website';
     arrow.textContent=showAfter?'↶':'↗';
+    previewModes.forEach(mode=>mode.setAttribute('aria-pressed',String(mode.dataset.previewMode===(showAfter?'after':'before'))));
+    reviewToast.classList.remove('is-visible');reviewToast.hidden=true;clearTimeout(toastTimer);updateReview(0,showAfter);
   };
+
   const finish=()=>{
     busy=false;card.classList.remove('is-refining');card.dataset.refine='complete';
     card.removeAttribute('aria-busy');button.removeAttribute('aria-disabled');
@@ -128,5 +165,7 @@
     later(()=>{card.dataset.refine='refining';status.textContent='Refining the details';},800);
     later(()=>{finish();celebrate();},1200);
   });
+  previewModes.forEach(mode=>mode.addEventListener('click',()=>{const showAfter=mode.dataset.previewMode==='after';if(showAfter===!after.hidden||busy)return;button.click();}));
+  updateReview(0,false);
   reduced.addEventListener('change',()=>{if(reduced.matches&&busy){timers.forEach(clearTimeout);setView(true);finish();celebrate();}});
 })();
