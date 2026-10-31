@@ -10,6 +10,8 @@ O dono da empresa deve reconhecer a qualidade do próprio trabalho na forma como
 
 ## 2. Referência e método
 
+Para o raciocínio específico de sites de home painters, consultar também [RESEARCH-HOME-PAINTER-WEBSITES.md](RESEARCH-HOME-PAINTER-WEBSITES.md). Esse documento separa fontes normativas, observações qualitativas de sites, propostas de avaliação e hipóteses a validar. Nenhuma alegação de conversão, conteúdo comercial ou credencial de um exemplo deve ser transferida para clientes sem verificação.
+
 Referência principal: https://cresta-template.framer.website/
 
 Pesquisa realizada no navegador em 23/10/2026: abertura, navegação por scroll, inspeção visual de hero, apresentação, serviços, processo, seção de seguros, depoimentos e FAQ; interação com pergunta do FAQ; leitura de propriedades computadas de fontes, cursor e posicionamento. Viewport observado: 1944 × 1244 CSS px. Capturas da ferramenta foram apresentadas durante a pesquisa.
@@ -437,3 +439,16 @@ Por decisão explícita do usuário, os botões de conversa permanecem sem desti
 
 ### Equilíbrio do card com a copy — 31/10/2026
 A rodada anterior deixou a cartela alta demais. Reduzir o círculo de 330 para 260 px no desktop e de 210 para 190 px no mobile, preservando renderer e interação. Compactar amostras para 88 px e espaçamentos internos. Hierarquia: tinta como foco visual, título de 21 px, instrução de 14 px, nome ativo de 17 px e metadados de 12 px. A altura acompanha conteúdo, sem altura fixa que corte texto ou prejudique zoom; o objetivo é equilíbrio visual com a coluna esquerda.
+
+## Página de apresentação de redesign — 31/10/2026
+
+Implementado em dist/presentation.html, com CSS/JS próprios e sem dependências de runtime. Prévia local para futura integração. Empresa Evergreen Painting fictícia; imagens ilustrativas, sem atribuição de trabalho real. Não reutilizar os fatos ou telefone de P&D no exemplo.
+
+A apresentação usa papel claro, Geist, Fragment Mono, linhas finas e verde do estúdio. Rolagem única do documento evita competição com frames internos. Desktop: site à direita e índice/notas sticky à esquerda. A seção que passa pelo ponto de leitura atualiza a nota; o índice permite saltar diretamente. Mobile: notas junto de cada seção para preservar associação e espaço útil.
+
+Current site / Redesign e Transform this site controlam os mesmos dois estados. A troca preserva a posição relativa do capítulo ativo, muda as notas e permite retorno. Fade/leve deslocamento de 450 ms somente quando reduced motion não está ativo. Conteúdo nunca depende da animação para aparecer. Os quatro capítulos correspondem a introdução, serviços, portfólio e contato. Os comentários explicam clareza e encontrabilidade, sem prometer conversão. O botão do contato fictício revela explicação, sem envio.
+
+Padrão reutilizável: substituir conteúdo e diagnóstico por dados específicos do cliente; manter o shell editorial do estúdio. Não impor a estética do site fictício a todos os redesigns.
+
+### Faixa de tinta na hero — 31/10/2026
+A superfície COLOR IN MOTION passa de círculo para faixa retangular horizontal de baixa altura, com o crop preenchendo a largura interna do card. Preservar mesma imagem, canvas, textura, movimento, interação de ponteiro e seleção de cor; esta alteração é somente de proporção visual. Desktop 100–150 px conforme viewport; mobile 96 px. Caption permanece legível abaixo/na faixa segundo seu posicionamento atual; validar no browser.
