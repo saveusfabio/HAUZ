@@ -153,15 +153,11 @@
   if (paintCard && matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     paintCard.addEventListener('pointermove', event => {
       const rect = paintCard.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      paintCard.style.setProperty('--glint-x', `${((event.clientX - rect.left) / rect.width * 100).toFixed(1)}%`);
+      paintCard.style.setProperty('--glint-y', `${((event.clientY - rect.top) / rect.height * 100).toFixed(1)}%`);
       paintCard.classList.add('tilt-active');
-      paintCard.style.transform = `perspective(1000px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 4).toFixed(2)}deg)`;
     }, { passive: true });
-    paintCard.addEventListener('pointerleave', () => {
-      paintCard.classList.remove('tilt-active');
-      paintCard.style.transform = '';
-    });
+    paintCard.addEventListener('pointerleave', () => paintCard.classList.remove('tilt-active'));
   }
   const viewToggle=document.querySelector('.work-transform-cta');
   const workMockup=document.querySelector('.work-showcase');

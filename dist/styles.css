@@ -787,12 +787,13 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 @media(min-width:761px){.hero-paint .paint-sample-card .paint-field{height:clamp(150px,17vw,205px)}}
 @media(max-width:760px){.hero-paint .paint-sample-card .paint-field{height:132px}}
 
-.paint-field-caption{font-size:13px!important;letter-spacing:.01em!important}.paint-field-caption .paint-field-dot{width:6px;height:6px}
-.hero-paint .paint-sample-card{perspective:1000px;transform-style:preserve-3d;transition:transform .2s ease,box-shadow .3s ease;will-change:transform}
-@media(hover:hover) and (pointer:fine){.hero-paint .paint-sample-card.tilt-active{box-shadow:0 22px 46px -28px #20231f55}.hero-paint .paint-sample-card.tilt-active .paint-field{transform:translateZ(18px)}.hero-paint .paint-sample-card.tilt-active .paint-picker{transform:translateZ(10px)}}
-.hero-paint .paint-sample-card .paint-field,.hero-paint .paint-sample-card .paint-picker{transition:transform .25s ease}
-@media(prefers-reduced-motion:reduce){.hero-paint .paint-sample-card,.hero-paint .paint-sample-card .paint-field,.hero-paint .paint-sample-card .paint-picker{transition:none!important;transform:none!important;will-change:auto}}
-
-.hero-paint .paint-sample-card .paint-picker{padding-top:0;border-top:0;gap:12px}
-.hero-paint .paint-sample-card .paint-field{box-shadow:0 8px 28px -18px #20231f55}
-@media(hover:hover) and (pointer:fine){.hero-paint .paint-sample-card.tilt-active{transition:transform .12s ease,box-shadow .3s ease}}
+/* Palette card: stationary hover depth with pointer-following light, no magnetic movement. */
+.hero-paint .paint-sample-card{position:relative;transition:box-shadow .3s ease,border-color .3s ease}
+.hero-paint .paint-sample-card:after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:inherit;background:radial-gradient(260px circle at var(--glint-x,50%) var(--glint-y,50%),rgba(255,255,255,.18),transparent 72%);opacity:0;transition:opacity .3s ease}
+.hero-paint .paint-deck-intro{margin-bottom:20px}
+.hero-paint .paint-deck-intro h3{font-size:25px;line-height:1.15;letter-spacing:-.045em;font-weight:550}
+.hero-paint .paint-deck-intro p{margin-top:9px;max-width:33ch;font-size:15px;line-height:1.5}
+.hero-paint .paint-sample-card .paint-picker{padding-top:0;border-top:0;gap:15px}
+@media(hover:hover) and (pointer:fine){.hero-paint .paint-sample-card.tilt-active{box-shadow:0 20px 48px -30px #20231f55;border-color:#20231f35}.hero-paint .paint-sample-card.tilt-active:after{opacity:.72}}
+@media(max-width:760px){.hero-paint .paint-deck-intro{margin-bottom:17px}.hero-paint .paint-deck-intro h3{font-size:22px}.hero-paint .paint-deck-intro p{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.hero-paint .paint-sample-card,.hero-paint .paint-sample-card:after{transition:none!important}.hero-paint .paint-sample-card:after{display:none}}
