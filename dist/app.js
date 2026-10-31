@@ -149,6 +149,20 @@
     }, { passive: true });
   }
 
+  const paintCard = document.querySelector('.paint-sample-card');
+  if (paintCard && matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    paintCard.addEventListener('pointermove', event => {
+      const rect = paintCard.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      paintCard.classList.add('tilt-active');
+      paintCard.style.transform = `perspective(1000px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 4).toFixed(2)}deg)`;
+    }, { passive: true });
+    paintCard.addEventListener('pointerleave', () => {
+      paintCard.classList.remove('tilt-active');
+      paintCard.style.transform = '';
+    });
+  }
   const viewToggle=document.querySelector('.work-transform-cta');
   const workMockup=document.querySelector('.work-showcase');
   if(viewToggle&&workMockup){

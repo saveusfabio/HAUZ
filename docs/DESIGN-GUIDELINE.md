@@ -457,3 +457,6 @@ Correção da faixa: remover border-radius circular de todas as camadas. Canvas 
 
 ### Teste de altura da faixa — 31/10/2026
 Teste visual solicitado: ampliar a faixa para 150–205 px no desktop e 132 px no mobile. A ideia é revelar uma área maior da imagem e reduzir a sensação de achatamento causada pelo recorte muito panorâmico. Manter `object-fit:cover`, superfície retangular e renderer/aspect ratio reais, sem deformar os pixels. Avaliar no navegador antes de tratar esta altura como definitiva.
+
+
+
