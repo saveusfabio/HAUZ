@@ -102,37 +102,44 @@
   const before=document.querySelector('#before-demo'), after=document.querySelector('#after-demo');
   const previewModes=[...previewToolbar.querySelectorAll('[data-preview-mode]')];
   const noteIndex=document.querySelector('[data-review-index]'),noteTitle=document.querySelector('[data-review-title]'),noteCopy=document.querySelector('[data-review-copy]'),noteProgress=document.querySelector('[data-review-progress]');
+  const noteState=document.querySelector('[data-review-state]');
   const syncReviewLive=()=>document.querySelector('.work-design-note').setAttribute('aria-live',innerWidth<=760?'off':'polite');
   syncReviewLive();addEventListener('resize',syncReviewLive,{passive:true});
-  const noteChapters=[...after.querySelectorAll('.modern-hero,.modern-services,.modern-work,.modern-contact')];
+  const noteChapters={
+    before:[...before.querySelectorAll('.old-hero,.old-section,.old-work,.old-contact')],
+    after:[...after.querySelectorAll('.modern-hero,.modern-services,.modern-work,.modern-contact')]
+  };
   const reviewNotes=[
     ['FIRST IMPRESSION','A vague introduction.','The service and location get lost among competing messages.','Clarity from the first glance.','Service, location and one clear next step help homeowners recognize the right fit.'],
     ['SERVICES','Everything competes.','A dense list makes different services difficult to compare.','A place for every project.','Distinct painting services make it easier to find the right fit.'],
     ['THE WORK','The work deserves more room.','Repeated thumbnails give little context or detail.','Details worth a closer look.','Larger photos make prep, siding and finish easier to see.'],
     ['NEXT STEP','An unclear invitation.','Urgent messages compete without explaining what happens next.','A simple way to begin.','One clear invitation explains how to ask for an estimate.']
   ];
-  const reviewToast=document.createElement('div');reviewToast.hidden=true;reviewToast.className='work-review-toast';reviewToast.setAttribute('role','status');reviewToast.setAttribute('aria-live','polite');reviewToast.setAttribute('aria-atomic','true');reviewToast.innerHTML='<span class="work-review-toast-mark" aria-hidden="true"></span><span class="work-review-toast-copy"><span class="mono" data-toast-index></span><strong data-toast-title></strong><span data-toast-copy></span></span>';
+  const reviewToast=document.createElement('div');reviewToast.hidden=true;reviewToast.className='work-review-toast';reviewToast.setAttribute('role','status');reviewToast.setAttribute('aria-live','polite');reviewToast.setAttribute('aria-atomic','true');reviewToast.innerHTML='<span class="work-review-toast-mark" aria-hidden="true"></span><span class="work-review-toast-copy"><span class="mono" data-toast-index></span><span class="work-review-toast-state mono" data-toast-state></span><strong data-toast-title></strong><span data-toast-copy></span></span>';
   reviewToast.querySelector('.work-review-toast-mark').append(window.studioIcon('arrow-up-right'));document.querySelector('.work').append(reviewToast);
   let activeReview=0,reviewFrame=0,toastTimer=0;
   const updateReview=(index,notify=false)=>{
     activeReview=Math.max(0,Math.min(reviewNotes.length-1,index));
     const n=reviewNotes[activeReview],redesigned=!after.hidden,offset=redesigned?3:1;
     noteIndex.textContent=`0${activeReview+1} / ${n[0]}`;noteTitle.textContent=n[offset];noteCopy.textContent=n[offset+1];noteProgress.style.width=`${(activeReview+1)*25}%`;
-    if(redesigned)previewModes.forEach(mode=>mode.setAttribute('aria-pressed',String(mode.dataset.previewMode==='after')));
-    if(notify&&redesigned&&innerWidth<=760){
+    noteState.textContent=redesigned?'REDESIGN':'CURRENT SITE';
+    previewModes.forEach(mode=>mode.setAttribute('aria-pressed',String(mode.dataset.previewMode===(redesigned?'after':'before'))));
+    if(notify&&innerWidth<=760){
       reviewToast.querySelector('[data-toast-index]').textContent=`0${activeReview+1} / ${n[0]}`;
-      reviewToast.querySelector('[data-toast-title]').textContent=n[3];reviewToast.querySelector('[data-toast-copy]').textContent=n[4];
+      reviewToast.querySelector('[data-toast-state]').textContent=redesigned?'REDESIGN':'CURRENT SITE';
+      reviewToast.querySelector('[data-toast-title]').textContent=n[offset];reviewToast.querySelector('[data-toast-copy]').textContent=n[offset+1];
       reviewToast.hidden=false;reviewToast.classList.remove('is-visible');requestAnimationFrame(()=>reviewToast.classList.add('is-visible'));
       clearTimeout(toastTimer);toastTimer=setTimeout(()=>{reviewToast.classList.remove('is-visible');setTimeout(()=>{reviewToast.hidden=true;},220);},4200);
     }else if(!redesigned){reviewToast.classList.remove('is-visible');reviewToast.hidden=true;clearTimeout(toastTimer);}
   };
-  const syncReviewToScroll=()=>{
-    reviewFrame=0;if(after.hidden||!noteChapters.length)return;
-    const box=after.getBoundingClientRect(),line=box.top+Math.min(box.height*.38,220);let index=0;
-    noteChapters.forEach((chapter,i)=>{if(chapter.getBoundingClientRect().top<=line)index=i;});
+  const syncReviewToScroll=source=>{
+    reviewFrame=0;const chapters=noteChapters[source];if(!chapters?.length)return;
+    const demo=source==='before'?before:after;
+    const box=demo.getBoundingClientRect(),line=box.top+Math.min(box.height*.38,220);let index=0;
+    chapters.forEach((chapter,i)=>{if(chapter.getBoundingClientRect().top<=line)index=i;});
     if(index!==activeReview)updateReview(index,true);
   };
-  after.addEventListener('scroll',()=>{if(!reviewFrame)reviewFrame=requestAnimationFrame(syncReviewToScroll);},{passive:true});
+  [before,after].forEach(demo=>demo.addEventListener('scroll',()=>{if(!reviewFrame)reviewFrame=requestAnimationFrame(()=>syncReviewToScroll(demo===before?'before':'after'));},{passive:true}));
   let busy=false, timers=[];  const later=(fn,delay)=>timers.push(setTimeout(fn,delay));
   const setView=showAfter=>{
     before.hidden=showAfter;after.hidden=!showAfter;
