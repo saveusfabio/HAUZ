@@ -853,3 +853,7 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .hero-v2 .hero-actions .button{min-width:0;gap:20px}
 .hero-v2 .hero-frame{background-image:linear-gradient(to right,var(--grid-line,rgba(32,35,31,.04)) 1px,transparent 1px);background-size:25% 100%}
 @media(max-width:760px){.hero-v2 .hero-main{left:0;width:100%;top:49%;transform:translateY(-50%)}.hero-v2 .hero-actions{margin-top:26px}.hero-v2 .hero-frame{background-size:50% 100%}}
+/* Let the hero copy fill its grid column instead of shrinking to its contents. */
+.hero-paint .hero-main{position:relative;left:auto;top:auto;width:100%;max-width:660px;padding:0;justify-self:stretch;align-self:center;transform:none}
+.hero-paint .hero-frame{grid-template-rows:1fr}
+@media(max-width:760px){.hero-paint .hero-main{width:100%;max-width:none;padding:0;transform:none}}
