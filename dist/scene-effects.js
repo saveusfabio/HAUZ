@@ -56,7 +56,7 @@
   arrow.setAttribute('aria-hidden', 'true');
   arrow.append(window.studioIcon('arrow-up-right'));
   button.replaceChildren(light, label, arrow);
-  window.initStarBorder(button, light);
+  // The transform control is hidden in this presentation; avoid starting its canvas effect.
 
   // HoloCard's pointer-normalized light and spring tilt, adapted for live DOM content.
   let frame = 0, tx = 0, ty = 0, x = 0, y = 0, vx = 0, vy = 0, last = 0;
@@ -102,7 +102,7 @@
   const before=document.querySelector('#before-demo'), after=document.querySelector('#after-demo');
   const previewModes=[...previewToolbar.querySelectorAll('[data-preview-mode]')];
   const noteIndex=document.querySelector('[data-review-index]'),noteTitle=document.querySelector('[data-review-title]'),noteCopy=document.querySelector('[data-review-copy]'),noteProgress=document.querySelector('[data-review-progress]');
-  const noteState=document.querySelector('[data-review-state]');
+  const noteState=document.querySelector('[data-review-state]'),noteBefore=document.querySelector('[data-review-before]');
   const syncReviewLive=()=>document.querySelector('.work-design-note').setAttribute('aria-live',innerWidth<=760?'off':'polite');
   syncReviewLive();addEventListener('resize',syncReviewLive,{passive:true});
   const noteChapters={
@@ -120,14 +120,14 @@
   let activeReview=0,reviewFrame=0,toastTimer=0;
   const updateReview=(index,notify=false)=>{
     activeReview=Math.max(0,Math.min(reviewNotes.length-1,index));
-    const n=reviewNotes[activeReview],redesigned=!after.hidden,offset=redesigned?3:1;
-    noteIndex.textContent=`0${activeReview+1} / ${n[0]}`;noteTitle.textContent=n[offset];noteCopy.textContent=n[offset+1];noteProgress.style.width=`${(activeReview+1)*25}%`;
+    const n=reviewNotes[activeReview],redesigned=!after.hidden;
+    noteIndex.textContent=`0${activeReview+1} / ${n[0]}`;noteTitle.textContent=n[3];noteCopy.textContent=n[4];noteBefore.textContent=n[1];noteProgress.style.width=`${(activeReview+1)*25}%`;
     noteState.textContent=redesigned?'REDESIGN':'CURRENT SITE';
     previewModes.forEach(mode=>mode.setAttribute('aria-pressed',String(mode.dataset.previewMode===(redesigned?'after':'before'))));
     if(notify&&innerWidth<=760){
       reviewToast.querySelector('[data-toast-index]').textContent=`0${activeReview+1} / ${n[0]}`;
       reviewToast.querySelector('[data-toast-state]').textContent=redesigned?'REDESIGN':'CURRENT SITE';
-      reviewToast.querySelector('[data-toast-title]').textContent=n[offset];reviewToast.querySelector('[data-toast-copy]').textContent=n[offset+1];
+      reviewToast.querySelector('[data-toast-title]').textContent=n[3];reviewToast.querySelector('[data-toast-copy]').textContent=n[4];
       reviewToast.hidden=false;reviewToast.classList.remove('is-visible');requestAnimationFrame(()=>reviewToast.classList.add('is-visible'));
       clearTimeout(toastTimer);toastTimer=setTimeout(()=>{reviewToast.classList.remove('is-visible');setTimeout(()=>{reviewToast.hidden=true;},220);},4200);
     }else if(!redesigned){reviewToast.classList.remove('is-visible');reviewToast.hidden=true;clearTimeout(toastTimer);}
@@ -141,16 +141,22 @@
   };
   [before,after].forEach(demo=>demo.addEventListener('scroll',()=>{if(!reviewFrame)reviewFrame=requestAnimationFrame(()=>syncReviewToScroll(demo===before?'before':'after'));},{passive:true}));
   let busy=false, timers=[];  const later=(fn,delay)=>timers.push(setTimeout(fn,delay));
-  const setView=showAfter=>{
+  const setView=(showAfter,preserveChapter=false)=>{
+    const chapterIndex=preserveChapter?activeReview:0;
     before.hidden=showAfter;after.hidden=!showAfter;
     before.inert=showAfter;after.inert=!showAfter;
-    (showAfter?after:before).scrollTop=0;
+    const demo=showAfter?after:before;
+    demo.scrollTop=0;
+    if(preserveChapter&&chapterIndex){
+      const target=noteChapters[showAfter?'after':'before'][chapterIndex];
+      demo.scrollTop=target.getBoundingClientRect().top-demo.getBoundingClientRect().top;
+    }
     button.dataset.view=showAfter?'before':'after';
     button.setAttribute('aria-pressed',String(showAfter));
     label.textContent=showAfter?'See the original website':'Transform this website';
     arrow.replaceChildren(window.studioIcon(showAfter?'rotate-ccw':'arrow-up-right'));
     previewModes.forEach(mode=>mode.setAttribute('aria-pressed',String(mode.dataset.previewMode===(showAfter?'after':'before'))));
-    reviewToast.classList.remove('is-visible');reviewToast.hidden=true;clearTimeout(toastTimer);updateReview(0,showAfter);
+    reviewToast.classList.remove('is-visible');reviewToast.hidden=true;clearTimeout(toastTimer);updateReview(chapterIndex,false);
   };
 
   const finish=()=>{
@@ -172,7 +178,7 @@
     later(()=>{card.dataset.refine='refining';status.textContent='Refining the details';},800);
     later(()=>{finish();celebrate();},1200);
   });
-  previewModes.forEach(mode=>mode.addEventListener('click',()=>{const showAfter=mode.dataset.previewMode==='after';if(showAfter===!after.hidden||busy)return;button.click();}));
+  previewModes.forEach(mode=>mode.addEventListener('click',()=>{const showAfter=mode.dataset.previewMode==='after';if(showAfter===!after.hidden||busy)return;setView(showAfter,true);finish();}));
   updateReview(0,false);
   reduced.addEventListener('change',()=>{if(reduced.matches&&busy){timers.forEach(clearTimeout);setView(true);finish();celebrate();}});
 })();

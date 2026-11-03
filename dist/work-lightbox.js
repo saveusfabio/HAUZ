@@ -31,7 +31,7 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'work-lightbox';
   dialog.setAttribute('aria-labelledby', 'comparison-title');
-  dialog.innerHTML = `<div class="work-lightbox-header"><div><span class="mono">CONCEPT REDESIGN / P&amp;D PAINTING</span><h2 id="comparison-title">Explore the before &amp; after.</h2></div><button class="work-lightbox-close" type="button" aria-label="Close comparison"></button></div><div class="work-lightbox-layout"><div class="work-lightbox-notes"></div></div><p class="work-lightbox-disclaimer">Uncommissioned concept based on a public website. This is not a client project.</p>`;
+  dialog.innerHTML = `<div class="work-lightbox-header"><div><span class="mono">CONCEPT REDESIGN / P&amp;D PAINTING</span><h2 id="comparison-title">See what changed.</h2></div><button class="work-lightbox-close" type="button" aria-label="Close comparison"></button></div><div class="work-lightbox-layout"><div class="work-lightbox-notes"></div></div>`;
   dialog.querySelector('.work-lightbox-close').append(document.querySelector('.dialog-close .lucide').cloneNode(true));
   work.append(dialog);
   const layout = dialog.querySelector('.work-lightbox-layout');

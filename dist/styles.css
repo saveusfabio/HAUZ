@@ -900,3 +900,10 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .work .work-foot{display:none}
 .work .work-lightbox{height:auto;max-height:94dvh}
 @media(max-width:760px){.work .work-lightbox{height:100dvh;max-height:none}}
+/* Keep the comparison responsive while making the improvement the focal point. */
+.work .work-lightbox::backdrop{background:rgba(16,23,18,.76);backdrop-filter:none}
+.work .work-lightbox .project-window{box-shadow:none}
+.work-note-kicker{display:block;margin-top:17px;color:var(--site-accent);font-size:10px;letter-spacing:.05em}
+.work-lightbox-layout .work-design-note h3{margin-top:8px}
+.work-note-before{display:flex;flex-direction:column;gap:4px;margin-top:15px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:12px!important;line-height:1.4}
+.work-note-before .mono{font-size:10px;color:var(--muted)}
