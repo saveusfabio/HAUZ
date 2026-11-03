@@ -516,6 +516,6 @@ Refinamento visual: o microtexto sob o teaser sai da landing; a identificação 
 
 ### Lightbox: melhorias em primeiro plano · 03/11/2026
 
-Implementado: a nota lateral mostra sempre o ganho do redesign como mensagem principal e resume a limitação anterior em uma linha secundária. Assim, a melhoria continua explícita ao examinar a versão atual. As abas trocam as versões imediatamente e mantêm o capítulo de leitura, permitindo comparar a mesma parte sem voltar ao topo. A instrução do comparativo fica no título curto ‘See what changed.’
+Implementado: a nota lateral mostra sempre o ganho do redesign como mensagem principal e resume a limitação anterior em uma linha secundária. Assim, a melhoria continua explícita ao examinar a versão atual. As abas trocam as versões imediatamente e mantêm o capítulo de leitura, permitindo comparar a mesma parte sem voltar ao topo. A barra da prévia informa que a página interna pode ser rolada. A instrução do comparativo fica no título curto ‘See what changed.’
 
-Para reduzir o peso percebido, a lightbox não desfoca mais o fundo, a janela interna deixa de projetar sombra e o canvas decorativo do botão oculto não é iniciado. O mockup continua rolável; as notas acompanham o capítulo. As duas versões são estudos visuais, sem alegação de resultado comercial ou trabalho contratado.
+Para reduzir o peso percebido, a lightbox não desfoca mais o fundo, a janela interna deixa de projetar sombra e o canvas decorativo do botão oculto não é iniciado. O diálogo se ajusta ao conteúdo em telas largas, evitando espaço vazio sob o preview. O mockup continua rolável; as notas acompanham o capítulo. As duas versões são estudos visuais, sem alegação de resultado comercial ou trabalho contratado.

@@ -42,7 +42,7 @@
   shell.className = 'project-shell';
   card.before(shell);
   const previewToolbar=document.createElement('div');previewToolbar.className='work-preview-toolbar';previewToolbar.setAttribute('role','group');previewToolbar.setAttribute('aria-label','Choose website version');
-  previewToolbar.innerHTML='<span class="mono">PREVIEW</span><button type="button" data-preview-mode="before" aria-pressed="true">Current site</button><button type="button" data-preview-mode="after" aria-pressed="false">Redesign</button>';
+  previewToolbar.innerHTML='<span class="mono">SCROLL TO EXPLORE</span><button type="button" data-preview-mode="before" aria-pressed="true">Current site</button><button type="button" data-preview-mode="after" aria-pressed="false">Redesign</button>';
   shell.append(previewToolbar,card);
   const dots = card.querySelector('.browser-dots');
   dots.innerHTML = '<i></i><i></i><i></i>';
