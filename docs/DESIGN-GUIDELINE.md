@@ -108,15 +108,25 @@ Nossa diferenciação vem do redesign demonstrado, da linguagem específica para
 
 Usar Geist para conteúdo e Fragment Mono para índices, labels e metadados. Fallbacks: Arial/sans-serif e monospace. No redesign conceitual de P&D Painting, usar sans-serif editorial e linguagem visual de empreiteiro residencial: preparação, siding, trim, ferramentas, exterior e cuidado com o local. Evitar linguagem/fotografia de design de interiores.
 
-- H1: 56–88 px em desktop normal; 94 px acima de 1700 px; cerca de 42–65 px no móvel. Caixa alta é o padrão das seções; no hero atual, usar caixa de frase, peso 450 e espaçamento mais aberto.
-- H2: 40–64 px desktop; 37–52 px móvel; line-height 1.05.
-- H3: 24–30 px; peso 450.
-- Corpo: 16–18 px nas apresentações; 14–15 px nos detalhes.
-- Monoespaçada: 12 px como base para rótulos e metadados. Não reduzir para acomodar o conteúdo; conceitos de sites antigos podem ter copy menor apenas quando ela for cenográfica, secundária e continuar legível no mockup.
+- H1 do site: Geist, caixa de frase no hero, peso 450–500 e escala responsiva aproximada de 42–72 px. Os mockups permanecem isolados e podem usar tipografia própria para mostrar o antes e depois.
+- H2 de seção: escala compartilhada `clamp(36px, 4.2vw, 56px)`, peso 500, line-height 1.08 e tracking próximo de -0.05em. Títulos de abertura e fechamento podem assumir escala display quando a hierarquia pedir.
+- H3 de cards e blocos: `clamp(22px, 1.8vw, 24px)`, peso 500 e line-height 1.2.
+- Corpo: Geist 16 px como base; 14 px para detalhes e listas de apoio. Leads podem ser maiores quando a hierarquia editorial justificar.
+- Fragment Mono: 11 px para labels e metadados; usar pelo menos 10 px quando o espaço for realmente limitado. Não reduzir texto de leitura para acomodar o conteúdo.
 - Campos editáveis: 16 px para evitar zoom inesperado no celular.
 
 Se o conteúdo crescer, ajustar o layout antes de reduzir o tamanho da tipografia. Headline deve continuar compreensível sem efeitos.
 
+
+### Sistema de tipografia e ações · 03/11/2026
+
+Implementado em `dist/design-system.css`, carregado após a folha-base para concentrar tokens e os padrões finais do site. Geist é a família de interface; Fragment Mono fica reservado a labels e metadados. A escala semântica usa display, título de seção, subtítulo, corpo 16 px, apoio 14 px e metadata 11 px. Variações de tamanho devem acompanhar o papel do conteúdo e o breakpoint, não surgir de ajustes isolados sem função.
+
+Ações primárias e de navegação compartilham Geist, peso 500, 14 px, cantos retos e altura de 48 px; CTAs de demonstração e preço usam 56 px. Links de texto continuam visualmente distintos, mas mantêm escala de ação e área mínima de 44 px. Abas de comparação, menu e fechamento de diálogo também têm hit area mínima de 44 px. Cores continuam contextuais: CTA escuro, claro ou de destaque não cria uma família tipográfica separada.
+
+**Exceções intencionais:** botões de navegação dentro do mockup são parte do site demonstrativo e preservam o desenho e as dimensões daquele conceito; amostras de tinta são controles de seleção visual, não CTAs. Não uniformizar esses elementos com os botões da interface do estúdio.
+
+**Revisão:** a auditoria encontrou tamanhos de CTA entre 11 e 14 px e alturas entre 34 e 56 px, além de títulos de seção em escalas parcialmente sobrepostas. A nova camada normaliza os papéis recorrentes, preservando os títulos display e as variações de cor existentes.
 ## 7. Grid e linhas
 
 O Cresta usa uma régua comum com quatro colunas iguais: duas linhas definem as margens do conteúdo e outras três indicam as divisões internas. Na captura de 1265 px, observei os limites em aproximadamente x=40 e x=1210, com guias em x=334, 626 e 918. A régua permanece alinhada ao passar do hero para as seções claras. Labels e títulos se posicionam em relação a ela; os elementos não ganham caixas decorativas próprias por causa da grade.
