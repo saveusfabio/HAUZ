@@ -897,3 +897,6 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .work .work-lightbox .project-window{height:min(70dvh,740px);overflow:hidden;pointer-events:auto}
 .work .work-lightbox .project-window:after{content:none}
 @media(max-width:760px){.work .work-lightbox .project-window{height:62dvh}}
+.work .work-foot{display:none}
+.work .work-lightbox{height:auto;max-height:94dvh}
+@media(max-width:760px){.work .work-lightbox{height:100dvh;max-height:none}}

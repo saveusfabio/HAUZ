@@ -20,7 +20,7 @@
   const previewButton = document.createElement('button');
   previewButton.type = 'button';
   previewButton.className = 'work-preview-open';
-  previewButton.innerHTML = '<span>Open the interactive comparison</span>';
+  previewButton.innerHTML = '<span>View comparison</span>';
   previewButton.append(window.studioIcon('arrow-up-right'));
   shell.append(previewButton);
   card.inert = true;
