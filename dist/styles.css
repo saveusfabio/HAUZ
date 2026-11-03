@@ -845,3 +845,11 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 /* Keep the fixed action and menu inside narrow phone viewports. */
 @media(max-width:760px){.nav{gap:8px}.wordmark{gap:6px;white-space:nowrap}.wordmark-index{white-space:nowrap}.menu-toggle{font-size:0;gap:0;min-width:24px;padding:0}.menu-toggle .lucide{width:22px;height:22px}}
 @media(max-width:380px){.wordmark{font-size:15px;gap:4px}.wordmark-index{font-size:11px}.house-mark{width:18px;height:17px}.nav-contact{gap:6px;padding:9px 8px;font-size:11px}}
+
+/* Hero follows the shared frame and column rhythm. */
+.hero-v2 .hero-main{left:0;top:50%;width:min(50%,660px);transform:translateY(-50%)}
+.hero-v2 .hero-description{max-width:42ch}
+.hero-v2 .hero-actions{margin-top:32px}
+.hero-v2 .hero-actions .button{min-width:0;gap:20px}
+.hero-v2 .hero-frame{background-image:linear-gradient(to right,var(--grid-line,rgba(32,35,31,.04)) 1px,transparent 1px);background-size:25% 100%}
+@media(max-width:760px){.hero-v2 .hero-main{left:0;width:100%;top:49%;transform:translateY(-50%)}.hero-v2 .hero-actions{margin-top:26px}.hero-v2 .hero-frame{background-size:50% 100%}}

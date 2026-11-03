@@ -488,6 +488,11 @@ Orientação inicial de cabeçalho fixo e âncoras com compensação mantida. A 
 
 ### Ícones e CTA da navegação · 03/11/2026
 
-Implementado: a navegação mantém Work, Services, Process e About us; o CTA fixo “Get started” leva à seção da oferta e preço. Ele comunica um próximo passo sem repetir “Pricing” como link vizinho. Enquanto o canal de contato não estiver ativo, não rotular o CTA como envio de mensagem ou compra concluída.
+Implementado: a navegação mantém Work, Process e About us; o CTA fixo “Get started” leva à seção da oferta e preço. Ele comunica um próximo passo sem repetir “Pricing” como link vizinho. Enquanto o canal de contato não estiver ativo, não rotular o CTA como envio de mensagem ou compra concluída.
 
 Ícones funcionais das duas páginas usam SVGs locais do Lucide Static 1.67.0 (licença ISC em `dist/assets/lucide-LICENSE.txt`), com tamanho e traço consistentes, cor herdada e `aria-hidden` quando acompanhados por texto. Usar setas somente para direção ou navegação; `message-circle` para pedido de contato no conceito, `image` para portfólio, `panels-top-left` para serviços, `monitor-smartphone` para adaptação às telas, `sparkles` para transformação ou detalhe decorativo. Estados de seleção usam `check`. Pontos da janela de navegador são formas CSS decorativas. O mockup antigo conserva linguagem própria para representar a comparação histórica, mas sem caracteres Unicode tratados como controles. Evitar caracteres que possam renderizar como emoji em novas interfaces.
+
+
+### Hero alinhada ao grid — 03/11/2026
+
+Implementado: removido o kicker técnico e os metadados flutuantes no rodapé da hero, que competiam com a mensagem principal e pareciam decoração de interface. O bloco de texto começa na mesma borda do container das seções seguintes; o grid segue a mesma divisão de colunas e a composição da hero mantém sua altura, sem criar uma faixa adicional antes da seção seguinte. A ação principal agora diz “Get a new website” e leva diretamente à oferta. Manter na abertura uma promessa simples, uma ação clara e alinhamento compartilhado com o restante da página.
