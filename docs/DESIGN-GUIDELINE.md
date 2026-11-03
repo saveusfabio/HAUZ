@@ -126,7 +126,7 @@ Ações primárias e de navegação compartilham Geist, peso 500, 14 px, cantos 
 
 **Exceções intencionais:** botões de navegação dentro do mockup são parte do site demonstrativo e preservam o desenho e as dimensões daquele conceito; amostras de tinta são controles de seleção visual, não CTAs. Não uniformizar esses elementos com os botões da interface do estúdio.
 
-**Revisão:** a auditoria encontrou tamanhos de CTA entre 11 e 14 px e alturas entre 34 e 56 px, além de títulos de seção em escalas parcialmente sobrepostas. A nova camada normaliza os papéis recorrentes, preservando os títulos display e as variações de cor existentes.
+**Revisão:** a auditoria encontrou tamanhos de CTA entre 11 e 14 px e alturas entre 34 e 56 px, além de títulos de seção em escalas parcialmente sobrepostas. A nova camada normaliza os papéis recorrentes, preservando os títulos display e as variações de cor existentes. Labels em painéis estreitos podem usar 10 px para caber sem quebra; metadados não devem ficar menores.
 ## 7. Grid e linhas
 
 O Cresta usa uma régua comum com quatro colunas iguais: duas linhas definem as margens do conteúdo e outras três indicam as divisões internas. Na captura de 1265 px, observei os limites em aproximadamente x=40 e x=1210, com guias em x=334, 626 e 918. A régua permanece alinhada ao passar do hero para as seções claras. Labels e títulos se posicionam em relação a ela; os elementos não ganham caixas decorativas próprias por causa da grade.

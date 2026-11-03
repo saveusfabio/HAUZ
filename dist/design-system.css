@@ -76,6 +76,7 @@ h1,h2,h3{font-family:var(--font-sans)}
 :is(.view-switch button,.work-preview-toolbar button){font-family:var(--font-sans);font-size:13px;font-weight:var(--weight-medium);line-height:1.2}
 .view-switch button{min-height:44px}
 .work-preview-toolbar button{min-height:44px;padding-inline:14px}
+.work-design-note-index,.work-design-note-state{font-size:10px;white-space:nowrap}
 :is(.menu-toggle,.dialog-close,#privacy-button){min-width:44px;min-height:44px}
 :is(footer .footer-nav a,footer .footer-meta>a,footer .footer-meta button,footer .back-top){min-height:44px;font-family:var(--font-sans);font-size:var(--type-action)}
 input,textarea{font-family:var(--font-sans);font-size:16px}
