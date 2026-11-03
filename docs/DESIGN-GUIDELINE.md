@@ -77,7 +77,7 @@ O símbolo de casa e o nome **Studio / 001** são placeholders de trabalho. Não
 
 **Direção a explorar:** criar símbolos próprios relacionados à pintura residencial e à apresentação do trabalho — por exemplo, gesto de pincel, amostra/recorte de tinta ou moldura arquitetônica — em desenho manual controlado, simples o bastante para funcionar em tamanhos pequenos. Testar versões de uma cor e lockups símbolo + wordmark. Preservar legibilidade e evitar sugerir que o estúdio executa pintura. “Studio / 001” permanece nome de trabalho; conceitos não aprovam naming, cor ou marca final. A prancha inicial e os três caminhos estão em `docs/brand-concepts.html` e devem ser avaliados antes de incorporar qualquer opção ao website.
 
-### Apresentação do trabalho: comparação antes → depois
+### Apresentação do trabalho: comparação antes → depois — orientação anterior, substituída em 03/11/2026
 
 A seção “See what a better first impression looks like.” abre com um grid de duas colunas no desktop: título, identificação conceitual e CTA na coluna esquerda; um único frame de navegador rolável ocupa a coluna direita. O texto editorial mantém uma largura compacta e alinhada ao topo do mockup. Abaixo de 900 px, as colunas empilham, com a CTA junto ao texto e antes do mockup para permanecer fácil de encontrar.
 
@@ -496,3 +496,7 @@ Implementado: a navegação mantém Work, Process e About us; o CTA fixo “Get 
 ### Hero alinhada ao grid — 03/11/2026
 
 Implementado: removido o kicker técnico e os metadados flutuantes no rodapé da hero, que competiam com a mensagem principal e pareciam decoração de interface. O bloco de texto começa na mesma borda do container das seções seguintes; o grid segue a mesma divisão de colunas e a composição da hero mantém sua altura, sem criar uma faixa adicional antes da seção seguinte. A ação principal agora diz “Get a new website” e leva diretamente à oferta. Manter na abertura uma promessa simples, uma ação clara e alinhamento compartilhado com o restante da página.
+
+### Comparativo em foco — 03/11/2026
+
+Implementado: a seção da landing apresenta título, uma frase de contexto, um CTA “Explore the redesign” e o preview como teaser clicável. As notas editoriais extensas e os controles de versão aparecem na lightbox, para que o preview seja o foco. A lightbox usa `dialog` nativo, fechamento por botão, Escape ou clique fora, e devolve foco ao CTA ao fechar. O preview é movido para dentro do diálogo enquanto está aberto; as abas Current site e Redesign ficam visíveis no topo, o conteúdo de cada versão continua rolável, e a nota contextual acompanha os capítulos no desktop. No mobile, a notificação contextual existente aparece durante o scroll do redesign. A identificação de estudo conceitual e a ressalva de que não é trabalho de cliente permanecem visíveis. Movimento reduzido mantém as trocas imediatas. O objetivo é convidar à exploração sem transformar a seção em um bloco de explicações antes da interação; não há evidência de aumento de conversão.

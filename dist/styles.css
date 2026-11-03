@@ -857,3 +857,43 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .hero-paint .hero-main{position:relative;left:auto;top:auto;width:100%;max-width:660px;padding:0;justify-self:stretch;align-self:center;transform:none}
 .hero-paint .hero-frame{grid-template-rows:1fr}
 @media(max-width:760px){.hero-paint .hero-main{width:100%;max-width:none;padding:0;transform:none}}
+/* The work section invites one focused interaction; the preview owns the space. */
+.work .work-showcase{grid-template-columns:minmax(260px,.34fr) minmax(0,1fr);align-items:center}
+.work .work-copy{position:static}
+.work .work-heading .eyebrow,.work .work-demo-note,.work .work-copy .work-design-note,.work .work-copy .work-transform-cta,.work .work-copy .work-reward{display:none}
+.work .work-copy .work-heading{margin:0}
+.work .work-copy .work-heading h2{max-width:11ch}
+.work-invitation{max-width:32ch;margin-top:24px;color:var(--muted);font-size:16px;line-height:1.55}
+.work-open-cta,.work-preview-open{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;min-height:56px;padding:15px 18px;border:1px solid var(--action-accent,var(--site-accent));background:var(--action-accent,var(--site-accent));color:var(--accent-ink,#fff);font-size:14px;font-weight:550;transition:background .2s,transform .2s}
+.work-open-cta{margin-top:30px}
+.work-open-cta:hover,.work-preview-open:hover{transform:translateY(-2px)}
+.work-open-cta .lucide,.work-preview-open .lucide{width:18px;height:18px}
+.work .project-shell{position:relative}
+.work .project-shell>.work-preview-toolbar{display:none}
+.work .project-shell>.project-window{height:min(55svh,540px);overflow:hidden;pointer-events:none}
+.work .project-shell>.project-window:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(32,35,31,.2));pointer-events:none}
+.work-preview-open{position:absolute;z-index:8;left:50%;bottom:24px;transform:translateX(-50%);white-space:nowrap;background:var(--ink);border-color:var(--ink);color:white;box-shadow:0 12px 40px #20231f3d}
+.work-preview-open:hover{transform:translate(-50%,-2px)}
+.work .work-lightbox{position:fixed;inset:0;width:min(96vw,1440px);max-width:none;height:min(94dvh,1000px);max-height:none;margin:auto;padding:20px 26px 14px;background:var(--paper);color:var(--ink);overflow:auto;border:1px solid var(--line)}
+.work .work-lightbox::backdrop{background:rgba(16,23,18,.8);backdrop-filter:blur(8px)}
+.work-lightbox-header{display:flex;justify-content:space-between;align-items:start;gap:24px;padding-bottom:14px}
+.work-lightbox-header .mono{color:var(--muted);font-size:10px}
+.work-lightbox-header h2{margin-top:4px;font-size:clamp(25px,2.5vw,38px);text-transform:none;letter-spacing:-.04em}
+.work-lightbox-close{display:grid;place-items:center;flex:none;width:44px;height:44px;border:1px solid var(--line);background:transparent}
+.work-lightbox-close .lucide{width:20px;height:20px}
+.work-lightbox-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:24px;align-items:start}
+.work-lightbox-layout .project-shell{min-width:0}
+.work-lightbox-layout .work-preview-toolbar{position:sticky;top:0;z-index:9;background:var(--paper);border:1px solid var(--line)}
+.work-lightbox-layout .project-window{height:min(70dvh,740px);overflow:hidden;pointer-events:auto}
+.work-lightbox-layout .demo{height:calc(min(70dvh,740px) - 43px);overflow:auto}
+.work-lightbox-layout .work-design-note{display:block;position:sticky;top:10px;max-width:none;margin:0;padding:20px;border:1px solid var(--line);background:#fff;box-shadow:0 16px 36px #20231f12}
+.work-lightbox-layout .work-design-note h3{font-size:23px}
+.work-lightbox-disclaimer{margin:12px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
+@media(max-width:900px){.work .work-showcase{grid-template-columns:1fr;gap:30px}.work .work-copy .work-heading h2{max-width:18ch}.work-invitation{max-width:50ch}.work-lightbox-layout{grid-template-columns:1fr}.work-lightbox-layout .work-design-note{position:static;padding:14px 16px}.work-lightbox-layout .work-design-note p{font-size:13px}}
+@media(max-width:760px){.work .work-lightbox{width:100%;height:100dvh;padding:15px 14px;max-height:none}.work-lightbox-header h2{font-size:25px}.work-lightbox-header .mono{font-size:9px}.work-lightbox-layout{gap:12px}.work-lightbox-layout .project-window{height:62dvh}.work-lightbox-layout .demo{height:calc(62dvh - 43px)}.work-preview-open{max-width:calc(100% - 20px);white-space:normal;font-size:12px}.work .project-shell>.project-window{height:42svh}.work .work-copy .work-heading h2{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.work-open-cta,.work-preview-open{transition:none}.work-open-cta:hover,.work-preview-open:hover{transform:none}.work-preview-open{transform:translateX(-50%)!important}}
+/* The modal restores interactive preview dimensions and controls. */
+.work .work-lightbox .work-preview-toolbar{display:flex}
+.work .work-lightbox .project-window{height:min(70dvh,740px);overflow:hidden;pointer-events:auto}
+.work .work-lightbox .project-window:after{content:none}
+@media(max-width:760px){.work .work-lightbox .project-window{height:62dvh}}
