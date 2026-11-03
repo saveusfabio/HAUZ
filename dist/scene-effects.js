@@ -5,7 +5,7 @@
   // The hero uses the native cursor; the paint surface owns its interaction.
 
   const stars=document.querySelector('.studio-stars');
-  if(stars) stars.replaceChildren(...Array.from({length:5},(_,i)=>{const star=document.createElement('span');star.textContent='★';star.style.setProperty('--star-index',i);return star;}));
+  if(stars) stars.replaceChildren(...Array.from({length:5},(_,i)=>{const star=document.createElement('span');star.append(window.studioIcon('star'));star.style.setProperty('--star-index',i);return star;}));
 
   const offer=document.querySelector('.offer');
   if(offer){
@@ -54,7 +54,7 @@
   label.textContent = 'Transform this website';
   const arrow = document.createElement('span');
   arrow.setAttribute('aria-hidden', 'true');
-  arrow.textContent = '↗';
+  arrow.append(window.studioIcon('arrow-up-right'));
   button.replaceChildren(light, label, arrow);
   window.initStarBorder(button, light);
 
@@ -95,8 +95,8 @@
   button.after(reward);
   const celebrate=()=>{
     status.classList.remove('is-visible');
-    reward.innerHTML='<div class="reward-content"><svg aria-hidden="true" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14"/><path d="m9 16 5 5 9-10"/></svg><div class="reward-copy"><span class="reward-eyebrow mono">REDESIGN COMPLETE</span><strong>A better first impression.</strong><p>Same painter. Same work. A clearer website.</p></div><span class="reward-spark" aria-hidden="true">✳</span></div>';
-    reward.classList.add('is-complete');card.classList.add('redesign-reward');
+    reward.innerHTML='<div class="reward-content"><svg aria-hidden="true" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14"/><path d="m9 16 5 5 9-10"/></svg><div class="reward-copy"><span class="reward-eyebrow mono">REDESIGN COMPLETE</span><strong>A better first impression.</strong><p>Same painter. Same work. A clearer website.</p></div><span class="reward-spark" aria-hidden="true"></span></div>';
+    reward.querySelector('.reward-spark').append(window.studioIcon('sparkles'));reward.classList.add('is-complete');card.classList.add('redesign-reward');
     later(()=>card.classList.remove('redesign-reward'),1500);
   };
   const before=document.querySelector('#before-demo'), after=document.querySelector('#after-demo');
@@ -111,8 +111,8 @@
     ['THE WORK','The work deserves more room.','Repeated thumbnails give little context or detail.','Details worth a closer look.','Larger photos make prep, siding and finish easier to see.'],
     ['NEXT STEP','An unclear invitation.','Urgent messages compete without explaining what happens next.','A simple way to begin.','One clear invitation explains how to ask for an estimate.']
   ];
-  const reviewToast=document.createElement('div');reviewToast.hidden=true;reviewToast.className='work-review-toast';reviewToast.setAttribute('role','status');reviewToast.setAttribute('aria-live','polite');reviewToast.setAttribute('aria-atomic','true');reviewToast.innerHTML='<span class="work-review-toast-mark" aria-hidden="true">↗</span><span class="work-review-toast-copy"><span class="mono" data-toast-index></span><strong data-toast-title></strong><span data-toast-copy></span></span>';
-  document.querySelector('.work').append(reviewToast);
+  const reviewToast=document.createElement('div');reviewToast.hidden=true;reviewToast.className='work-review-toast';reviewToast.setAttribute('role','status');reviewToast.setAttribute('aria-live','polite');reviewToast.setAttribute('aria-atomic','true');reviewToast.innerHTML='<span class="work-review-toast-mark" aria-hidden="true"></span><span class="work-review-toast-copy"><span class="mono" data-toast-index></span><strong data-toast-title></strong><span data-toast-copy></span></span>';
+  reviewToast.querySelector('.work-review-toast-mark').append(window.studioIcon('arrow-up-right'));document.querySelector('.work').append(reviewToast);
   let activeReview=0,reviewFrame=0,toastTimer=0;
   const updateReview=(index,notify=false)=>{
     activeReview=Math.max(0,Math.min(reviewNotes.length-1,index));
@@ -141,7 +141,7 @@
     button.dataset.view=showAfter?'before':'after';
     button.setAttribute('aria-pressed',String(showAfter));
     label.textContent=showAfter?'See the original website':'Transform this website';
-    arrow.textContent=showAfter?'↶':'↗';
+    arrow.replaceChildren(window.studioIcon(showAfter?'rotate-ccw':'arrow-up-right'));
     previewModes.forEach(mode=>mode.setAttribute('aria-pressed',String(mode.dataset.previewMode===(showAfter?'after':'before'))));
     reviewToast.classList.remove('is-visible');reviewToast.hidden=true;clearTimeout(toastTimer);updateReview(0,showAfter);
   };

@@ -463,8 +463,31 @@ A faixa volta a uma altura mais compacta: 100–150 px no desktop e 96 px no mob
 
 ### Walkthrough editorial do redesign — 31/10/2026
 A seção principal de redesign incorpora o padrão da página de apresentação dist/presentation.html: alternância explícita Current site / Redesign, notas que acompanham a seção visível e mensagens contextuais breves no mobile. A coluna editorial no desktop mostra o diagnóstico do site original ou a melhoria equivalente, com índice e progresso. No mobile, uma notificação discreta acompanha a área interna rolável quando o capítulo muda; ela não cobre os controles do mockup e desaparece após alguns segundos. A notificação de conclusão que já existe continua separada e permanece até retornar ao original. As quatro notas explicam hierarquia, serviços, prova visual e próximo passo; são observações do conceito, não alegações de conversão. Preservar a navegação interna e a troca animada/refinamento do redesign; tabs apenas acionam o mesmo estado do CTA. Mudança de capítulo é anunciada por status sem deslocar foco. Movimento reduzido remove as transições; o texto e o estado continuam acessíveis.
+
+### Acesso integrado à apresentação — 01/11/2026
+
+A página dist/presentation.html agora deve ser acessível pela navegação principal e por um link contextual após a seção de demonstração na Home. Objetivo: eliminar dependência de URL localhost ou abertura de arquivo; preservar apresentação separada em rota própria para foco e integração futura. Mobile usa link no menu expansível. A página permanece buildless junto aos demais HTML em dist.
+
+### Rota para a apresentação de redesign — 01/11/2026
+
+Orientação retirada em 01/11/2026: o encaminhamento para index.html#work confundia duas experiências distintas. presentation.html volta a ser a apresentação independente.
+
+
+### Revisão visual da apresentação — 01/11/2026
+
+Implementado: página independente recuperada a partir do gerador local existente, preservando CSS e JavaScript de notificações. Não representa recuperação de uma versão histórica via Git. Backup anterior em output/presentation-backup.
+
+Shell alinhado à Home: Geist e Fragment Mono, fundo #f4f5f6, header de papel #f4f4f0, marca de casa com o mesmo recorte, largura máxima 1320 px, margens desktop de 48 px e mobile de 20 px. Título 48–76 px no desktop, peso 500, tracking apertado e sublinhado neutro; remover a abertura excessivamente grande e o gradiente. Controles verdes e linhas discretas. A identidade do exemplo fictício permanece separada da identidade editorial do estúdio.
+
+Verificação em arquivo local: 1440, 390 e 320 px sem overflow horizontal ou exceções JavaScript; notificações presentes somente no mobile no modo redesign. Fontes ainda dependem de Google Fonts.
+
 ### Navegação principal · 03/11/2026
 
-Implementado: cabeçalho fixo com links convencionais para Work, Services, Process, About us e Pricing. O CTA "See pricing" permanece visível no desktop e no celular e leva ao preço publicado de $999. A navegação móvel preserva os mesmos destinos essenciais. Links de âncora compensam a altura do cabeçalho. O objetivo é reduzir o esforço para consultar a oferta em qualquer ponto da página; o cabeçalho usa fundo sólido para manter leitura sobre seções claras e escuras.
+Orientação inicial de cabeçalho fixo e âncoras com compensação mantida. A composição dos links e o rótulo do CTA foram revisados abaixo para eliminar duplicidade.
 
 
+### Ícones e CTA da navegação · 03/11/2026
+
+Implementado: a navegação mantém Work, Services, Process e About us; o CTA fixo “Get started” leva à seção da oferta e preço. Ele comunica um próximo passo sem repetir “Pricing” como link vizinho. Enquanto o canal de contato não estiver ativo, não rotular o CTA como envio de mensagem ou compra concluída.
+
+Ícones funcionais das duas páginas usam SVGs locais do Lucide Static 1.67.0 (licença ISC em `dist/assets/lucide-LICENSE.txt`), com tamanho e traço consistentes, cor herdada e `aria-hidden` quando acompanhados por texto. Usar setas somente para direção ou navegação; `message-circle` para pedido de contato no conceito, `image` para portfólio, `panels-top-left` para serviços, `monitor-smartphone` para adaptação às telas, `sparkles` para transformação ou detalhe decorativo. Estados de seleção usam `check`. Pontos da janela de navegador são formas CSS decorativas. O mockup antigo conserva linguagem própria para representar a comparação histórica, mas sem caracteres Unicode tratados como controles. Evitar caracteres que possam renderizar como emoji em novas interfaces.
