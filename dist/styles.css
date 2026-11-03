@@ -824,3 +824,7 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .offer .feature-icon{transform:none;transition:color .25s ease,background-color .25s ease,border-color .25s ease,box-shadow .3s ease}
 @media(hover:hover) and (pointer:fine){.offer .feature:hover .feature-icon{transform:none;color:var(--accent-ink,#fff);background:var(--site-accent);border-color:color-mix(in srgb,var(--site-accent) 72%,white);box-shadow:0 0 0 3px color-mix(in srgb,var(--site-accent) 17%,transparent),0 0 24px 1px color-mix(in srgb,var(--site-accent) 54%,transparent)}}
 @media(prefers-reduced-motion:reduce){.offer .feature-icon{transition:none}}
+/* Keep the primary offer available as visitors move through the page. */
+.header{position:fixed;inset:0 0 auto;z-index:80;background:var(--paper);color:var(--ink);box-shadow:0 1px 0 rgba(32,35,31,.1)}.nav{min-height:76px;gap:24px}.nav nav{margin-left:auto;gap:24px}.nav-contact{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:44px;padding:10px 16px;background:var(--ink);color:#fff;font-size:13px;font-weight:500;white-space:nowrap}.nav-contact:hover{background:#3c4b3d}html{scroll-padding-top:92px}@media(max-width:760px){.nav{min-height:68px}.nav-contact{margin-left:auto;padding:10px 12px;font-size:12px}#mobile-menu{top:68px}.menu-toggle{min-width:auto;gap:6px;font-size:12px}}@media(max-width:390px){.nav{gap:10px}.wordmark{font-size:17px}.wordmark-index{font-size:12px}.nav-contact{padding:9px;font-size:11px}.menu-toggle{font-size:0}.menu-toggle span{font-size:24px}}
+
+

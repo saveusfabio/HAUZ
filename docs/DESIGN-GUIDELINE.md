@@ -463,3 +463,8 @@ A faixa volta a uma altura mais compacta: 100–150 px no desktop e 96 px no mob
 
 ### Walkthrough editorial do redesign — 31/10/2026
 A seção principal de redesign incorpora o padrão da página de apresentação dist/presentation.html: alternância explícita Current site / Redesign, notas que acompanham a seção visível e mensagens contextuais breves no mobile. A coluna editorial no desktop mostra o diagnóstico do site original ou a melhoria equivalente, com índice e progresso. No mobile, uma notificação discreta acompanha a área interna rolável quando o capítulo muda; ela não cobre os controles do mockup e desaparece após alguns segundos. A notificação de conclusão que já existe continua separada e permanece até retornar ao original. As quatro notas explicam hierarquia, serviços, prova visual e próximo passo; são observações do conceito, não alegações de conversão. Preservar a navegação interna e a troca animada/refinamento do redesign; tabs apenas acionam o mesmo estado do CTA. Mudança de capítulo é anunciada por status sem deslocar foco. Movimento reduzido remove as transições; o texto e o estado continuam acessíveis.
+### Navegação principal · 03/11/2026
+
+Implementado: cabeçalho fixo com links convencionais para Work, Services, Process, About us e Pricing. O CTA "See pricing" permanece visível no desktop e no celular e leva ao preço publicado de $999. A navegação móvel preserva os mesmos destinos essenciais. Links de âncora compensam a altura do cabeçalho. O objetivo é reduzir o esforço para consultar a oferta em qualquer ponto da página; o cabeçalho usa fundo sólido para manter leitura sobre seções claras e escuras.
+
+
