@@ -176,6 +176,7 @@ input,textarea{font-family:var(--font-sans);font-size:16px}
   border-color:color-mix(in srgb,var(--site-accent,#56664e) 24%,var(--line));
   background:#fff;
 }
+#main .section.pricing>.pricing-card{padding:0;margin-block:var(--section)}
 .pricing-intro{
   min-height:500px;
   padding:clamp(30px,4.5vw,64px);

@@ -431,7 +431,7 @@ O símbolo proposto parte de um contorno de casa traçado à mão, com interrup�
 
 A hero reúne a micro página e a cartela num único card. Na revisão de 03/11, removemos instruções e metadados duplicados, contadores visíveis, textura das amostras e reflexos que seguiam o ponteiro. O card usa borda reta, sombra discreta, uma amostra ativa nomeada e cinco controles compactos; a atualização da página continua visível ao selecionar uma cor. O título de escolha é funcional e a explicação longa permanece apenas para leitores de tela.
 
-Oferta fornecida pelo usuário: $999 USD one-time; até três páginas (Home, Gallery, Contact), design personalizado e até três revisões. Domínio, hosting e suporte opcionais por $99/mês. A seção mantém dois painéis no desktop e empilha no mobile; o painel editorial usa uma superfície clara derivada da paleta selecionada, em vez de verde fixo, com texto escuro para legibilidade. O valor, escopo e CTA têm hierarquia própria. Não inventar prazos ou políticas adicionais.
+Oferta fornecida pelo usuário: $999 USD one-time; até três páginas (Home, Gallery, Contact), design personalizado e até três revisões. Domínio, hosting e suporte opcionais por $99/mês. A seção mantém dois painéis no desktop e empilha no mobile; o painel editorial usa uma superfície clara derivada da paleta selecionada, em vez de verde fixo, com texto escuro para legibilidade. O valor, escopo e CTA têm hierarquia própria. Não inventar prazos ou políticas adicionais. O respiro vertical pertence à seção ao redor; não deixar padding vazio dentro da borda do card.
 
 Por decisão explícita do usuário, os botões de conversa permanecem sem destino, com aria-disabled e sem envio. Conectar quando o contato for definido.
 
