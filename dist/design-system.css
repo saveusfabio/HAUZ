@@ -75,7 +75,7 @@ h1,h2,h3{font-family:var(--font-sans)}
 #mobile-menu a{font-family:var(--font-sans)}
 :is(.view-switch button,.work-preview-toolbar button){font-family:var(--font-sans);font-size:13px;font-weight:var(--weight-medium);line-height:1.2}
 .view-switch button{min-height:44px}
-.work-preview-toolbar button{min-height:44px;padding-inline:14px}
+.work-preview-toolbar button{min-height:52px;padding-inline:14px;font-size:14px;font-weight:600}
 .work-design-note-index,.work-design-note-state{font-size:10px;white-space:nowrap}
 :is(.menu-toggle,.dialog-close,#privacy-button){min-width:44px;min-height:44px}
 :is(footer .footer-nav a,footer .footer-meta>a,footer .footer-meta button,footer .back-top){min-height:44px;font-family:var(--font-sans);font-size:var(--type-action)}
@@ -161,7 +161,7 @@ input,textarea{font-family:var(--font-sans);font-size:16px}
 #main .work .work-copy{display:grid;justify-items:center;text-align:center}
 #main .work .work-copy .work-heading h2{max-width:18ch;text-wrap:balance}
 #main .work .work-invitation{max-width:52ch;margin-top:14px;font-size:16px;line-height:1.55}
-#main .work .work-open-cta{min-width:232px;margin:22px auto 0}
+#main .work .work-open-cta{width:100%;min-width:0;max-width:none;justify-self:stretch;margin:22px auto 0}
 #main .work .work-preview-open{display:none!important}
 #main .work .project-shell{width:100%;min-width:0}
 #main .work .project-shell>.project-window{height:min(60svh,560px)}

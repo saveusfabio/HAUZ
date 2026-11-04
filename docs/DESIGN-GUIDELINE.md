@@ -532,6 +532,12 @@ Implementado: a nota lateral mostra sempre o ganho do redesign como mensagem pri
 
 Para reduzir o peso percebido, a lightbox não desfoca mais o fundo, a janela interna deixa de projetar sombra e o canvas decorativo do botão oculto não é iniciado. O diálogo se ajusta ao conteúdo em telas largas; a janela de prévia limita a altura a 62dvh (máximo de 700 px) para caber sem criar rolagem extra no diálogo. O mockup continua rolável; as notas acompanham o capítulo. As duas versões são estudos visuais, sem alegação de resultado comercial ou trabalho contratado.
 
+### Refinamento do comparativo e das imagens de benefícios · 04/11/2026
+
+Implementado: no estado fechado da seção de redesign, “Explore the redesign” ocupa a mesma largura do preview imediatamente abaixo, tornando a ação principal fácil de localizar e tocar. Dentro da lightbox, Current site e Redesign agora aparecem como dois controles de igual tamanho, com contraste forte entre o estado selecionado e o disponível, alvo de toque mínimo de 48 px no mobile e foco visível por teclado. A seleção continua trocando o mesmo preview e preservando o ponto de leitura; os botões não devem parecer links secundários.
+
+Na seção “Why a good website matters”, cada fotografia de fundo deve representar diretamente sua mensagem: trabalho concluído para “Show your best work”, página de serviços para “Explain what you do”, conversa sobre orçamento para “Make it easy to reach you” e a mesma presença em computador e celular para “Look sharp on every screen”. As três imagens novas são ilustrações fotográficas geradas para este conceito, não portfólio, fotos de cliente nem prova de resultado. Mantemos carregamento tardio perto da seção e a interação por hover em ponteiro preciso; a imagem ativa ganhou mais opacidade, cor e área visível, enquanto uma máscara escura gradual conserva a leitura dos textos claros. `prefers-reduced-motion` continua sem escala ou transição animada.
+
 
 ### Hero como prévia de site · 03/11/2026
 

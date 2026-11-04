@@ -545,7 +545,7 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 /* Feature imagery changes the atmosphere of the whole dark section, never the individual benefit rows. */
 .offer .offer-backdrop{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#20231f}
 .offer .offer-backdrop-image{position:absolute;inset:-2%;background-size:cover;background-position:center 46%;opacity:0;transform:scale(1.045);transition:opacity .7s ease,transform 1.1s var(--ease)}
-@media(hover:hover) and (pointer:fine){.offer[data-active-feature="work"] .offer-backdrop--work,.offer[data-active-feature="services"] .offer-backdrop--services,.offer[data-active-feature="estimate"] .offer-backdrop--estimate,.offer[data-active-feature="screens"] .offer-backdrop--screens{opacity:.38;transform:scale(1)}}
+@media(hover:hover) and (pointer:fine){.offer[data-active-feature="work"] .offer-backdrop--work,.offer[data-active-feature="services"] .offer-backdrop--services,.offer[data-active-feature="estimate"] .offer-backdrop--estimate,.offer[data-active-feature="screens"] .offer-backdrop--screens{opacity:.56;transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.offer .offer-backdrop-image{transition:none;transform:none}}
 /* Type legibility: keep the editorial hierarchy while giving labels and controls room to read. */
 .mono,.eyebrow{font-size:12px}
@@ -599,7 +599,7 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 
 /* One material surface: image dissolves completely into the left side and the edges. */
 .offer:before{background-image:url('assets/section-grain.webp');background-size:160px 160px;opacity:.13;mix-blend-mode:soft-light}
-.offer .offer-backdrop-image{inset:-2%;background-position:75% 42%;filter:grayscale(.45) saturate(.65);mask-image:linear-gradient(90deg,transparent 22%,rgba(0,0,0,.12) 45%,#000 100%);transition:opacity .8s ease,transform 1.4s var(--ease)}
+.offer .offer-backdrop-image{inset:-2%;background-position:75% 42%;filter:grayscale(.2) saturate(.82);mask-image:linear-gradient(90deg,transparent 12%,rgba(0,0,0,.14) 32%,#000 78%);transition:opacity .8s ease,transform 1.4s var(--ease)}
 .offer .offer-backdrop:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#20231f 0%,rgba(32,35,31,.65) 20%,transparent 55%,rgba(32,35,31,.65) 100%);pointer-events:none}
 .offer .feature{position:relative}
 .offer .feature-icon{color:color-mix(in srgb,var(--site-accent) 40%,#f4f4f0);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09)}
@@ -798,10 +798,12 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 @media(max-width:760px){.hero-paint .paint-deck-intro{margin-bottom:17px}.hero-paint .paint-deck-intro h3{font-size:22px}.hero-paint .paint-deck-intro p{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.hero-paint .paint-sample-card,.hero-paint .paint-sample-card:after{transition:none!important}.hero-paint .paint-sample-card:after{display:none}}
 /* Redesign walkthrough: explicit version controls, synced design notes and mobile toast. */
-.work-preview-toolbar{display:flex;align-items:center;gap:8px;min-height:48px;padding:5px 10px;border:1px solid var(--line);border-bottom:0;background:#ecece6}
-.work-preview-toolbar>.mono{margin-right:auto;color:var(--muted);font-size:10px;letter-spacing:.07em}
-.work-preview-toolbar button{min-height:36px;padding:7px 12px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:12px;transition:background .2s,color .2s,border-color .2s}
-.work-preview-toolbar button[aria-pressed=true]{background:var(--paper);border-color:var(--line);color:var(--ink)}
+.work-preview-toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:8px;min-height:0;padding:10px;border:1px solid var(--line);border-bottom:0;background:#ecece6}
+.work-preview-toolbar>.mono{grid-column:1/-1;margin:0;color:var(--muted);font-size:10px;letter-spacing:.07em}
+.work-preview-toolbar button{width:100%;min-height:52px;padding:12px 14px;border:1px solid var(--ink);background:#fff;color:var(--ink);font-size:14px;font-weight:600;line-height:1.2;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.work-preview-toolbar button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:inset 0 -3px 0 var(--site-accent)}
+.work-preview-toolbar button:not([aria-pressed=true]):hover{background:#f5f5ef;transform:translateY(-1px)}
+.work-preview-toolbar button:focus-visible{outline:2px solid var(--site-accent);outline-offset:2px;z-index:1}
 .work-design-note{width:100%;max-width:32ch;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
 .work-design-note-index{color:var(--site-accent);font-size:10px;letter-spacing:.055em}
 .work-design-note h3{margin:9px 0 7px;font-size:21px;line-height:1.18;letter-spacing:-.035em;font-weight:500}
@@ -817,7 +819,7 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .work-review-toast-copy strong{font-size:15px;line-height:1.25;font-weight:550}
 .work-review-toast-copy>span:last-child{font-size:13px;line-height:1.45;color:var(--muted)}
 @media(max-width:900px){.work-design-note{max-width:48ch}.work-preview-toolbar{margin-top:2px}}
-@media(max-width:760px){.work-preview-toolbar{min-height:44px;padding:4px 7px;gap:4px}.work-preview-toolbar>.mono{font-size:9px}.work-preview-toolbar button{padding:6px 9px;min-height:34px;font-size:11px}.work-design-note{margin-top:18px;padding-top:13px}.work-design-note h3{font-size:19px}.work-design-note p{font-size:14px}.work-review-toast{bottom:calc(16px + env(safe-area-inset-bottom));width:min(440px,calc(100% - 24px));padding:14px 15px}}
+@media(max-width:760px){.work-preview-toolbar{padding:8px;gap:6px}.work-preview-toolbar>.mono{font-size:10px}.work-preview-toolbar button{padding:11px 8px;min-height:48px;font-size:13px}.work-design-note{margin-top:18px;padding-top:13px}.work-design-note h3{font-size:19px}.work-design-note p{font-size:14px}.work-review-toast{bottom:calc(16px + env(safe-area-inset-bottom));width:min(440px,calc(100% - 24px));padding:14px 15px}}
 @media(prefers-reduced-motion:reduce){.work-preview-toolbar button,.work-review-progress span,.work-review-toast{transition:none!important}.work-review-toast{transform:translate(-50%,0)}}
 
 /* Stronger hover affordance: fill the icon tile and give it a restrained accent halo. */
@@ -893,7 +895,7 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 @media(max-width:760px){.work .work-lightbox{width:100%;height:100dvh;padding:15px 14px;max-height:none}.work-lightbox-header h2{font-size:25px}.work-lightbox-header .mono{font-size:9px}.work-lightbox-layout{gap:12px}.work-lightbox-layout .project-window{height:62dvh}.work-lightbox-layout .demo{height:calc(62dvh - 43px)}.work-preview-open{max-width:calc(100% - 20px);white-space:normal;font-size:12px}.work .project-shell>.project-window{height:42svh}.work .work-copy .work-heading h2{max-width:100%}}
 @media(prefers-reduced-motion:reduce){.work-open-cta,.work-preview-open{transition:none}.work-open-cta:hover,.work-preview-open:hover{transform:none}.work-preview-open{transform:translateX(-50%)!important}}
 /* The modal restores interactive preview dimensions and controls. */
-.work .work-lightbox .work-preview-toolbar{display:flex}
+.work .work-lightbox .work-preview-toolbar{display:grid}
 .work .work-lightbox .project-window{height:min(70dvh,740px);overflow:hidden;pointer-events:auto}
 .work .work-lightbox .project-window:after{content:none}
 @media(max-width:760px){.work .work-lightbox .project-window{height:62dvh}}
