@@ -164,6 +164,7 @@ input,textarea{font-family:var(--font-sans);font-size:16px}
 #main .work .work-open-cta{width:100%;min-width:0;max-width:none;justify-self:stretch;position:relative;display:flex;align-items:center;justify-content:center;min-height:68px;padding:18px 56px;margin:22px auto 0;font-size:clamp(16px,1.3vw,18px);font-weight:600;line-height:1.2}
 #main .work .work-open-cta .lucide{position:absolute;top:50%;right:20px;translate:0 -50%;width:20px;height:20px}
 #main .work>.frame{padding-top:clamp(24px,2vw,32px)}
+@media(min-width:761px){#main .work{margin-top:-clamp(40px,4vw,64px)}}
 #main .work .work-preview-open{display:none!important}
 #main .work .project-shell{width:100%;min-width:0}
 #main .work .project-shell>.project-window{height:min(60svh,560px)}
