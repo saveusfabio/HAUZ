@@ -77,13 +77,13 @@ O símbolo de casa e o nome **Studio / 001** são placeholders de trabalho. Não
 
 **Direção a explorar:** criar símbolos próprios relacionados à pintura residencial e à apresentação do trabalho — por exemplo, gesto de pincel, amostra/recorte de tinta ou moldura arquitetônica — em desenho manual controlado, simples o bastante para funcionar em tamanhos pequenos. Testar versões de uma cor e lockups símbolo + wordmark. Preservar legibilidade e evitar sugerir que o estúdio executa pintura. “Studio / 001” permanece nome de trabalho; conceitos não aprovam naming, cor ou marca final. A prancha inicial e os três caminhos estão em `docs/brand-concepts.html` e devem ser avaliados antes de incorporar qualquer opção ao website.
 
-### Apresentação do trabalho: comparação antes → depois — orientação anterior, substituída em 03/11/2026
+### Apresentação do trabalho: comparação antes → depois — 03/11/2026
 
-A seção “See what a better first impression looks like.” abre com um grid de duas colunas no desktop: título, identificação conceitual e CTA na coluna esquerda; um único frame de navegador rolável ocupa a coluna direita. O texto editorial mantém uma largura compacta e alinhada ao topo do mockup. Abaixo de 900 px, as colunas empilham, com a CTA junto ao texto e antes do mockup para permanecer fácil de encontrar.
+Implementado: no estado fechado, a seção usa uma única coluna em todas as larguras. Título, frase de apoio e uma CTA ficam centralizados e empilhados acima de um preview largo. A ação “Explore the redesign” abre a comparação em lightbox; o frame abaixo permanece inerte nesse estado, sem um segundo botão sobre a imagem. Isso concentra a atenção no preview e evita duas ações concorrentes. Dentro da lightbox, manter controles explícitos Current / Redesign e notas que acompanham o conteúdo.
 
-A primeira vista mostra um website propositalmente fraco, com sinais visuais reconhecíveis de sites datados, sem ridicularizar empresas reais. A CTA “Transform this website” fica na coluna editorial, com Star Border, e alterna para o redesign pré-construído; ao transformar, oferece retorno ao original. Mostrá-la enquanto a composição da seção está visível e mantê-la acessível por teclado apenas nesse estado. As duas versões apresentam as mesmas partes de uma home painter — navegação, hero, apresentação, serviços, trabalhos, contato e rodapé — para que a diferença venha da organização, tipografia, fotografia e hierarquia. A referência escolhida foi P&D Painting, o maior score da planilha de prospects (81/100), com site atual no ar; usamos seu mix público de pintura interna/externa, murais, custom finishes e reparos para tornar o exemplo específico do ofício. A identidade é identificada como conceito independente, não encomendado nem trabalho de cliente. Fotos geradas são marcadas como conceituais, não como portfólio real. O mockup é uma página miniatura rolável dentro de uma moldura de navegador; a rolagem interna continua independente e pode passar à página principal ao atingir as extremidades. Revisar o equilíbrio das colunas e a leitura em larguras de 320–390 px.
+A comparação continua apresentando as mesmas partes da home de uma empresa de pintura — navegação, hero, apresentação, serviços, trabalhos, contato e rodapé — para que a diferença venha da organização, tipografia, fotografia e hierarquia. A referência escolhida é P&D Painting; seu mix público de pintura interna/externa, murais, custom finishes e reparos torna o exemplo específico do ofício. O redesign é um conceito independente, não encomendado nem trabalho de cliente; fotos conceituais não são portfólio real. Na lightbox, o mockup é uma página miniatura rolável, com navegação interna independente. Conservar alvos de toque e teclado, sem overflow horizontal em 320–390 px.
 
-A CTA usa o Star Border do React Bits: uma estrela com cauda na cor de accent percorre o contorno em 4 s; no hover, completa uma volta adicional. A cor de fundo dos botões principais da hero e de transformação acompanha o tom selecionado na paleta. Comparar as razões reais de contraste entre ink/branco e o fundo, escolhendo o maior contraste; no Porchlight, usar um terracota mais profundo no botão com texto branco (meta de 5,2:1), conservando o pigmento original na arte; a borda luminosa conserva contraste e o brilho acompanha o accent. Desativar o movimento contínuo quando `prefers-reduced-motion` estiver ativo. O mockup deve ocupar uma janela compacta para deixar espaço visível para continuar a página: no desktop, cerca de 62svh (máximo 620 px); no mobile, 54svh e 48svh até 380 px. O conteúdo continua rolável internamente, com navegação compacta, alvos de toque confortáveis e sem overflow horizontal. Em celulares estreitos (até 380 px), o título da seção usa 30–36 px, largura livre e quebra balanceada para evitar linhas com palavras isoladas.
+Manter uma única CTA no estado fechado. O tratamento de borda animada fica reservado à oferta final, não ao botão de abrir a comparação; evitar movimento decorativo repetido em CTAs. O preview fechado usa altura de até 560 px no desktop e 38svh no mobile, com mínimo de 260 px para preservar contexto. A lightbox conserva a janela rolável e seus controles de versão; reduzir transições com prefers-reduced-motion.
 Nossa diferenciação vem do redesign demonstrado, da linguagem específica para painting contractors e da promessa de valorizar um trabalho já bem feito. A página deve parecer mais um estúdio de design que entende ofícios do que uma empresa de pintura vendendo seus serviços.
 
 ## 6. Tokens da V1
@@ -94,7 +94,7 @@ Nossa diferenciação vem do redesign demonstrado, da linguagem específica para
 | Ink | `#20231f` | Texto principal |
 | Muted | `#686c63` | Texto secundário em fundo claro |
 | Grid light | `rgba(32,35,31,.022)` | Guias muito discretas no fundo claro |
-| Lime | `#b5d173` | Cursor, CTA final e pequenos detalhes |
+| Lime | #b5d173 | Cursor e detalhes pontuais; a CTA final usa a paleta selecionada |
 | Dark | `#252d27` | Contato e navegação móvel |
 | Studio wash | `#e8ebdf` | Bloco editorial sobre o estúdio |
 | Grid hero | `rgba(32,35,31,.04)` | Guias de baixo contraste no fundo off-white do hero atual |
@@ -108,7 +108,7 @@ Nossa diferenciação vem do redesign demonstrado, da linguagem específica para
 
 Usar Geist para conteúdo e Fragment Mono para índices, labels e metadados. Fallbacks: Arial/sans-serif e monospace. No redesign conceitual de P&D Painting, usar sans-serif editorial e linguagem visual de empreiteiro residencial: preparação, siding, trim, ferramentas, exterior e cuidado com o local. Evitar linguagem/fotografia de design de interiores.
 
-- H1 do site: Geist, caixa de frase no hero, peso 450–500 e escala responsiva aproximada de 42–72 px. Os mockups permanecem isolados e podem usar tipografia própria para mostrar o antes e depois.
+- H1 do site: Geist, caixa de frase no hero, peso 500 e escala responsiva aproximada de 42–72 px. O peso 600 fica reservado a ações de maior ênfase; os dois mockups permanecem isolados e podem usar tipografia própria para mostrar o antes e depois.
 - H2 de seção: escala compartilhada `clamp(36px, 4.2vw, 56px)`, peso 500, line-height 1.08 e tracking próximo de -0.05em. Títulos de abertura e fechamento podem assumir escala display quando a hierarquia pedir.
 - H3 de cards e blocos: `clamp(22px, 1.8vw, 24px)`, peso 500 e line-height 1.2.
 - Corpo: Geist 16 px como base; 14 px para detalhes e listas de apoio. Leads podem ser maiores quando a hierarquia editorial justificar.
@@ -120,13 +120,13 @@ Se o conteúdo crescer, ajustar o layout antes de reduzir o tamanho da tipografi
 
 ### Sistema de tipografia e ações · 03/11/2026
 
-Implementado em `dist/design-system.css`, carregado após a folha-base para concentrar tokens e os padrões finais do site. Geist é a família de interface; Fragment Mono fica reservado a labels e metadados. A escala semântica usa display, título de seção, subtítulo, corpo 16 px, apoio 14 px e metadata 11 px. Variações de tamanho devem acompanhar o papel do conteúdo e o breakpoint, não surgir de ajustes isolados sem função.
+Implementado em dist/design-system.css, carregado após a folha-base para concentrar tokens e padrões finais do site. A interface usa Geist como família sans-serif e Fragment Mono para labels e metadados; Geist é servido como uma única fonte variável. A interface limita pesos recorrentes a 400, 500 e 600; 600 destaca a marca e a CTA final. O tipo é organizado por função: display, título de seção, subtítulo, corpo 16 px, apoio 14 px e metadata 11 px. Os mockups de antes/depois preservam fontes e pesos próprios para explicar o redesign. Tamanhos e tracking devem seguir papéis e breakpoints, sem ajustes isolados sem função.
 
-Ações primárias e de navegação compartilham Geist, peso 500, 14 px, cantos retos e altura de 48 px; CTAs de demonstração e preço usam 56 px. Links de texto continuam visualmente distintos, mas mantêm escala de ação e área mínima de 44 px. Abas de comparação, menu e fechamento de diálogo também têm hit area mínima de 44 px. Cores continuam contextuais: CTA escuro, claro ou de destaque não cria uma família tipográfica separada.
+Ações primárias e navegação usam Geist, peso 500 e escala de 14 px; navegação mantém 48 px de altura e ações principais, 56 px ou mais. A CTA da oferta usa 18 px, peso 600 e altura mínima de 68 px no desktop (64 px no mobile), por encerrar a jornada comercial. Links mantêm área mínima de 44 px; abas, menu e fechamento de diálogo também têm alvos de pelo menos 44 px. Variação de cor não cria outra família tipográfica.
 
 **Exceções intencionais:** botões de navegação dentro do mockup são parte do site demonstrativo e preservam o desenho e as dimensões daquele conceito; amostras de tinta são controles de seleção visual, não CTAs. Não uniformizar esses elementos com os botões da interface do estúdio.
 
-**Revisão:** a auditoria encontrou tamanhos de CTA entre 11 e 14 px e alturas entre 34 e 56 px, além de títulos de seção em escalas parcialmente sobrepostas. A nova camada normaliza os papéis recorrentes, preservando os títulos display e as variações de cor existentes. Labels em painéis estreitos podem usar 10 px para caber sem quebra; metadados não devem ficar menores.
+**Revisão implementada:** a UI usa uma família sans-serif e uma mono; pesos 400, 500 e 600; escalas display, seção, subtítulo, corpo, apoio e metadados. O preço mantém escala de display e a CTA final sobe para 18 px / peso 600. Estilos de serif e Arial ficam somente nos mockups demonstrativos, onde representam o site original e a proposta.
 ## 7. Grid e linhas
 
 O Cresta usa uma régua comum com quatro colunas iguais: duas linhas definem as margens do conteúdo e outras três indicam as divisões internas. Na captura de 1265 px, observei os limites em aproximadamente x=40 e x=1210, com guias em x=334, 626 e 918. A régua permanece alinhada ao passar do hero para as seções claras. Labels e títulos se posicionam em relação a ela; os elementos não ganham caixas decorativas próprias por causa da grade.
@@ -304,11 +304,11 @@ Preservar a tipografia Geist, o título em caixa de frase e o seletor acessível
 
 Revisão técnica e orçamento detalhados em [PAINT-MOTION.md](PAINT-MOTION.md). Otimizações devem preservar a intensidade e a geometria aprovadas: cache de recursos, buffers reutilizados, cálculo de ondas suspenso em repouso e nenhum draw fora da tela. Ao trocar cor, atualizar a textura apenas no evento de carregamento, sem recriar o programa WebGL. Não confundir limites de renderização com benchmark de GPU.
 
-No desktop, manter texto e arte na mesma composição de duas colunas, trazendo ambos levemente em direção ao centro do frame de quatro colunas. Usar título de 54–72 px e corpo de 17–19 px; brilho discreto e sublinhado em gradiente de “website” e “your work” seguem a cor selecionada. A linha do sublinhado usa cerca de 0.11em para continuar visível em telas pequenas sem competir com as letras. O CTA principal usa um fundo da família do pigmento com contraste calculado. Sua seta herda a cor do texto; a seta do link secundário usa uma variante do pigmento com contraste adequado no fundo claro. Deixar a paleta aberta com a cor selecionada, a frase curta e os cinco swatches visíveis. No mobile, resetar os offsets da antiga hero fotográfica e centralizar a composição. Título em fluxo normal, 34–44 px / 1,1, descrição de 14 px, círculo de 160–190 px e seletor aberto no fluxo da página. A animação de entrada por linhas fica desativada no mobile para evitar clipping; o efeito da tinta permanece com os mesmos parâmetros.
+No desktop, manter texto e arte em duas colunas alinhadas ao grid da página. A coluna visual é um preview de página com nav, chamada, imagem e CTAs que reagem à cartela. A cartela não repete explicações: exibe um título funcional, a cor ativa e cinco amostras rotuladas abaixo do preview. O CTA principal da hero usa contraste calculado; no preview, as cores de nav e botão acompanham a escolha. No mobile, centralizar a composição e empilhar título, texto, ação e card. O card se adapta à largura sem ampliar a página nem causar scroll horizontal.
 
 ## 12. Responsividade
 
-- Acima de 1100 px: quatro faixas de grid, navegação horizontal, before/after com nota lateral, processo em duas colunas.
+- Acima de 1100 px: quatro faixas de grid, navegação horizontal, seção de comparação centralizada; a lightbox pode usar nota lateral. Processo em duas colunas.
 - Entre 761 e 1100 px: gutters 32 px; títulos e gaps reduzidos; manter composição sem comprimir textos.
 - Até 760 px: menu expansível, hero sem recuo lateral, grid de duas faixas, prova visual e processo empilhados, contato em uma coluna, cursor decorativo desligado.
 - Até 390 px: gutters 20 px, campos de nome/email empilhados, conteúdo do mockup simplificado.
@@ -349,7 +349,7 @@ Transformação: usar os estágios HTML do Refine Frame (queued, generating, ref
 Hero: sem guias verticais, bordas laterais ou crosshair. Usar o cursor nativo e manter o ponto decorativo desligado dentro da hero. A interação se concentra na tinta e no seletor.
 
 
-As CTAs da hero e da demonstração antes/depois usam a cor selecionada na paleta. A tinta define a família cromática do botão; comparar o contraste real de ink e branco. Porchlight recebe uma variante mais profunda para suportar texto branco; Linen e Golden Hour mantêm fundo claro e ink. Setas e texto do mesmo CTA usam a mesma cor de primeiro plano. A seção de comparação usa duas colunas no desktop — editorial e CTA à esquerda, mockup à direita — e empilha abaixo de 900 px. O sublinhado permanece como detalhe cromático; não indica um alvo de cursor.
+A CTA da hero e os detalhes do preview acompanham a cor selecionada. A oferta também reage: seu painel editorial recebe uma mistura clara da cor escolhida e o texto usa tinta escura; o botão mantém a superfície calculada por contraste. A borda rainbow do botão final deriva seis tons do matiz selecionado e gira lentamente em CSS, sem biblioteca adicional; prefers-reduced-motion mantém o gradiente estático. A composição fechada da comparação é uma coluna centralizada em todas as larguras; somente a lightbox organiza preview e notas lado a lado quando há espaço. O sublinhado permanece um detalhe cromático, sem significado de cursor.
 
 
 ## 17. Revisão de recompensa, acessibilidade e custo — 25/10/2026
@@ -427,28 +427,28 @@ O símbolo proposto parte de um contorno de casa traçado à mão, com interrup�
 **Exploração de formas positivas:** `docs/brand-positive-space-study.png` abre oito direções que usam forma visível, mancha de tinta e campos de cor para construir telhado ou fachada, em diálogo com contornos e recortes arquitetônicos. São rotas conceituais para ampliar a comparação; nenhuma substitui a preferência por estudar espaço negativo nem está aprovada. Avaliar especialmente se cada marca mantém leitura residencial e se a tinta comunica ofício sem virar ícone genérico de pintura.
 
 
-## Revisão comercial e cartela — 31/10/2026
+## Revisão comercial e cartela — 31/10/2026, refinada em 03/11
 
-Implementado: kicker DESIGN & TECHNOLOGY FOR HANDS-ON BUSINESSES; novo CTA de conversa e título do processo solicitados. A hero reúne a faixa de tinta e seletor num único card. A legenda redundante sob a faixa e a divisória foram removidas; a instrução da paleta explica a analogia com escolher tinta para casa e que o site muda com a escolha. As fichas individuais mantêm hover sem rotação. O card permanece fixo no layout, sem tilt, scale ou deslocamento magnético. Em hover de ponteiro preciso, apenas sombra, borda e um reflexo sutil que acompanha o ponteiro dão sensação de profundidade; ao sair, o reflexo desaparece. Touch não ganha efeito de hover e reduced motion desativa o reflexo. A hierarquia enfatiza título de 25 px, instrução de 15 px e nome aplicado.
+A hero reúne a micro página e a cartela num único card. Na revisão de 03/11, removemos instruções e metadados duplicados, contadores visíveis, textura das amostras e reflexos que seguiam o ponteiro. O card usa borda reta, sombra discreta, uma amostra ativa nomeada e cinco controles compactos; a atualização da página continua visível ao selecionar uma cor. O título de escolha é funcional e a explicação longa permanece apenas para leitores de tela.
 
-Oferta fornecida pelo usuário: $999 USD one-time; até três páginas (Home, Gallery, Contact), design personalizado e até três revisões. Domínio, hosting e suporte opcionais por $99/mês. Substitui a orientação de preço ainda indefinido. Painel editorial verde escuro e painel claro com preço/escopo, empilhados no mobile. A seção precede o FAQ, renumerado 06 e atualizado com os valores. Não inventar prazos ou políticas adicionais.
+Oferta fornecida pelo usuário: $999 USD one-time; até três páginas (Home, Gallery, Contact), design personalizado e até três revisões. Domínio, hosting e suporte opcionais por $99/mês. A seção mantém dois painéis no desktop e empilha no mobile; o painel editorial usa uma superfície clara derivada da paleta selecionada, em vez de verde fixo, com texto escuro para legibilidade. O valor, escopo e CTA têm hierarquia própria. Não inventar prazos ou políticas adicionais.
 
 Por decisão explícita do usuário, os botões de conversa permanecem sem destino, com aria-disabled e sem envio. Conectar quando o contato for definido.
 
-## Cartela física digital — 31/10/2026
+## Hero: preview de página e cartela compacta — 03/11/2026
 
 **Pesquisa:** Sherwin-Williams apresenta color chips de 2 × 3 polegadas e amostras peel & stick para testar cores no ambiente (https://www.sherwin-williams.com/homeowners/discovery/samples). Suvinil enfatiza teste no ambiente e comparação entre tons (https://suvinil.com.br/cores). Pantone descreve seus Formula Guides como leques portáteis para comparar e comunicar cor; a página retornou 403 na abertura, portanto a leitura ficou limitada ao resultado indexado (https://www.pantone.com/products/graphics/formula-guide-coated-uncoated).
 
-**Interpretação implementada, não teste com usuários:** pequenas fichas de papel alinhadas são familiares ao ofício e permitem ver as cinco opções simultaneamente. Bordas quase retas, lâminas de papel simuladas por sombras estáticas, área de pigmento fosca com textura SVG estática leve e faixa branca para o nome. Não usar logos, códigos de fabricante ou sugerir equivalência com tintas comerciais.
+**Interpretação implementada, não teste com usuários:** a micro página de pintura é a peça de demonstração; as amostras de cor são controles secundários. Não usar textura decorativa nas fichas nem repetir índice, nome ativo e explicação em mais de um lugar. Não usar logos ou códigos de fabricantes, nem sugerir equivalência com tintas comerciais.
 
-**Comunicação:** título “Give this site a fresh coat.” e instrução “Pick a color. Watch the details change across the site.” deixam explícito o efeito da ferramenta. “APPLIED TO THIS SITE” identifica o nome já selecionado. A instrução também é associada ao grupo por aria-describedby. Não reintroduzir descrição filosófica por cor.
+**Comunicação implementada:** a página demonstrativa é o foco. O cabeçalho reduzido “Choose a color” e a amostra ativa nomeada identificam a interação; a instrução complementar fica disponível para leitores de tela por aria-describedby, sem formar um segundo bloco de texto visível.
 
-**Interação atual:** hover preciso eleva somente a ficha apontada em 5 px, sem rotação ou deslocar vizinhas; clique comprime 1 px; check e contorno persistem na seleção. Foco escuro independente, transição de 200 ms; reduced motion remove transformações e transições. Substitui as especificações de hover da revisão anterior. Fichas de 112 px desktop e 96 px mobile, nomes e números de 12 px. Nenhuma biblioteca ou loop adicionado.
+**Interação atual:** cinco amostras compactas mantêm rótulos e nomes acessíveis; a seleção persiste por contorno e check SVG. Foco visível e hit areas permanecem. Cor, nome, hero, preview e oferta atualizam juntos. Transições de cor são curtas; movimento reduzido remove elevação e animações. Sem números repetidos, textura de ruído nas fichas ou biblioteca de componentes.
 
-**Preservado:** DOM, dimensões, imagem, shader, resposta ao ponteiro e inércia do círculo; dados, eventos, assets e lógica de aplicação das cinco cores. O painel cresce naturalmente para acomodar a instrução, sem redimensionar a tinta.
+A faixa de tinta continua no preview e preserva a imagem e o shader existentes. A cartela não é mais um conjunto de cartões altos: pigmentos em faixas baixas de 46 px no desktop e 40 px no mobile; labels curtos abaixo, sem índice numérico visível.
 
-### Equilíbrio do card com a copy — 31/10/2026
-A rodada anterior deixou a cartela alta demais. Reduzir o círculo de 330 para 260 px no desktop e de 210 para 190 px no mobile, preservando renderer e interação. Compactar amostras para 88 px e espaçamentos internos. Hierarquia: tinta como foco visual, título de 21 px, instrução de 14 px, nome ativo de 17 px e metadados de 12 px. A altura acompanha conteúdo, sem altura fixa que corte texto ou prejudique zoom; o objetivo é equilíbrio visual com a coluna esquerda.
+### Card da hero 2.0 — 03/11/2026
+A cartela cresce como parte do card, mas as amostras deixam de dominar a composição. O preview da mini página mede 210 px no desktop, 184 px no mobile e 170 px até 380 px. Um único título, um chip com o nome da cor e cinco amostras compactas organizam a interação. O card usa borda reta, superfície branca e sombra discreta, alinhado à linguagem editorial do restante do site; a página demonstrativa mantém o efeito de atualização de cor.
 
 ## Página de apresentação de redesign — 31/10/2026
 

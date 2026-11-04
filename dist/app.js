@@ -121,15 +121,22 @@
         let hue = 0, saturation = 0;
         if (high !== low) { const delta = high-low; saturation = delta/(1-Math.abs(2*light-1)); hue = high===red ? ((green-blue)/delta)%6 : high===green ? (blue-red)/delta+2 : (red-green)/delta+4; hue = (hue*60+360)%360; }
         const complementaryHue = (hue+180)%360;
-        hero.style.setProperty('--hero-paint-tint', 'hsl(' + hue + ' ' + Math.max(saturation * 100, 42) + '% ' + Math.max(light * 100, 34) + '%)');
-        hero.style.setProperty('--hero-ground', 'hsl(' + complementaryHue + ' ' + Math.min(17,saturation*100*.2) + '% 96.5%)');
+        const ground = 'hsl(' + complementaryHue + ' ' + Math.min(17,saturation*100*.2) + '% 96.5%)';
+        const rootStyle = document.documentElement.style;
+        rootStyle.setProperty('--hero-paint-tint', 'hsl(' + hue + ' ' + Math.max(saturation * 100, 42) + '% ' + Math.max(light * 100, 34) + '%)');
+        rootStyle.setProperty('--hero-ground', ground);
+        const spectrumSaturation = Math.max(28, Math.min(saturation * 100 * .86, 56));
+        const spectrumLightness = Math.min(68, Math.max(44, light * 100));
+        [0, 1, 2, 3, 4, 5].forEach((stop, i) => {
+          const stopHue = (hue + i * 60) % 360;
+          rootStyle.setProperty('--offer-spectrum-' + (i + 1), 'hsl(' + stopHue + ' ' + spectrumSaturation + '% ' + spectrumLightness + '%)');
+        });
         hero.classList.remove('is-painting');
         void hero.offsetWidth;
         hero.classList.add('is-painting');
         window.clearTimeout(paintPulseTimer);
         paintPulseTimer = window.setTimeout(() => hero.classList.remove('is-painting'), 780);
         picker.querySelector('[data-paint-name]').textContent = swatch.dataset.name;
-        picker.querySelector('[data-paint-count]').textContent = String(index + 1).padStart(2, '0') + ' / 05';
         swatches.forEach(button => {
           const selected = button === swatch;
           button.classList.toggle('is-selected', selected);
@@ -144,24 +151,8 @@
         swatches[next].focus();
       });
     });
-    picker.addEventListener('pointermove', event => {
-      if (event.pointerType === 'touch') return;
-      const rect = picker.getBoundingClientRect();
-      picker.style.setProperty('--paint-x', `${event.clientX - rect.left}px`);
-      picker.style.setProperty('--paint-y', `${event.clientY - rect.top}px`);
-    }, { passive: true });
   }
 
-  const paintCard = document.querySelector('.paint-sample-card');
-  if (paintCard && matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    paintCard.addEventListener('pointermove', event => {
-      const rect = paintCard.getBoundingClientRect();
-      paintCard.style.setProperty('--glint-x', `${((event.clientX - rect.left) / rect.width * 100).toFixed(1)}%`);
-      paintCard.style.setProperty('--glint-y', `${((event.clientY - rect.top) / rect.height * 100).toFixed(1)}%`);
-      paintCard.classList.add('tilt-active');
-    }, { passive: true });
-    paintCard.addEventListener('pointerleave', () => paintCard.classList.remove('tilt-active'));
-  }
   const viewToggle=document.querySelector('.work-transform-cta');
   const workMockup=document.querySelector('.work-showcase');
   if(viewToggle&&workMockup){

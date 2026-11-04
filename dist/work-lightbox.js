@@ -8,7 +8,7 @@
 
   const description = document.createElement('p');
   description.className = 'work-invitation';
-  description.textContent = 'Explore the same painting business website before and after a thoughtful redesign.';
+  description.textContent = 'Compare the current site with a clearer redesign.';
 
   const openButton = document.createElement('button');
   openButton.type = 'button';
@@ -17,12 +17,6 @@
   openButton.querySelector('span').append(window.studioIcon('arrow-up-right'));
   copy.querySelector('.work-heading').after(description, openButton);
 
-  const previewButton = document.createElement('button');
-  previewButton.type = 'button';
-  previewButton.className = 'work-preview-open';
-  previewButton.innerHTML = '<span>View comparison</span>';
-  previewButton.append(window.studioIcon('arrow-up-right'));
-  shell.append(previewButton);
   card.inert = true;
 
   const placeholder = document.createComment('comparison returns here');
@@ -39,7 +33,6 @@
   const toast = work.querySelector('.work-review-toast');
 
   const open = () => {
-    previewButton.hidden = true;
     card.inert = false;
     layout.prepend(shell);
     notes.append(note);
@@ -50,7 +43,6 @@
   const close = () => dialog.close();
 
   openButton.addEventListener('click', open);
-  previewButton.addEventListener('click', open);
   dialog.querySelector('.work-lightbox-close').addEventListener('click', close);
   dialog.addEventListener('click', event => {
     if (event.target === dialog) close();
@@ -60,7 +52,6 @@
     copy.querySelector('.work-transform-cta').after(note);
     if (toast) work.append(toast);
     card.inert = true;
-    previewButton.hidden = false;
     openButton.focus();
   });
 })();
