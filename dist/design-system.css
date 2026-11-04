@@ -286,9 +286,7 @@ body{font-family:var(--font-sans)}
   #main .hero-paint .paint-sample-card .paint-swatch-fill{height:54px;min-height:54px}
   #main .hero-paint .paint-sample-card .paint-swatch-label{padding:5px 0 1px;font-size:11px}
 }
-#main .hero-paint .site-mini-art:after{content:"";position:absolute;inset:0;z-index:3;background:var(--hero-paint-color,#56664e);mix-blend-mode:soft-light;opacity:.22;pointer-events:none;transition:background-color .35s ease}
-#main .hero-paint .site-mini-art{isolation:isolate}
-#main .hero-paint .site-mini-art .paint-field-texture,#main .hero-paint .site-mini-art .paint-fluid{object-position:center}
+#main .hero-paint .site-mini-art .paint-field-texture{object-position:center}
 @media(max-width:760px){
   #main .hero-paint{padding-top:92px;padding-bottom:28px}
   #main .hero-paint .hero-frame{height:auto;min-height:0;padding-top:0;padding-bottom:0}
@@ -315,4 +313,25 @@ body{font-family:var(--font-sans)}
   #main .hero-paint .paint-sample-card .paint-swatch-fill{height:40px;min-height:40px}
   #main .hero-paint .paint-sample-card .paint-swatch{height:60px;min-height:60px}
 }
-@media(prefers-reduced-motion:reduce){#main .hero-paint .site-mini-art:after{transition:none}}
+/* Each paint swatch previews a matching photo and a subtle mini-site layout variation. */
+#main .hero-paint .site-mini-content{transition:grid-template-columns .35s cubic-bezier(.2,.7,.2,1)}
+#main .hero-paint .site-mini-art .paint-field-texture{display:block;width:100%;height:100%;object-fit:cover;transition:opacity .35s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+#main .hero-paint .site-mini.is-building .site-mini-art .paint-field-texture{animation:hero-preview-photo-change .55s ease both}
+@keyframes hero-preview-photo-change{0%{opacity:.42;transform:scale(1.025)}100%{opacity:1;transform:scale(1)}}
+#main .hero-paint .site-mini[data-layout="porchlight"] .site-mini-content{grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr)}
+#main .hero-paint .site-mini[data-layout="porchlight"] .site-mini-art{order:-1}
+#main .hero-paint .site-mini[data-layout="linen"] .site-mini-content{grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:11px;padding-inline:17px}
+#main .hero-paint .site-mini[data-layout="linen"] .site-mini-copy strong{font-size:clamp(20px,1.65vw,24px)}
+#main .hero-paint .site-mini[data-layout="rainwashed"] .site-mini-content{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)}
+#main .hero-paint .site-mini[data-layout="rainwashed"] .site-mini-art{order:-1}
+#main .hero-paint .site-mini[data-layout="rainwashed"] .site-mini-copy{align-items:flex-end;text-align:right}
+#main .hero-paint .site-mini[data-layout="rainwashed"] .site-mini-lines{justify-items:end}
+#main .hero-paint .site-mini[data-layout="rainwashed"] .site-mini-cta{align-self:flex-end}
+#main .hero-paint .site-mini[data-layout="golden-hour"] .site-mini-content{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+@media(max-width:760px){
+  #main .hero-paint .site-mini[data-layout="porchlight"] .site-mini-content{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)}
+  #main .hero-paint .site-mini[data-layout="linen"] .site-mini-content{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:8px;padding-inline:10px}
+  #main .hero-paint .site-mini[data-layout="rainwashed"] .site-mini-content{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)}
+  #main .hero-paint .site-mini[data-layout="golden-hour"] .site-mini-content{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px}
+}
+@media(prefers-reduced-motion:reduce){#main .hero-paint .site-mini-content{transition:none}#main .hero-paint .site-mini.is-building .site-mini-art .paint-field-texture{animation:none}}

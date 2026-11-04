@@ -154,7 +154,7 @@ Estes valores são decisões da V1, não medidas de tempo do Cresta.
 | Fotos e ícones de benefícios | Imagem cresce 2,5% em 650 ms; bloco do ícone avança 4 × −3 px em 350 ms | Aumenta sensação de resposta sem mover o layout |
 | Hover em FAQ e campos | Cor e borda mudam suavemente; cerca de 200 ms | Indica controles interativos; manter foco visível no teclado |
 | Entrada do campo de tinta | Revelação horizontal suave; cerca de 850 ms; uma vez na primeira entrada | Introduz o motivo de cor sem cobrir a copy |
-| Superfície de tinta | Onda lenta contínua; no hover, inclinação e deslocamento ligados à posição do pointer; seleção eleva o nível por 780 ms | Sensação tátil e resposta direta à escolha |
+| Foto do mockup da hero | Estática durante hover e pointer; ao escolher uma cor, troca pela fotografia correspondente e aplica a pequena variação de layout com transição curta | Mostrar uma composição de site e paletas possíveis sem refração de água |
 | Antes/depois | Refine Frame de 1,2 s, seguido de confirmação persistente e halo único de 1,4 s; troca imediata com movimento reduzido | Tornar a conclusão perceptível, com controle para voltar ao original |
 | Accordion | Abertura nativa; resposta fade + Y 5 px, 350 ms | Sem sacrificar teclado e semântica |
 
@@ -186,7 +186,7 @@ Manter o cursor nativo em todas as seções. Não adicionar ponto decorativo que
 
 ## 9. Estrutura aprovada e implementação
 
-1. **Hero:** “Your website should look as good as your work.” Explica que o trabalho de pintura merece um website tão cuidadoso quanto ele, para que proprietários entendam o serviço e peçam um estimate. CTAs: “Let’s talk about your website” e “How it works”. Fundo off-white, copy à esquerda e círculo com textura abstrata de pigmento, cinco shapes distintos e refração por pointer seguem “Hero v14 — pinceladas orgânicas e seletor sempre visível”.
+1. **Hero:** Your website should look as good as your work. Explica que o trabalho de pintura merece um website tão cuidadoso quanto ele, para que proprietários entendam o serviço e peçam um estimate. CTAs atuais: Get a new website e How it works. Fundo off-white, copy à esquerda e painel à direita com mini-site, cinco cores, uma fotografia conceitual para cada tom e pequenas variações de layout seguem Hero 3.1.
 2. **Prova visual:** “See what a better first impression looks like.” Conceito P&D Painting com estados Before/After, inspirado no site público e identificado como não encomendado. O redesign mantém os serviços observados e troca o foco visual para o trabalho do pintor e a preparação da casa. Não tratar a demonstração como case de cliente nem como prova de conversão.
 3. **O que o site precisa fazer:** “What homeowners need to see.” Mostrar os melhores trabalhos, explicar serviços, facilitar o pedido de estimate e manter uma boa apresentação em toda tela.
 4. **Processo:** “You know your business. We’ll handle the website.” Etapas visíveis em um fluxo conectado: “Get to know you / Build and refine / Launch.”
@@ -288,7 +288,7 @@ A linguagem visual usa títulos serifados grandes, labels pequenos em estilo mon
 
 **Observações da referência:** usar a cadência editorial, a combinação de serifada expressiva com labels mono e a alternância controlada de temperatura como princípios possíveis. A direção aprovada para o nosso hero está registrada abaixo; as demais seções continuam seguindo o sistema Cresta até serem revistas. Não transformar a página toda em SaaS, nem adotar literalmente a paleta laranja/lilás, o desenho do produto ou a composição da referência. Não copiar nome, logo, tagline, copy, ilustrações, UI, fotografias ou outros assets do Daylight; usar princípios gerais de hierarquia, ritmo, contraste e atmosfera.
 
-### Hero v14 — pinceladas orgânicas e seletor sempre visível (base anterior)
+### Hero v14 — direção anterior, substituída pela Hero 3.1
 
 **Base preservada:** manter a copy aprovada, com tipografia expressiva e caixa de frase. A arte circular da direita foi substituída por uma página em miniatura na revisão posterior. As referências atuais pedem marcas de tinta mais expressivas: pinceladas imperfeitas, marmorização solta, washes de aquarela e misturas acrílicas, com textura tátil sutil. Evitar aspecto de seda, veios de mármore polido, manchas aleatórias densas, preto puro e contraste duro; as sombras permanecem coloridas e suaves. Cada tom deve ter uma silhueta legível distinta, ainda parte da mesma família: Garden Gate é um S verde e claro; Porchlight é uma espiral quente de terracota com pequenos ecos teal; Linen é um wash claro horizontal e difuso; Rainwashed é uma onda azul diagonal; Golden Hour é uma pincelada ocre ascendente. Assets: `paint-garden-gate.webp`, `paint-porchlight.webp`, `paint-linen.webp`, `paint-rainwashed.webp` e `paint-golden-hour.webp`, todos em 768 × 768 e otimizados em WebP (~77–127 KB cada). O asset anterior preto e marfim permanece arquivado sem uso. Não aplicar novamente a camada `multiply`, que apagaria as diferenças de pigmento.
 
@@ -477,8 +477,8 @@ A superfície COLOR IN MOTION passa de círculo para faixa retangular horizontal
 
 Correção da faixa: remover border-radius circular de todas as camadas. Canvas usa proporção real da superfície e coordenadas de textura com cover centralizado, cortando sobras sem esticar a arte. Fallback img mantém object-fit:cover. Não sobrepor legenda à faixa. O motor de ondas e inércia continua o mesmo.
 
-### Ajuste da faixa e sincronização das imagens — 31/10/2026
-Direção anterior, substituída em 04/11/2026: cada swatch trocava uma arte abstrata. A hero agora mantém uma fotografia ilustrativa de trabalho residencial e usa a cor selecionada para atualizar a interface e a tonalidade da imagem. O renderer continua aceitando uma nova imagem caso um futuro preview realmente precise dela; quando o asset selecionado já está ativo, não deve recarregá-lo nem decodificá-lo de novo. O crop permanece centralizado e o shader de refração continua sem reconstrução.
+### Foto e cor na hero — base da Hero 3.0
+Registro da direção anterior: os swatches agora carregam uma foto conceitual específica para cada tom e aplicam a variação de layout correspondente. A foto permanece estática; o renderer WebGL de refração foi removido na Hero 3.1.
 
 
 
@@ -551,12 +551,18 @@ Implementado: no CTA largo “Explore the redesign”, o texto fica centralizado
 
 A distância entre a hero e o início do redesign usa padding superior de 24–32 px no frame da seção Work e, em desktop, sobe a seção 40–64 px sobre o trecho vazio no fim da hero. A altura mínima desktop da hero e do frame é limitada a 640–700 px, usando padding de 152 px no topo e 36 px embaixo para compensar navbar e distância até a seção seguinte; o conteúdo centralizado aproxima as margens visíveis acima e abaixo. O mobile mantém a sobreposição desligada; o detalhe vigente de espaçamento simétrico está em “Hero 3.0: equilíbrio e demonstração do trabalho”.
 
-Como o Site é buildless, `styles.css` recebe um parâmetro de versão e `design-system.css` é copiado para um nome versionado no HTML ao publicar uma alteração, evitando que o navegador reutilize a folha anterior. A versão atual usa `v50`; manter as referências sincronizadas com a publicação.
+Como o Site é buildless, `styles.css` recebe um parâmetro de versão e `design-system.css` é copiado para um nome versionado no HTML ao publicar uma alteração, evitando que o navegador reutilize a folha anterior. A versão atual usa `v51`; manter as referências sincronizadas com a publicação.
 
 ### Hero 3.0: equilíbrio e demonstração do trabalho · 04/11/2026
 
 Implementado: os limites visíveis ao redor da composição ficam equilibrados com a altura da navbar. No desktop, o frame usa 152 px no topo e 36 px embaixo; com altura mínima entre 640 e 700 px, a composição desce cerca de 24 px, equilibrando o espaço visível entre navbar e conteúdo com o espaço até a seção seguinte. No mobile, 92 px no topo e 28 px abaixo compensam a navbar fixa e mantêm respiro semelhante. A seção de redesign continua no fluxo sem uma faixa vazia ampliada.
 
-O painel direito cresce até 520 px e a micro página chega a 284 px no desktop, com 198–224 px no mobile e 190 px em telas até 380 px. O exemplo troca a arte abstrata por fotografia conceitual de interior acabado; não é case ou trabalho de cliente. A paleta continua disponível como controle secundário: altera nome, acento, botões e uma leve tonalidade sobre a foto, enquanto a foto e o capítulo da página permanecem estáveis. A refração acompanha ponteiro/toque; `prefers-reduced-motion` preserva uma imagem estática. Swatches usam alvos consistentes, foco visível e estado selecionado por contorno e check.
+O painel direito cresce até 520 px e a micro página chega a 284 px no desktop, com 198–224 px no mobile e 190 px em telas até 380 px. A Hero 3.1 usa uma fotografia conceitual de interior por cor, sem apresentar as imagens como trabalho de cliente. A paleta atualiza o nome, a fotografia, a composição do mini-site e os acentos. A imagem não reage ao ponteiro ou toque. Swatches usam alvos consistentes, foco visível e estado selecionado por contorno e check.
 
 A decisão prioriza uma amostra de website reconhecível e uma mudança de cor coerente em vez de substituir a fotografia a cada escolha. O movimento não simula geração nem adiciona espera. As amostras compartilham o asset da foto para evitar decodificação repetida quando o usuário escolhe outro tom.
+
+### Hero 3.1: imagens e layout por cor · 04/11/2026
+
+Implementado: Garden Gate, Porchlight, Linen, Rainwashed e Golden Hour carregam fotografias de interiores geradas e otimizadas, cada uma alinhada à cor escolhida. São imagens conceituais, não cases ou fotos de cliente. Cada swatch também muda levemente o hero do mini-site: Porchlight e Rainwashed invertem texto/imagem; Linen amplia a coluna da cópia; Golden Hour equilibra as colunas; Garden Gate mantém a composição-base.
+
+O hover de refração/água e o renderer WebGL foram removidos do preview e da página; a fotografia fica estática e só muda quando o usuário escolhe outro swatch. A seleção continua atualizando cor de texto, botões e outras cenas do site. As imagens JPG têm 1200 × 800 px e carregam sob demanda quando selecionadas; transições de layout/foto respeitam `prefers-reduced-motion`.

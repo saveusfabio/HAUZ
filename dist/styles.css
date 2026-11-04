@@ -368,13 +368,9 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 @media(max-width:390px){.paint-field,.paint-picker{width:min(100%,min(57vw,238px))}.paint-field{height:auto}}
 @media(prefers-reduced-motion:reduce){.js.paint-intro .paint-field{animation:none;opacity:1;transform:none}}
 
-/* One continuous image, refracted by a bounded low-resolution displacement map. */
-.paint-fluid{position:absolute;inset:0;z-index:1;width:100%;height:100%;border-radius:50%;pointer-events:none;opacity:0;filter:saturate(.84) contrast(.97)}
-.has-fluid .paint-fluid{opacity:1}
-.has-fluid .paint-field-texture{visibility:hidden}
 .paint-field-tint{position:absolute;z-index:2;inset:0;border-radius:50%;background:var(--hero-paint-tint,var(--hero-paint-color));mix-blend-mode:multiply;opacity:.8;pointer-events:none;transition:background-color .65s var(--ease)}
 .paint-field-caption{z-index:3;pointer-events:none}
-@media(prefers-reduced-motion:reduce){.paint-fluid{display:none}.has-fluid .paint-field-texture{visibility:visible}.paint-field-tint{transition:none}}
+@media(prefers-reduced-motion:reduce){.paint-field-tint{transition:none}}
 
 /* Mobile hero: reset inherited photographic-hero offsets and let text reflow. */
 @media(max-width:760px){
@@ -411,7 +407,6 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 
 /* Let the chosen tone touch a few typographic and picker details. */
 .paint-field-texture{filter:none}
-.paint-fluid{filter:none}
 .paint-field-tint{display:none}
 .hero-word-accent,.hero-word-work{color:inherit;text-decoration:none;background-image:linear-gradient(105deg,color-mix(in srgb,var(--hero-paint-color) 55%,white),var(--hero-paint-color) 48%,color-mix(in srgb,var(--hero-paint-color) 48%,white));background-position:left bottom;background-repeat:no-repeat;background-size:100% .11em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size .35s var(--ease),text-shadow .7s var(--ease)}
 .hero-paint h1 .hero-word-accent,.hero-paint h1 .hero-word-work{text-shadow:0 0 22px color-mix(in srgb,var(--hero-paint-color) 5%,transparent)}
@@ -777,11 +772,11 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .paint-deck-intro{margin-bottom:12px}.paint-deck-intro h3{font-size:21px}.paint-deck-intro p{margin-top:5px;max-width:none;font-size:14px}.hero-paint .paint-sample-card .paint-chip{padding-bottom:4px;min-height:40px}.hero-paint .paint-sample-card .paint-chip-copy .mono{font-size:12px}.hero-paint .paint-sample-card .paint-swatches{padding-top:8px}
 @media(max-width:760px){.paint-deck-intro h3{font-size:20px}.hero-paint .paint-sample-card .paint-field{width:190px}.hero-paint .paint-sample-card .paint-swatch{height:88px}}
 
-/* Wide low paint strip; preserve texture renderer and crop logic. */
+/* Website sample photo, cropped without distortion. */
 @media(min-width:761px){.hero-paint .paint-sample-card .paint-field{width:100%;height:clamp(100px,12vw,150px)}}
 @media(max-width:760px){.hero-paint .paint-sample-card .paint-field{width:100%;height:96px}}
 .hero-paint .paint-sample-card .paint-field{aspect-ratio:auto;border-radius:0;clip-path:none;mask-image:none;box-shadow:none}
-.hero-paint .paint-sample-card .paint-field-texture,.hero-paint .paint-sample-card .paint-fluid,.hero-paint .paint-sample-card .paint-field-tint,.hero-paint .paint-sample-card .paint-field:before{border-radius:0;clip-path:none;mask-image:none}
+.hero-paint .paint-sample-card .paint-field-texture,.hero-paint .paint-sample-card .paint-field-tint,.hero-paint .paint-sample-card .paint-field:before{border-radius:0;clip-path:none;mask-image:none}
 
 /* Compact paint strip; crop the square source instead of stretching it. */
 @media(min-width:761px){.hero-paint .paint-sample-card .paint-field{height:clamp(100px,12vw,150px)}}
@@ -925,7 +920,7 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .site-mini-content{display:grid;grid-template-columns:1.45fr 1fr;gap:12px;height:128px;padding:14px 13px 10px}
 .site-mini-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0}.site-mini-eyebrow{color:var(--accent-text,#56664e);font:7px var(--font-mono,monospace);letter-spacing:.03em}.site-mini-copy strong{margin-top:7px;font-size:22px;font-weight:500;line-height:1.02;letter-spacing:-.06em}.site-mini-lines{display:grid;gap:3px;width:90%;margin-top:8px}.site-mini-lines i{height:3px;background:#c7cfc2}.site-mini-lines i:last-child{width:62%}.site-mini-cta{display:inline-flex;align-items:center;gap:9px;margin-top:auto;padding:6px 8px;background:var(--action-accent,#56664e);color:var(--accent-ink,#fff);font-size:7px;font-weight:600;transition:background .4s,color .4s}.site-mini-cta .lucide{width:9px;height:9px}
 .hero-paint .paint-sample-card .paint-field.site-mini-art{width:100%;height:100%;min-height:0;margin:0;border:0;overflow:hidden;background:var(--hero-paint-color,#56664e)}
-.site-mini-art .paint-field-texture,.site-mini-art .paint-fluid{width:100%;height:100%;object-fit:cover}
+.site-mini-art .paint-field-texture{width:100%;height:100%;object-fit:cover}
 .site-mini-footer{height:31px;display:flex;align-items:center;justify-content:space-between;padding:0 13px;border-top:1px solid #20231f16;color:#6c7369;font:7px var(--font-mono,monospace)}
 .site-mini.is-building .site-mini-copy strong,.site-mini.is-building .site-mini-cta,.site-mini.is-building .site-mini-nav-cta{animation:mini-site-build .55s ease both}
 .site-mini.is-building .site-mini-cta{animation-delay:.1s}

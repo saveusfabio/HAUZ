@@ -96,7 +96,7 @@
   applyActionTone('#56664e');
   if (picker) {
     const swatches = [...picker.querySelectorAll('.paint-swatch')];
-    const siteMini = document.querySelector('.site-mini');
+    const siteMini = document.querySelector('.site-mini'); const siteMiniImage = siteMini?.querySelector('.paint-field-texture');
     const paintSelected = picker.querySelector('.paint-selected');
     let paintPulseTimer = 0, paintNameTimer = 0;
     swatches.forEach((swatch, index) => {
@@ -138,7 +138,11 @@
           button.classList.toggle('is-selected', selected);
           button.setAttribute('aria-pressed', String(selected));
         });
-        window.dispatchEvent(new CustomEvent('paint-color-change', { detail: { texture: swatch.dataset.texture } }));
+        window.dispatchEvent(new Event('paint-color-change'));
+      });
+      swatch.addEventListener('click', () => {
+        if (siteMini) siteMini.dataset.layout = swatch.dataset.layout || 'garden';
+        if (siteMiniImage && swatch.dataset.image && !siteMiniImage.src.endsWith(swatch.dataset.image)) siteMiniImage.src = swatch.dataset.image;
       });
       swatch.addEventListener('keydown', event => {
         if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
