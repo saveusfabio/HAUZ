@@ -517,7 +517,7 @@ Implementado: a navegação mantém Work, Process e About us; o CTA fixo “Get 
 
 ### Hero alinhada ao grid — 03/11/2026
 
-Implementado: removido o kicker técnico e os metadados flutuantes no rodapé da hero, que competiam com a mensagem principal e pareciam decoração de interface. O bloco de texto começa na mesma borda do container das seções seguintes; o grid segue a mesma divisão de colunas e a composição da hero mantém sua altura, sem criar uma faixa adicional antes da seção seguinte. A ação principal agora diz “Get a new website” e leva diretamente à oferta. Manter na abertura uma promessa simples, uma ação clara e alinhamento compartilhado com o restante da página.
+Implementado: removido o kicker técnico e os metadados flutuantes no rodapé da hero, que competiam com a mensagem principal e pareciam decoração de interface. O bloco de texto começa na mesma borda do container das seções seguintes e o grid segue a mesma divisão de colunas. A altura desktop pode ser ajustada para encurtar a transição inferior, preservando a distância visual entre a navbar e o conteúdo da hero; os valores atuais estão registrados em “CTA de redesign e distância após a hero”. A ação principal agora diz “Get a new website” e leva diretamente à oferta. Manter na abertura uma promessa simples, uma ação clara e alinhamento compartilhado com o restante da página.
 
 ### Comparativo em foco — 03/11/2026
 
