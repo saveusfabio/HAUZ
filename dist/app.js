@@ -97,7 +97,8 @@
   if (picker) {
     const swatches = [...picker.querySelectorAll('.paint-swatch')];
     const siteMini = document.querySelector('.site-mini');
-    let paintPulseTimer = 0;
+    const paintSelected = picker.querySelector('.paint-selected');
+    let paintPulseTimer = 0, paintNameTimer = 0;
     swatches.forEach((swatch, index) => {
       swatch.addEventListener('click', () => {
         if (siteMini && !reduced.matches) {
@@ -119,18 +120,19 @@
         const rootStyle = document.documentElement.style;
         rootStyle.setProperty('--hero-paint-tint', 'hsl(' + hue + ' ' + Math.max(saturation * 100, 42) + '% ' + Math.max(light * 100, 34) + '%)');
         rootStyle.setProperty('--hero-ground', ground);
-        const spectrumSaturation = Math.max(28, Math.min(saturation * 100 * .86, 56));
-        const spectrumLightness = Math.min(68, Math.max(44, light * 100));
-        [0, 1, 2, 3, 4, 5].forEach((stop, i) => {
-          const stopHue = (hue + i * 60) % 360;
-          rootStyle.setProperty('--offer-spectrum-' + (i + 1), 'hsl(' + stopHue + ' ' + spectrumSaturation + '% ' + spectrumLightness + '%)');
-        });
         hero.classList.remove('is-painting');
         void hero.offsetWidth;
         hero.classList.add('is-painting');
         window.clearTimeout(paintPulseTimer);
         paintPulseTimer = window.setTimeout(() => hero.classList.remove('is-painting'), 780);
         picker.querySelector('[data-paint-name]').textContent = swatch.dataset.name;
+        if (paintSelected && !reduced.matches) {
+          paintSelected.classList.remove('is-changing');
+          void paintSelected.offsetWidth;
+          paintSelected.classList.add('is-changing');
+          window.clearTimeout(paintNameTimer);
+          paintNameTimer = window.setTimeout(() => paintSelected.classList.remove('is-changing'), 360);
+        }
         swatches.forEach(button => {
           const selected = button === swatch;
           button.classList.toggle('is-selected', selected);

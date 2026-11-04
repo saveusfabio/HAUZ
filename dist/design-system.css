@@ -117,8 +117,10 @@ input,textarea{font-family:var(--font-sans);font-size:16px}
 .paint-deck-intro>div{display:flex;flex-direction:column;gap:3px}
 .paint-deck-intro .mono{color:var(--muted);font-size:10px;letter-spacing:.04em}
 .hero-paint .paint-deck-intro h3{font-size:17px;font-weight:500;line-height:1.2;letter-spacing:-.025em}
-.paint-selected{display:inline-flex;align-items:center;gap:8px;flex:none;padding:7px 9px;border:1px solid var(--line);color:var(--ink);font-size:12px;line-height:1.2}
-.paint-selected-dot{width:10px;height:10px;background:var(--hero-paint-color,#56664e);transition:background-color .25s}
+.paint-selected{display:inline-flex;align-items:center;gap:9px;flex:none;padding:8px 11px;border:1px solid color-mix(in srgb,var(--hero-paint-color,#56664e) 28%,var(--line));border-radius:3px;background:color-mix(in srgb,var(--hero-paint-color,#56664e) 7%,#fff);color:var(--ink);font-size:12px;font-weight:500;line-height:1.2;transition:background-color .24s ease,border-color .24s ease,transform .24s var(--ease)}
+.paint-selected-dot{width:15px;height:15px;flex:none;border:1px solid rgba(32,35,31,.16);border-radius:2px;background:linear-gradient(135deg,#ffffff40,transparent 60%),var(--hero-paint-color,#56664e);box-shadow:inset 0 1px 1px #ffffff66,0 1px 2px #20231f1c;transition:background .25s ease,transform .25s var(--ease)}
+.paint-selected.is-changing{animation:paint-selected-arrive .34s var(--ease)}
+@keyframes paint-selected-arrive{0%{transform:translateY(2px) scale(.97);opacity:.75}65%{transform:translateY(-1px) scale(1.015);opacity:1}100%{transform:none;opacity:1}}
 .hero-paint .paint-sample-card .paint-swatches{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:0;align-items:start}
 .hero-paint .paint-sample-card .paint-swatch{
   height:auto;
@@ -202,18 +204,14 @@ input,textarea{font-family:var(--font-sans);font-size:16px}
   position:relative;
   min-height:68px;
   padding:20px 22px;
-  border:2px solid transparent;
-  background:linear-gradient(var(--action-accent,#56664e),var(--action-accent,#56664e)) padding-box,
-    conic-gradient(from var(--offer-angle,0deg),var(--offer-spectrum-1,#56664e),var(--offer-spectrum-2,#74664e),var(--offer-spectrum-3,#56664e),var(--offer-spectrum-4,#4e6661),var(--offer-spectrum-5,#4e5666),var(--offer-spectrum-6,#664e5a),var(--offer-spectrum-1,#56664e)) border-box;
+  border:0;
+  background:var(--action-accent,#56664e);
   color:var(--accent-ink,#fff);
   font-size:18px;
   font-weight:600;
   line-height:1.25;
 }
-.pricing-action{animation:offer-rainbow-turn 8s linear infinite}
 .pricing-action .lucide{width:22px;height:22px}
-@property --offer-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
-@keyframes offer-rainbow-turn{to{--offer-angle:360deg}}
 @media(max-width:760px){
   .pricing-card{grid-template-columns:1fr}
   .pricing-intro{min-height:0;padding:30px 24px}
@@ -224,19 +222,13 @@ input,textarea{font-family:var(--font-sans);font-size:16px}
   .pricing-price strong{font-size:80px}
   .pricing-action{font-size:17px;min-height:64px;padding:17px 18px}
 }
-@media(prefers-reduced-motion:reduce){.pricing-action{animation:none}.pricing-intro,.paint-selected-dot{transition:none}}
+@media(prefers-reduced-motion:reduce){.pricing-intro,.paint-selected,.paint-selected-dot{transition:none}.paint-selected.is-changing{animation:none}}
 
 /* Keep the studio UI on a three-step weight scale; the two example sites retain their own styles. */
 :root{
   --weight-regular:400;
   --weight-medium:500;
   --weight-semibold:600;
-  --offer-spectrum-1:#56664e;
-  --offer-spectrum-2:#74664e;
-  --offer-spectrum-3:#56664e;
-  --offer-spectrum-4:#4e6661;
-  --offer-spectrum-5:#4e5666;
-  --offer-spectrum-6:#664e5a;
 }
 body{font-family:var(--font-sans)}
 #main .hero-paint h1,
@@ -247,12 +239,21 @@ body{font-family:var(--font-sans)}
 #main .feature h3,
 #main .process-step h3,
 #main .faq-cta h3,
-#main .faq-list summary,
-#main .studio-title{font-weight:var(--weight-medium)}
+#main .faq-list summary{font-weight:var(--weight-medium)}
 :is(.button,.nav-contact,.work-open-cta,.work-transform-cta){font-weight:var(--weight-medium)}
 #main .pricing-action{font-weight:var(--weight-semibold)}
 #main .work-review-toast-copy strong,#main .reward-content strong{font-weight:var(--weight-medium)}
 #main .site-mini-brand{font-weight:var(--weight-semibold)}
-#main .hero-description,#main .intro,#main .studio-body{font-size:16px}
+#main .hero-description,#main .intro{font-size:16px}
 #main .pricing-support{font-size:var(--type-support)}
 .cursor-dot{display:none!important}
+
+/* A shared, restrained hover response for the studio's real actions. */
+:is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta):not(:disabled):not([aria-disabled="true"]){transition:transform .22s var(--ease),box-shadow .22s ease,background-color .22s ease,color .22s ease}
+@media(hover:hover) and (pointer:fine){
+  :is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta):not(:disabled):not([aria-disabled="true"]):hover:not(:focus-visible){transform:translateY(-2px);box-shadow:0 5px 14px -8px rgba(32,35,31,.38)}
+  :is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta):not(:disabled):not([aria-disabled="true"]):hover:not(:focus-visible) .lucide-arrow-up-right{transform:translate(2px,-2px)}
+}
+:is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta):not(:disabled):not([aria-disabled="true"]):active:not(:focus-visible){transform:translateY(0);box-shadow:0 1px 3px -2px rgba(32,35,31,.3)}
+.lucide-arrow-up-right{transition:transform .22s var(--ease)}
+@media(prefers-reduced-motion:reduce){:is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta),.lucide-arrow-up-right{transition:none!important}:is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta):hover,:is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta):active{transform:none!important}}
