@@ -359,6 +359,10 @@ A CTA rainbow da oferta foi removida; o botão mantém cor sólida calculada par
 
 Na caixa “Before we start”, o rótulo do botão passa a “Talk To Us” a pedido do usuário e continua apontando para a seção de processo até que exista um destino real de contato. No seletor da hero, o título visível passa a “Choose your color”; o cartão do nome ativo ganha amostra tátil maior, superfície tonal e uma breve entrada ao trocar a cor. Não acrescentar microcopy visível nem animação contínua; manter a seleção anunciada e o efeito desligado com movimento reduzido.
 
+### Espaçamento vertical da hero · 04/11/2026
+
+Implementado: no desktop, a composição da hero sobe por meio de espaço inferior no frame, reduzindo o vão percebido após a navbar sem mover a própria navbar nem alterar a altura total da abertura. O ajuste fica limitado a larguras acima de 760 px; o empilhamento mobile preserva seu espaçamento atual. A regra responde ao screenshot do usuário, que mostrava a composição concentrada abaixo do meio da viewport.
+
 
 ## 17. Revisão de recompensa, acessibilidade e custo — 25/10/2026
 
