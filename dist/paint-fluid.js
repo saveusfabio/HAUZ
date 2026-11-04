@@ -252,8 +252,9 @@
   window.addEventListener('paint-color-change', async event => {
     const source = event.detail?.texture;
     if (!source) return;
-    const request = ++textureRequest;
     const expectedUrl = new URL(source, document.baseURI).href;
+    if (expectedUrl === image.currentSrc || expectedUrl === image.src) return;
+    const request = ++textureRequest;
     const selectedImage = new Image();
     selectedImage.decoding = 'async';
     selectedImage.src = expectedUrl;

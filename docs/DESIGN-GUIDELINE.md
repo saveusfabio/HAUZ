@@ -460,7 +460,7 @@ Por decisão explícita do usuário, os botões de conversa permanecem sem desti
 A faixa de tinta continua no preview e preserva a imagem e o shader existentes. A cartela não é mais um conjunto de cartões altos: pigmentos em faixas baixas de 46 px no desktop e 40 px no mobile; labels curtos abaixo, sem índice numérico visível.
 
 ### Card da hero 2.0 — 03/11/2026
-A cartela cresce como parte do card, mas as amostras deixam de dominar a composição. O preview da mini página mede 210 px no desktop, 184 px no mobile e 170 px até 380 px. Um único título, um chip com o nome da cor e cinco amostras compactas organizam a interação. O card usa borda reta, superfície branca e sombra discreta, alinhado à linguagem editorial do restante do site; a página demonstrativa mantém o efeito de atualização de cor.
+Direção anterior, substituída em 04/11/2026: a cartela e o preview eram compactos (210 px no desktop e 184 px no mobile). A revisão atual dá mais área à micro página para tornar a demonstração de site legível; valores vigentes estão em “Hero 3.0: equilíbrio e demonstração do trabalho”.
 
 ## Página de apresentação de redesign — 31/10/2026
 
@@ -478,7 +478,7 @@ A superfície COLOR IN MOTION passa de círculo para faixa retangular horizontal
 Correção da faixa: remover border-radius circular de todas as camadas. Canvas usa proporção real da superfície e coordenadas de textura com cover centralizado, cortando sobras sem esticar a arte. Fallback img mantém object-fit:cover. Não sobrepor legenda à faixa. O motor de ondas e inércia continua o mesmo.
 
 ### Ajuste da faixa e sincronização das imagens — 31/10/2026
-A faixa volta a uma altura mais compacta: 100–150 px no desktop e 96 px no mobile. A imagem continua preenchendo a superfície com crop central (`object-fit: cover` no fallback e `uCover` no WebGL); nunca esticar a arte para caber. Cada swatch troca a imagem correspondente e os accents da página. Para evitar a textura WebGL ficar presa à primeira cor ou carregar uma escolha obsoleta em cliques rápidos, decodificar uma imagem isolada por seleção, ignorar respostas antigas e só então atualizar a imagem visível e a textura existente. Não recriar o programa WebGL nem alterar o efeito de movimento.
+Direção anterior, substituída em 04/11/2026: cada swatch trocava uma arte abstrata. A hero agora mantém uma fotografia ilustrativa de trabalho residencial e usa a cor selecionada para atualizar a interface e a tonalidade da imagem. O renderer continua aceitando uma nova imagem caso um futuro preview realmente precise dela; quando o asset selecionado já está ativo, não deve recarregá-lo nem decodificá-lo de novo. O crop permanece centralizado e o shader de refração continua sem reconstrução.
 
 
 
@@ -541,7 +541,7 @@ Na seção “Why a good website matters”, cada fotografia de fundo deve repre
 
 ### Hero como prévia de site · 03/11/2026
 
-Implementado: o antigo retângulo abstrato de tinta no topo da cartela foi integrado a uma página em miniatura. Ela exibe navegação, headline, material visual, botão e uma pequena estrutura de conteúdo para demonstrar como o estúdio constrói uma interface para uma empresa de pintura. A textura interativa continua presente como área visual da prévia; as cinco amostras permanecem abertas e selecionáveis. A escolha de uma cor atualiza a miniatura, os accents da página e a textura já usada pelo renderer. Uma entrada curta dos elementos de interface comunica refinamento sem simular geração real ou introduzir uma espera; movimento reduzido desliga essa entrada.
+Implementado: o card da hero mostra uma micro página com navegação, headline, CTA e uma fotografia de interior acabado, para demonstrar a estrutura de um website para empresa de pintura. A fotografia é ilustrativa e não representa cliente, portfólio ou trabalho contratado. A escolha de cor atualiza os accents, CTAs e uma tonalidade sutil da imagem; manter a mesma fotografia evita que a interação pareça trocar de projeto, enquanto a deformação por ponteiro preserva a resposta tátil. As cinco amostras continuam acessíveis e selecionáveis; movimento reduzido mantém a imagem estática.
 
 O exemplo usa uma marca genérica sem sugerir trabalho de cliente ou prometer resultado. O preview deve permanecer legível em telas estreitas, mas é uma demonstração visual, não uma página navegável. A paleta é o único controle interativo nessa área; a miniatura fica fora da árvore de acessibilidade para evitar falsos botões. A direção anterior de arte circular/strip de tinta fica aposentada como composição principal, mantendo apenas a tinta como material dentro da página.
 
@@ -549,6 +549,14 @@ O exemplo usa uma marca genérica sem sugerir trabalho de cliente ou prometer re
 
 Implementado: no CTA largo “Explore the redesign”, o texto fica centralizado com precisão e a seta permanece ancorada à direita; isso mantém a leitura equilibrada sem depender da largura do rótulo. A ação usa peso 600, tipografia de 16–18 px e altura mínima de 68 px no desktop; no mobile, 15 px e 60 px. O hover compartilhado continua elevando o botão com discrição.
 
-A distância entre a hero e o início do redesign usa padding superior de 24–32 px no frame da seção Work e, em desktop, sobe a seção 40–64 px sobre o trecho vazio no fim da hero. Para remover o grande intervalo inferior sem deslocar o conteúdo da hero para mais longe da navbar, sua altura mínima desktop passou de 860 para 700 px e o padding inferior do frame foi ajustado para 100 px; o padding superior de 128 px permanece. Em mobile a sobreposição não se aplica. A exceção trata apenas esta transição; as demais seções mantêm seu espaçamento geral.
+A distância entre a hero e o início do redesign usa padding superior de 24–32 px no frame da seção Work e, em desktop, sobe a seção 40–64 px sobre o trecho vazio no fim da hero. A altura mínima desktop da hero e do frame é limitada a 640–700 px, preservando o padding superior de 128 px e ajustando o inferior para 60 px; os itens centralizados distribuem o respiro extra entre esses dois limites. O mobile mantém a sobreposição desligada; o detalhe vigente de espaçamento simétrico está em “Hero 3.0: equilíbrio e demonstração do trabalho”.
 
 Como o Site é buildless, `styles.css` recebe um parâmetro de versão e `design-system.css` é copiado para um nome versionado no HTML ao publicar uma alteração, evitando que o navegador reutilize a folha anterior. Manter as referências sincronizadas com a versão publicada.
+
+### Hero 3.0: equilíbrio e demonstração do trabalho · 04/11/2026
+
+Implementado: os limites visíveis ao redor da composição ficam equilibrados com a altura da navbar. No desktop, o frame usa 128 px no topo e 60 px abaixo do conteúdo; a altura mínima entre 640 e 700 px distribui o espaço que sobra ao redor das duas colunas alinhadas. No mobile, 92 px no topo e 28 px abaixo compensam a navbar fixa e mantêm respiro semelhante. A seção de redesign continua no fluxo sem uma faixa vazia ampliada.
+
+O painel direito cresce até 520 px e a micro página chega a 284 px no desktop, com 198–224 px no mobile e 190 px em telas até 380 px. O exemplo troca a arte abstrata por fotografia conceitual de interior acabado; não é case ou trabalho de cliente. A paleta continua disponível como controle secundário: altera nome, acento, botões e uma leve tonalidade sobre a foto, enquanto a foto e o capítulo da página permanecem estáveis. A refração acompanha ponteiro/toque; `prefers-reduced-motion` preserva uma imagem estática. Swatches usam alvos consistentes, foco visível e estado selecionado por contorno e check.
+
+A decisão prioriza uma amostra de website reconhecível e uma mudança de cor coerente em vez de substituir a fotografia a cada escolha. O movimento não simula geração nem adiciona espera. As amostras compartilham o asset da foto para evitar decodificação repetida quando o usuário escolhe outro tom.
