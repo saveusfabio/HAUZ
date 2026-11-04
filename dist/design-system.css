@@ -254,3 +254,4 @@ body{font-family:var(--font-sans)}
 #main .site-mini-brand{font-weight:var(--weight-semibold)}
 #main .hero-description,#main .intro,#main .studio-body{font-size:16px}
 #main .pricing-support{font-size:var(--type-support)}
+.cursor-dot{display:none!important}

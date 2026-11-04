@@ -70,16 +70,10 @@
   };
   if ('IntersectionObserver' in window) {const labels=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){scramble(e.target);labels.unobserve(e.target)}}),{threshold:1});document.querySelectorAll('[data-scramble]').forEach(el=>labels.observe(el));}
 
-  const dot=document.querySelector('.cursor-dot');const fine=matchMedia('(hover: hover) and (pointer: fine)');let targetX=0,targetY=0,x=0,y=0,cursorFrame=0;
-  function animateCursor(){x+=(targetX-x)*.22;y+=(targetY-y)*.22;dot.style.transform=`translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;if(Math.abs(targetX-x)+Math.abs(targetY-y)>.15)cursorFrame=requestAnimationFrame(animateCursor);else cursorFrame=0;}
-  document.addEventListener('pointermove',event=>{if(!fine.matches||reduced.matches||event.pointerType==='touch')return;if(event.target.closest('.hero-paint')){dot.classList.remove('active');return;}targetX=event.clientX+13;targetY=event.clientY+13;if(!dot.classList.contains('active')){x=targetX;y=targetY;}dot.classList.add('active');dot.classList.toggle('over-link',Boolean(event.target.closest('a,button,summary')));if(!cursorFrame)cursorFrame=requestAnimationFrame(animateCursor);},{passive:true});
-  document.addEventListener('pointerleave',()=>dot.classList.remove('active'));
-  document.addEventListener('visibilitychange',()=>{if(document.hidden){dot.classList.remove('active');cancelAnimationFrame(cursorFrame);cursorFrame=0;}});
-
   const hero=document.querySelector('.hero'); const photo=document.querySelector('.hero-photo');let scrollFrame=0;
   function updatePhoto(){scrollFrame=0;if(reduced.matches||!photo)return;const y=window.scrollY;if(y<hero.offsetHeight)photo.style.transform=`translate3d(0,${Math.min(y*.12,90)}px,0)`;}
   if(photo) window.addEventListener('scroll',()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(updatePhoto);},{passive:true});
-  reduced.addEventListener('change',()=>{if(reduced.matches){if(photo)photo.style.transform='none';dot.classList.remove('active');cancelAnimationFrame(cursorFrame);cursorFrame=0;}});
+  reduced.addEventListener('change',()=>{if(reduced.matches&&photo)photo.style.transform='none';});
 
   const picker = document.querySelector('[data-paint-picker]');
   const luminanceOf = hex => {

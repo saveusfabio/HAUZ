@@ -178,7 +178,7 @@ A aplicação cria Lenis somente para pointer fine com hover e quando movimento 
 
 ### Cursor
 
-Manter o cursor nativo; o ponto é um complemento decorativo. Não capturar cliques e não mudar o alcance dos controles. Ativar apenas para pointer fine + hover. Desativar em touch e em reduced motion. O loop de animação para ao alcançar o alvo; não manter processamento em idle. Nunca tornar o ponto a única indicação de que um elemento é clicável.
+Manter o cursor nativo em todas as seções. Não adicionar ponto decorativo que siga o ponteiro: a movimentação não informa estado de controle e compete com o conteúdo.
 
 ### Acessibilidade do movimento
 
