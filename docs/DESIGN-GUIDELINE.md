@@ -551,4 +551,4 @@ Implementado: no CTA largo “Explore the redesign”, o texto fica centralizado
 
 A distância entre a hero e o início do redesign agora usa padding superior de 24–32 px no frame da seção Work e, em desktop, sobe a seção 40–64 px sobre o trecho vazio no fim da hero. A altura e a posição interna da hero permanecem iguais, assim como a distância já revisada entre navbar e hero; o título da seção continua depois do conteúdo interativo da hero. Em mobile não há sobreposição. A exceção trata apenas esta transição; as demais seções mantêm seu espaçamento geral.
 
-Como o Site é buildless, as referências a `styles.css` e `design-system.css` recebem um parâmetro de versão no HTML quando são atualizadas, evitando que o navegador reutilize a folha anterior depois da publicação. Manter os dois parâmetros sincronizados com a versão publicada.
+Como o Site é buildless, `styles.css` recebe um parâmetro de versão e `design-system.css` é copiado para um nome versionado no HTML ao publicar uma alteração, evitando que o navegador reutilize a folha anterior. Manter as referências sincronizadas com a versão publicada.
