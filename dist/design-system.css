@@ -263,5 +263,4 @@ body{font-family:var(--font-sans)}
 .lucide-arrow-up-right{transition:transform .22s var(--ease)}
 @media(prefers-reduced-motion:reduce){:is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta),.lucide-arrow-up-right{transition:none!important}:is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta):hover,:is(.button,.nav-contact,.work-open-cta,.work-preview-open,.work-transform-cta):active{transform:none!important}}
 
-/* Move the desktop hero composition closer to the fixed-height navigation. */
-@media(min-width:761px){.hero-paint .hero-frame{padding-bottom:clamp(180px,25vh,300px)}}
+/* Desktop hero bottom spacing is set with the section sizing in styles.css. */
