@@ -186,7 +186,7 @@ Manter o cursor nativo em todas as seções. Não adicionar ponto decorativo que
 
 ## 9. Estrutura aprovada e implementação
 
-1. **Hero:** Your website should look as good as your work. Explica que o trabalho de pintura merece um website tão cuidadoso quanto ele, para que proprietários entendam o serviço e peçam um estimate. CTAs atuais: Get a new website e How it works. Fundo off-white, copy à esquerda e painel à direita com mini-site, cinco cores, uma fotografia conceitual para cada tom e pequenas variações de layout seguem Hero 3.1.
+1. **Hero:** Your website should look as good as your work. Explica que o trabalho de pintura merece um website tão cuidadoso quanto ele, para que proprietários entendam o serviço e peçam um estimate. CTAs atuais: Get a new website e How it works. Fundo off-white, copy à esquerda e painel à direita com mini-site, cinco cores, uma fotografia conceitual para cada tom, pequenas variações de layout e cartões de amostra mais espaçosos seguem Hero 3.2.
 2. **Prova visual:** “See what a better first impression looks like.” Conceito P&D Painting com estados Before/After, inspirado no site público e identificado como não encomendado. O redesign mantém os serviços observados e troca o foco visual para o trabalho do pintor e a preparação da casa. Não tratar a demonstração como case de cliente nem como prova de conversão.
 3. **O que o site precisa fazer:** “What homeowners need to see.” Mostrar os melhores trabalhos, explicar serviços, facilitar o pedido de estimate e manter uma boa apresentação em toda tela.
 4. **Processo:** “You know your business. We’ll handle the website.” Etapas visíveis em um fluxo conectado: “Get to know you / Build and refine / Launch.”
@@ -566,3 +566,9 @@ A decisão prioriza uma amostra de website reconhecível e uma mudança de cor c
 Implementado: Garden Gate, Porchlight, Linen, Rainwashed e Golden Hour carregam fotografias de interiores geradas e otimizadas, cada uma alinhada à cor escolhida. São imagens conceituais, não cases ou fotos de cliente. Cada swatch também muda levemente o hero do mini-site: Porchlight e Rainwashed invertem texto/imagem; Linen amplia a coluna da cópia; Golden Hour equilibra as colunas; Garden Gate mantém a composição-base.
 
 O hover de refração/água e o renderer WebGL foram removidos do preview e da página; a fotografia fica estática e só muda quando o usuário escolhe outro swatch. A seleção continua atualizando cor de texto, botões e outras cenas do site. As imagens JPG têm 1200 × 800 px e carregam sob demanda quando selecionadas; transições de layout/foto respeitam `prefers-reduced-motion`.
+
+### Hero 3.2: seletor de cores com mais respiro · 04/11/2026
+
+Implementado: cada swatch é um cartão independente, com margem interna maior, amostra de cor e nome em áreas separadas. O check aparece ao lado do nome selecionado, fora da área pintada; o contorno tonal, o fundo levemente tingido e a elevação sutil deixam a seleção evidente sem sobrecarregar a amostra. O mini-site continua atualizando foto, cor e composição conforme a escolha.
+
+Em telas estreitas, os cinco cartões passam a uma grade de três colunas, com os dois últimos centralizados. O foco permanece visível, os botões mantêm rótulos acessíveis e aria-pressed, e os estados de elevação respeitam prefers-reduced-motion. A separação entre preenchimento, rótulo e seleção melhora leitura e toque sem adicionar texto à hero.
