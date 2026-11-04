@@ -911,3 +911,22 @@ footer .footer-bottom{border:0;background:transparent;color:#a9afa3;padding:0;fo
 .work .work-lightbox .project-window{height:min(62dvh,700px)}
 .work-lightbox-layout .demo{height:calc(min(62dvh,700px) - 43px)}
 @media(max-width:760px){.work .work-lightbox{top:0;left:0;transform:none;width:100%;height:100dvh;max-height:none}}
+
+/* Hero: a miniature site makes each paint choice visible as a design decision. */
+.site-mini{width:100%;height:214px;overflow:hidden;border:1px solid #20231f22;background:#fff;box-shadow:0 10px 24px -18px #20231f66;color:#20231f}
+.site-mini-browser{height:24px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:#e9ebe5;border-bottom:1px solid #20231f16;font:8px var(--font-mono,monospace);color:#70776d}
+.site-mini-browser .lucide{width:10px;height:10px}.site-mini-dots{display:flex;gap:3px}.site-mini-dots i{width:5px;height:5px;border-radius:50%;background:#b9beb1}.site-mini-dots i:first-child{background:#d5a19d}.site-mini-dots i:nth-child(2){background:#dac797}
+.site-mini-page{height:calc(100% - 24px);background:linear-gradient(110deg,#f7f7f2,#fff)}
+.site-mini-nav{height:35px;padding:0 13px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #20231f16;font-size:8px;white-space:nowrap}
+.site-mini-brand{display:inline-flex;align-items:center;gap:5px;margin-right:auto;font-weight:650;letter-spacing:-.025em}.site-mini-brand i{width:8px;height:8px;background:var(--hero-paint-color,#56664e);transform:rotate(45deg);transition:background .4s}
+.site-mini-links{color:#7b8076}.site-mini-nav-cta{padding:5px 7px;background:var(--action-accent,#56664e);color:var(--accent-ink,#fff);transition:background .4s,color .4s}
+.site-mini-content{display:grid;grid-template-columns:1.45fr 1fr;gap:12px;height:128px;padding:14px 13px 10px}
+.site-mini-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0}.site-mini-eyebrow{color:var(--accent-text,#56664e);font:7px var(--font-mono,monospace);letter-spacing:.03em}.site-mini-copy strong{margin-top:7px;font-size:22px;font-weight:500;line-height:1.02;letter-spacing:-.06em}.site-mini-lines{display:grid;gap:3px;width:90%;margin-top:8px}.site-mini-lines i{height:3px;background:#c7cfc2}.site-mini-lines i:last-child{width:62%}.site-mini-cta{display:inline-flex;align-items:center;gap:9px;margin-top:auto;padding:6px 8px;background:var(--action-accent,#56664e);color:var(--accent-ink,#fff);font-size:7px;font-weight:600;transition:background .4s,color .4s}.site-mini-cta .lucide{width:9px;height:9px}
+.hero-paint .paint-sample-card .paint-field.site-mini-art{width:100%;height:100%;min-height:0;margin:0;border:0;overflow:hidden;background:var(--hero-paint-color,#56664e)}
+.site-mini-art .paint-field-texture,.site-mini-art .paint-fluid{width:100%;height:100%;object-fit:cover}
+.site-mini-footer{height:31px;display:flex;align-items:center;justify-content:space-between;padding:0 13px;border-top:1px solid #20231f16;color:#6c7369;font:7px var(--font-mono,monospace)}
+.site-mini.is-building .site-mini-copy strong,.site-mini.is-building .site-mini-cta,.site-mini.is-building .site-mini-nav-cta{animation:mini-site-build .55s ease both}
+.site-mini.is-building .site-mini-cta{animation-delay:.1s}
+@keyframes mini-site-build{0%{opacity:.22;transform:translateY(5px)}100%{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){.site-mini{height:184px}.site-mini-content{height:101px;padding:10px}.site-mini-copy strong{font-size:18px}.site-mini-footer{height:24px}.site-mini-nav{padding-inline:10px}.site-mini-links{display:none}}
+@media(prefers-reduced-motion:reduce){.site-mini *{animation:none!important;transition:none!important}}

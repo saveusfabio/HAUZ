@@ -102,9 +102,15 @@
   applyActionTone('#56664e');
   if (picker) {
     const swatches = [...picker.querySelectorAll('.paint-swatch')];
+    const siteMini = document.querySelector('.site-mini');
     let paintPulseTimer = 0;
     swatches.forEach((swatch, index) => {
       swatch.addEventListener('click', () => {
+        if (siteMini && !reduced.matches) {
+          siteMini.classList.remove('is-building');
+          void siteMini.offsetWidth;
+          siteMini.classList.add('is-building');
+        }
         picker.style.setProperty('--paint-color', swatch.dataset.paint);
         hero.style.setProperty('--hero-paint-color', swatch.dataset.paint);
         document.documentElement.style.setProperty('--site-accent', swatch.dataset.paint);
