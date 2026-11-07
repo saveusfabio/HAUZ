@@ -1,6 +1,6 @@
-# Studio / 001 — direção de design e interação
+# HAUZ — direção de design e interação
 
-Versão 1 · 23 de outubro de 2026 · identidade provisória
+Direção vigente · 07 de novembro de 2026 · identidade HAUZ
 
 ## 1. Objetivo
 
@@ -69,13 +69,13 @@ Também existem um carrossel de parceiros e depoimentos com navegação. Não fo
 
 Preservar o vocabulário visual, construir a composição e o conteúdo para nossa oferta. Não reutilizar as fotos, logos, testemunhos, dados comerciais ou código do template. As fotos da V1 são imagens independentes de arquitetura, não trabalhos realizados pelo estúdio ou por clientes.
 
-O símbolo de casa e o nome **Studio / 001** são placeholders de trabalho. Não constituem proposta final de naming. A marca Clubhouse permanece referência de atitude e síntese, sem reprodução do desenho.
+O símbolo de casa e o nome Studio / 001 foram placeholders da V1 e foram substituídos pela marca HAUZ fornecida pelo usuário em 07/11/2026. A marca Clubhouse permanece referência de atitude e síntese, sem reprodução do desenho.
 
 ### Exploração de identidade — rodada inicial · 26/10/2026
 
 **Referência fornecida pelo usuário:** Clubhouse. A preferência declarada é pelo traço irregular, quebrado e com aparência feita à mão, além da síntese de uma marca composta por símbolo e wordmark. O símbolo de casa e o elemento central pertencem à referência e não devem ser copiados. Esta é uma preferência observada, não uma identidade aprovada.
 
-**Direção a explorar:** criar símbolos próprios relacionados à pintura residencial e à apresentação do trabalho — por exemplo, gesto de pincel, amostra/recorte de tinta ou moldura arquitetônica — em desenho manual controlado, simples o bastante para funcionar em tamanhos pequenos. Testar versões de uma cor e lockups símbolo + wordmark. Preservar legibilidade e evitar sugerir que o estúdio executa pintura. “Studio / 001” permanece nome de trabalho; conceitos não aprovam naming, cor ou marca final. A prancha inicial e os três caminhos estão em `docs/brand-concepts.html` e devem ser avaliados antes de incorporar qualquer opção ao website.
+**Histórico da exploração:** a rodada inicial considerou símbolos próprios relacionados à pintura residencial e à apresentação do trabalho — por exemplo, gesto de pincel, amostra/recorte de tinta ou moldura arquitetônica. “Studio / 001” era então nome de trabalho; a marca HAUZ fornecida pelo usuário substituiu essa hipótese. A prancha inicial e os três caminhos permanecem em `docs/brand-concepts.html` apenas como registro, sem orientar a identidade atual.
 
 ### Apresentação do trabalho: comparação antes → depois — 03/11/2026
 
@@ -90,15 +90,15 @@ Nossa diferenciação vem do redesign demonstrado, da linguagem específica para
 
 | Token | Valor | Uso |
 |---|---|---|
-| Paper | `#f4f4f0` | Fundo com leve calor |
-| Ink | `#20231f` | Texto principal |
-| Muted | `#686c63` | Texto secundário em fundo claro |
-| Grid light | `rgba(32,35,31,.022)` | Guias muito discretas no fundo claro |
+| Paper | `#f5f3ed` | Fundo com leve calor |
+| Ink | `#20221d` | Texto principal |
+| Muted | `#565b50` | Texto secundário em fundo claro |
+| Grid light | `color-mix(in srgb,var(--paint-pigment) 11%,transparent)` | Guias verticais na hero e no estúdio |
 | Lime | #b5d173 | Cursor e detalhes pontuais; a CTA final usa a paleta selecionada |
 | Dark | `#252d27` | Contato e navegação móvel |
 | Studio wash | `#e8ebdf` | Bloco editorial sobre o estúdio |
-| Grid hero | `rgba(32,35,31,.04)` | Guias de baixo contraste no fundo off-white do hero atual |
-| Grid mobile | `rgba(32,35,31,.016)` | Guias ainda mais leves em telas estreitas |
+| Grid hero | `color-mix(in srgb,var(--paint-pigment) 11%,transparent)` | Divisões verticais alinhadas na hero |
+| Grid mobile | mesmo pigmento com contenção atrás do conteúdo | Guias não atravessam texto |
 | Container | Até 1320 px | Quatro colunas principais |
 | Gutters | 48 / 32 / 24 / 20 px | Desktop amplo / intermediário / móvel / muito estreito |
 | Padding de seção | 120 / 90 / 72 px | Desktop / tablet / mobile |
@@ -186,7 +186,7 @@ Manter o cursor nativo em todas as seções. Não adicionar ponto decorativo que
 
 ## 9. Estrutura aprovada e implementação
 
-1. **Hero:** Your website should look as good as your work. Explica que o trabalho de pintura merece um website tão cuidadoso quanto ele, para que proprietários entendam o serviço e peçam um estimate. CTAs atuais: Get a new website e How it works. Fundo off-white, copy à esquerda e painel à direita com mini-site, cinco cores, uma fotografia conceitual para cada tom, pequenas variações de layout e cartões de amostra mais espaçosos seguem Hero 3.2.
+1. **Hero:** Your website should look as good as your work. Explica que o trabalho de pintura merece um website tão cuidadoso quanto ele, para que proprietários entendam o serviço e peçam um estimate. CTAs atuais: Get a new website e How it works. Fundo off-white, copy à esquerda e painel à direita com mini-site, cinco cores, uma fotografia conceitual para cada tom, pequenas variações de layout e cartões de amostra mais espaçosos seguem a direção HAUZ de 07/11/2026.
 2. **Prova visual:** “See what a better first impression looks like.” Conceito P&D Painting com estados Before/After, inspirado no site público e identificado como não encomendado. O redesign mantém os serviços observados e troca o foco visual para o trabalho do pintor e a preparação da casa. Não tratar a demonstração como case de cliente nem como prova de conversão.
 3. **O que o site precisa fazer:** “What homeowners need to see.” Mostrar os melhores trabalhos, explicar serviços, facilitar o pedido de estimate e manter uma boa apresentação em toda tela.
 4. **Processo:** “You know your business. We’ll handle the website.” Etapas visíveis em um fluxo conectado: “Get to know you / Build and refine / Launch.”
@@ -551,7 +551,7 @@ Implementado: no CTA largo “Explore the redesign”, o texto fica centralizado
 
 A distância entre a hero e o início do redesign usa padding superior de 24–32 px no frame da seção Work e, em desktop, sobe a seção 40–64 px sobre o trecho vazio no fim da hero. A altura mínima desktop da hero e do frame é limitada a 640–700 px, usando padding de 152 px no topo e 36 px embaixo para compensar navbar e distância até a seção seguinte; o conteúdo centralizado aproxima as margens visíveis acima e abaixo. O mobile mantém a sobreposição desligada; o detalhe vigente de espaçamento simétrico está em “Hero 3.0: equilíbrio e demonstração do trabalho”.
 
-Como o Site é buildless, `styles.css` recebe um parâmetro de versão e `design-system.css` é copiado para um nome versionado no HTML ao publicar uma alteração, evitando que o navegador reutilize a folha anterior. A versão atual usa `v51`; manter as referências sincronizadas com a publicação.
+Como o Site é buildless, `styles.css` recebe um parâmetro de versão e `design-system.css` é copiado para um nome versionado no HTML ao publicar uma alteração, evitando que o navegador reutilize a folha anterior. A versão atual usa o complemento de estilo `hauz-v53.css` e parâmetros `v=53` nos scripts alterados; manter as referências sincronizadas com a publicação.
 
 ### Hero 3.0: equilíbrio e demonstração do trabalho · 04/11/2026
 
@@ -572,3 +572,16 @@ O hover de refração/água e o renderer WebGL foram removidos do preview e da p
 Implementado: cada swatch é um cartão independente, com margem interna maior, amostra de cor e nome em áreas separadas. O check aparece ao lado do nome selecionado, fora da área pintada; o contorno tonal, o fundo levemente tingido e a elevação sutil deixam a seleção evidente sem sobrecarregar a amostra. O mini-site continua atualizando foto, cor e composição conforme a escolha.
 
 Em telas estreitas, os cinco cartões passam a uma grade de três colunas, com os dois últimos centralizados. O foco permanece visível, os botões mantêm rótulos acessíveis e aria-pressed, e os estados de elevação respeitam prefers-reduced-motion. A separação entre preenchimento, rótulo e seleção melhora leitura e toque sem adicionar texto à hero.
+
+
+### Direção HAUZ: integração autorizada · 07/11/2026
+
+**Referência observada:** o Site do sócio em https://hauz-fieldwork.marcelvinotti.chatgpt.site/ apresenta uma amostra de website com paleta flutuante, comparação de antes/depois com divisor arrastável, quatro benefícios sobre fotografia, lista dos ofícios, FAQ em duas colunas e guias verticais alinhadas. O usuário autorizou copiar essas partes e forneceu HAUZ-LOGO.svg como marca. A referência é visual e de interação; não fornece evidência de resultado comercial.
+
+**Implementado:** HAUZ substitui Studio / 001 na navegação, rodapé, título e descrições. O SVG fornecido é a fonte do lockup; uma versão monocromática clara deriva do mesmo desenho para o rodapé. A hero apresenta o mini-site em um retângulo destacado, com cinco amostras quadradas em cartela flutuante e nomes acessíveis em aria-label. A escolha continua trocando imagem e tema; o selo circular da referência pode ser pausado e para com movimento reduzido. A seção Work usa um divisor operável por toque, ponteiro ou teclado e abre a lightbox para navegar nas páginas completas. Em mobile, o divisor permanece visível e o usuário desliza para revelar o redesign.
+
+O conceito de P&D Painting continua identificado dentro do mockup e da lightbox, sem ser apresentado como cliente. A legenda redundante abaixo do comparativo e a frase de disclaimer no rodapé da lightbox foram removidas para manter o preview como foco visual.
+
+A seção de benefícios usa quatro colunas com fotografia escura no fundo e texto legível; o bloco About apresenta Painting, Construction e Carpentry e uma prancha com foto e mensagem. O FAQ começa fechado, organiza pergunta e resposta na coluna direita no desktop e empilha no mobile; apenas uma pergunta fica aberta por vez. Mantemos os textos comerciais já aprovados, inclusive preço e ressalvas.
+
+**Regra vigente:** superfícies, controles, cartões, diálogos e imagens retangulares usam cantos retos. Selo e puxador do comparativo são círculos intencionais. As guias verticais aparecem na hero e no estúdio, alinhadas à largura do frame, e cedem ao fundo do texto; outras seções usam seus próprios limites. A tipografia permanece Geist para conteúdo e Fragment Mono para metadados, com pesos recorrentes 400, 500 e 600; títulos de página e seção usam 500. Não importar a fonte Archivo Black nem o peso mais alto da referência. Os exemplos de sites dentro do comparativo podem manter tipografia própria. As especificações de Hero 3.0–3.2, dos cartões de cor e da grade anterior ficam registradas como histórico e são substituídas por esta direção.

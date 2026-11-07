@@ -1,171 +1,116 @@
 (() => {
   'use strict';
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  document.documentElement.classList.add('js');
-  const paintFieldIntro = document.querySelector('.paint-field');
-  if (paintFieldIntro && !reduced.matches) {
-    document.documentElement.classList.add('paint-intro');
-    window.setTimeout(() => document.documentElement.classList.remove('paint-intro'), 1050);
-  }
-  let smoothScroll = null;
-  const smoothPointer = matchMedia('(hover:hover) and (pointer:fine)');
-  const syncSmoothScroll = () => {
+
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = matchMedia('(hover:hover) and (pointer:fine)');
+  let smoothScroll;
+  function syncSmoothScroll() {
     smoothScroll?.destroy();
-    smoothScroll = !reduced.matches && smoothPointer.matches && window.Lenis ? new window.Lenis({ autoRaf: true, anchors: true, lerp: .085 }) : null;
-  };
+    smoothScroll = !reducedMotion.matches && finePointer.matches && window.Lenis
+      ? new window.Lenis({ autoRaf: true, anchors: true, lerp: .085 })
+      : null;
+  }
   syncSmoothScroll();
-  reduced.addEventListener('change', syncSmoothScroll);
-  smoothPointer.addEventListener('change', syncSmoothScroll);
-  const reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
-    }), { threshold: .08, rootMargin: '0px 0px -25px 0px' });
-    reveals.forEach(el => observer.observe(el));
-  } else reveals.forEach(el => el.classList.add('is-visible'));
+  reducedMotion.addEventListener('change', syncSmoothScroll);
+  finePointer.addEventListener('change', syncSmoothScroll);
 
-  const scrollCopy = document.querySelector('[data-scroll-copy]');
-  if (scrollCopy && !reduced.matches) {
-    const text = scrollCopy.textContent;
-    const words = text.match(/\S+|\s+/g) || [];
-    scrollCopy.replaceChildren(...words.map(part => {
-      if (/^\s+$/.test(part)) return document.createTextNode(part);
-      const word = document.createElement('span');
-      word.className = 'studio-scroll-word';
-      word.textContent = part;
-      return word;
-    }));
-    const scrollWords = [...scrollCopy.querySelectorAll('.studio-scroll-word')];
-    scrollWords.forEach(word => { if (/^(tech|design|homebuilding)[.,—]?$/i.test(word.textContent)) word.classList.add('studio-keyword'); });
-    let textFrame = 0, textVisible = false;
-    const updateScrollCopy = () => {
-      textFrame = 0;
-      const threshold = window.innerHeight * .78;
-      const positions = scrollWords.map(word => word.getBoundingClientRect().top);
-      scrollWords.forEach((word,i) => word.classList.toggle('is-scrolled', reduced.matches || positions[i] <= threshold));
-    };
-    const requestTextUpdate = () => { if (textVisible && !textFrame && !document.hidden) textFrame = requestAnimationFrame(updateScrollCopy); };
-    new IntersectionObserver(entries => { textVisible=entries[0].isIntersecting; requestTextUpdate(); },{rootMargin:'100px'}).observe(scrollCopy);
-    window.addEventListener('scroll', requestTextUpdate, { passive: true });
-    window.addEventListener('resize', requestTextUpdate, { passive: true });
-    requestTextUpdate();
+  const luminance = hex => {
+    const channels = hex.slice(1).match(/../g).map(channel => {
+      const value = parseInt(channel, 16) / 255;
+      return value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4;
+    });
+    return channels[0] * .2126 + channels[1] * .7152 + channels[2] * .0722;
+  };
+  const contrast = (a, b) => (Math.max(luminance(a), luminance(b)) + .05) / (Math.min(luminance(a), luminance(b)) + .05);
+  const shade = (hex, factor) => '#' + hex.slice(1).match(/../g).map(channel => Math.round(parseInt(channel, 16) * factor).toString(16).padStart(2, '0')).join('');
+
+  const tint = (hex, amount) => '#' + hex.slice(1).match(/../g).map(channel => {
+    const value = parseInt(channel, 16);
+    return Math.round(value + (255 - value) * amount).toString(16).padStart(2, '0');
+  }).join('');
+
+  function applyPaintTheme(color) {
+    let background = color;
+    const ink = contrast(color, '#ffffff') >= contrast(color, '#252824') ? '#ffffff' : '#252824';
+    if (ink === '#ffffff') {
+      for (let factor = .98; contrast(background, ink) < 5.2; factor -= .02) background = shade(color, factor);
+    } else {
+      for (let amount = .02; contrast(background, ink) < 5.2; amount += .02) background = tint(color, amount);
+    }
+    let textColor = color;
+    for (let factor = .98; contrast(textColor, '#e4e4e0') < 4.5; factor -= .02) textColor = shade(color, factor);
+    const root = document.documentElement.style;
+    root.setProperty('--paint-pigment', color);
+    root.setProperty('--action-accent', background);
+    root.setProperty('--accent-ink', ink);
+    root.setProperty('--accent-text', textColor);
+    root.setProperty('--selection-ink', textColor);
+    document.querySelector('.craft-sticker img').style.filter = ink === '#ffffff' ? 'none' : 'brightness(.25)';
   }
 
-  document.querySelectorAll('.roll').forEach(el => {
-    [...el.childNodes].filter(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim()).forEach(node => {
-      const text = node.textContent.trim();
-      const wrap = document.createElement('span'); wrap.className = 'roll-text'; wrap.setAttribute('aria-hidden','true');
-      [...text].forEach((char,i) => { const span=document.createElement('span'); span.className='roll-char';span.style.setProperty('--i',i);span.textContent=char;wrap.append(span); });
-      const accessible=document.createElement('span');accessible.textContent=text;accessible.style.cssText='position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap';
-      node.replaceWith(wrap,accessible);
+  const picker = document.querySelector('[data-paint-picker]');
+  const swatches = [...picker.querySelectorAll('.paint-swatch')];
+  const miniSite = document.querySelector('.site-mini');
+  const miniImage = miniSite.querySelector('.paint-field-texture');
+  const paintName = picker.querySelector('[data-paint-name]');
+  applyPaintTheme(picker.querySelector('.is-selected').dataset.paint);
+
+  swatches.forEach((swatch, index) => {
+    swatch.addEventListener('click', () => {
+      if (swatch.classList.contains('is-selected')) return;
+      applyPaintTheme(swatch.dataset.paint);
+      paintName.textContent = swatch.dataset.name;
+      miniSite.dataset.layout = swatch.dataset.layout;
+      miniImage.src = swatch.dataset.image;
+      miniSite.classList.remove('is-building');
+      void miniSite.offsetWidth;
+      miniSite.classList.add('is-building');
+      swatches.forEach(button => {
+        const selected = button === swatch;
+        button.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', String(selected));
+      });
+    });
+    swatch.addEventListener('keydown', event => {
+      if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      let next = (index + (event.key === 'ArrowRight' ? 1 : swatches.length - 1)) % swatches.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = swatches.length - 1;
+      swatches[next].focus();
+      swatches[next].click();
     });
   });
 
-  const scramble = el => {
-    if (reduced.matches) return;
-    const original=el.textContent; const visible=document.createElement('span');visible.setAttribute('aria-hidden','true');
-    const accessible=document.createElement('span');accessible.textContent=original;accessible.style.cssText='position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap';
-    el.replaceChildren(visible,accessible);const start=performance.now();
-    const tick = now => { const progress=Math.min((now-start)/480,1);const resolved=Math.floor(progress*original.length);visible.textContent=[...original].map((c,i)=>c===' '||i<resolved?c:'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random()*26)]).join(''); if(progress<1&&!reduced.matches) requestAnimationFrame(tick);else visible.textContent=original; };requestAnimationFrame(tick);
-  };
-  if ('IntersectionObserver' in window) {const labels=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){scramble(e.target);labels.unobserve(e.target)}}),{threshold:1});document.querySelectorAll('[data-scramble]').forEach(el=>labels.observe(el));}
-
-  const hero=document.querySelector('.hero'); const photo=document.querySelector('.hero-photo');let scrollFrame=0;
-  function updatePhoto(){scrollFrame=0;if(reduced.matches||!photo)return;const y=window.scrollY;if(y<hero.offsetHeight)photo.style.transform=`translate3d(0,${Math.min(y*.12,90)}px,0)`;}
-  if(photo) window.addEventListener('scroll',()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(updatePhoto);},{passive:true});
-  reduced.addEventListener('change',()=>{if(reduced.matches&&photo)photo.style.transform='none';});
-
-  const picker = document.querySelector('[data-paint-picker]');
-  const luminanceOf = hex => {
-    const channels = hex.replace('#','').match(/../g).map(c=>parseInt(c,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);
-    return channels[0]*.2126+channels[1]*.7152+channels[2]*.0722;
-  };
-  const contrast = (a,b) => (Math.max(luminanceOf(a),luminanceOf(b))+.05)/(Math.min(luminanceOf(a),luminanceOf(b))+.05);
-  const shade = (hex,factor) => '#'+hex.slice(1).match(/../g).map(c=>Math.round(parseInt(c,16)*factor).toString(16).padStart(2,'0')).join('');
-  const applyActionTone = color => {
-    let background=color;
-    // The orange pigment needs a deeper terracotta surface to support clear white type.
-    if(color==='#d87843') for(let f=.98;contrast(background,'#ffffff')<5.2;f-=.02) background=shade(color,f);
-    const ink=contrast(background,'#ffffff')>=contrast(background,'#20231f')?'#ffffff':'#20231f';
-    if(ink==='#ffffff') for(let f=.98;contrast(background,ink)<5.2;f-=.02) background=shade(color,f);
-    let textColor=color;
-    for(let f=.98;contrast(textColor,'#f4f4f0')<4.5;f-=.02) textColor=shade(color,f);
-    const root=document.documentElement.style;
-    root.setProperty('--action-accent',background);root.setProperty('--accent-ink',ink);root.setProperty('--accent-text',textColor);root.setProperty('--selection-ink',shade(textColor,.48));
-  };
-  applyActionTone('#56664e');
-  if (picker) {
-    const swatches = [...picker.querySelectorAll('.paint-swatch')];
-    const siteMini = document.querySelector('.site-mini'); const siteMiniImage = siteMini?.querySelector('.paint-field-texture');
-    const paintSelected = picker.querySelector('.paint-selected');
-    let paintPulseTimer = 0, paintNameTimer = 0;
-    swatches.forEach((swatch, index) => {
-      swatch.addEventListener('click', () => {
-        if (siteMini && !reduced.matches) {
-          siteMini.classList.remove('is-building');
-          void siteMini.offsetWidth;
-          siteMini.classList.add('is-building');
-        }
-        picker.style.setProperty('--paint-color', swatch.dataset.paint);
-        hero.style.setProperty('--hero-paint-color', swatch.dataset.paint);
-        document.documentElement.style.setProperty('--site-accent', swatch.dataset.paint);
-        applyActionTone(swatch.dataset.paint);
-        const hex = swatch.dataset.paint.slice(1);
-        const red = parseInt(hex.slice(0,2),16)/255, green = parseInt(hex.slice(2,4),16)/255, blue = parseInt(hex.slice(4,6),16)/255;
-        const high = Math.max(red,green,blue), low = Math.min(red,green,blue), light = (high+low)/2;
-        let hue = 0, saturation = 0;
-        if (high !== low) { const delta = high-low; saturation = delta/(1-Math.abs(2*light-1)); hue = high===red ? ((green-blue)/delta)%6 : high===green ? (blue-red)/delta+2 : (red-green)/delta+4; hue = (hue*60+360)%360; }
-        const complementaryHue = (hue+180)%360;
-        const ground = 'hsl(' + complementaryHue + ' ' + Math.min(17,saturation*100*.2) + '% 96.5%)';
-        const rootStyle = document.documentElement.style;
-        rootStyle.setProperty('--hero-paint-tint', 'hsl(' + hue + ' ' + Math.max(saturation * 100, 42) + '% ' + Math.max(light * 100, 34) + '%)');
-        rootStyle.setProperty('--hero-ground', ground);
-        hero.classList.remove('is-painting');
-        void hero.offsetWidth;
-        hero.classList.add('is-painting');
-        window.clearTimeout(paintPulseTimer);
-        paintPulseTimer = window.setTimeout(() => hero.classList.remove('is-painting'), 780);
-        picker.querySelector('[data-paint-name]').textContent = swatch.dataset.name;
-        if (paintSelected && !reduced.matches) {
-          paintSelected.classList.remove('is-changing');
-          void paintSelected.offsetWidth;
-          paintSelected.classList.add('is-changing');
-          window.clearTimeout(paintNameTimer);
-          paintNameTimer = window.setTimeout(() => paintSelected.classList.remove('is-changing'), 360);
-        }
-        swatches.forEach(button => {
-          const selected = button === swatch;
-          button.classList.toggle('is-selected', selected);
-          button.setAttribute('aria-pressed', String(selected));
-        });
-        window.dispatchEvent(new Event('paint-color-change'));
-      });
-      swatch.addEventListener('click', () => {
-        if (siteMini) siteMini.dataset.layout = swatch.dataset.layout || 'garden';
-        if (siteMiniImage && swatch.dataset.image && !siteMiniImage.src.endsWith(swatch.dataset.image)) siteMiniImage.src = swatch.dataset.image;
-      });
-      swatch.addEventListener('keydown', event => {
-        if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
-        event.preventDefault();
-        const next = event.key === 'Home' ? 0 : event.key === 'End' ? swatches.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : swatches.length - 1)) % swatches.length;
-        swatches[next].focus();
-      });
-    });
+  const menu = document.querySelector('#mobile-menu');
+  const menuToggle = document.querySelector('.menu-toggle');
+  function closeMenu() {
+    menu.hidden = true;
+    menuToggle.setAttribute('aria-expanded', 'false');
   }
+  menuToggle.addEventListener('click', () => {
+    const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menu.hidden = !open;
+  });
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !menu.hidden) {
+      closeMenu();
+      menuToggle.focus();
+    }
+  });
+  matchMedia('(min-width:761px)').addEventListener('change', event => {
+    if (event.matches) closeMenu();
+  });
 
-  const viewToggle=document.querySelector('.work-transform-cta');
-  const workMockup=document.querySelector('.work-showcase');
-  if(viewToggle&&workMockup){
-    const setCtaVisible=visible=>{viewToggle.classList.toggle('is-visible',visible);};
-    if('IntersectionObserver' in window){new IntersectionObserver(entries=>{for(const entry of entries)setCtaVisible(entry.isIntersecting);},{threshold:0.12}).observe(workMockup);}
-    else setCtaVisible(true);
-  }
-  document.addEventListener('click',event=>{if(!(event.target instanceof Element))return;const control=event.target.closest('.work .demo [data-demo-target]');if(!control)return;const demo=control.closest('.demo');const target=demo?.querySelector(control.dataset.demoTarget);if(!demo||!target)return;event.preventDefault();const top=target.getBoundingClientRect().top-demo.getBoundingClientRect().top+demo.scrollTop;demo.scrollTo({top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});},true);
-  const menu=document.querySelector('#mobile-menu');const toggle=document.querySelector('.menu-toggle');
-  const closeMenu=()=>{menu.hidden=true;toggle.setAttribute('aria-expanded','false');};
-  toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));menu.hidden=!open;});
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){closeMenu();toggle.focus();}});
-  matchMedia('(min-width: 761px)').addEventListener('change',e=>{if(e.matches)closeMenu();});
-
-  const dialog=document.querySelector('#privacy-dialog');document.querySelector('#privacy-button').addEventListener('click',()=>dialog.showModal());dialog.querySelectorAll('.dialog-close,.dialog-close-text').forEach(b=>b.addEventListener('click',()=>dialog.close()));dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
+  const privacy = document.querySelector('#privacy-dialog');
+  document.querySelector('#privacy-button').addEventListener('click', () => privacy.showModal());
+  privacy.querySelectorAll('.dialog-close,.dialog-close-text').forEach(button => button.addEventListener('click', () => privacy.close()));
+  privacy.addEventListener('click', event => {
+    if (event.target === privacy) {
+      const box = privacy.getBoundingClientRect();
+      if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) privacy.close();
+    }
+  });
 })();
