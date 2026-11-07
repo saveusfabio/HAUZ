@@ -169,6 +169,20 @@
   control.addEventListener('input', sync);
   sync();
   viewport.append(labels, control, divider);
+  let dragging = false;
+  const moveTo = clientX => {
+    const box = viewport.getBoundingClientRect();
+    control.value = String(Math.round(Math.max(0, Math.min(1, (clientX - box.left) / box.width)) * 100));
+    sync();
+  };
+  viewport.addEventListener('pointerdown', event => {
+    dragging = true;
+    viewport.setPointerCapture(event.pointerId);
+    moveTo(event.clientX);
+  });
+  viewport.addEventListener('pointermove', event => { if (dragging) moveTo(event.clientX); });
+  viewport.addEventListener('pointerup', () => { dragging = false; });
+  viewport.addEventListener('pointercancel', () => { dragging = false; });
   compare.append(viewport);
   shell.after(compare);
 })();
