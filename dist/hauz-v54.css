@@ -267,7 +267,11 @@ body.hauz-site .craft-sticker,body.hauz-site .swatch-check,body.hauz-site .compa
 }
 @media(max-width:760px){
   #main .hero-paint .hero-main{text-align:center;margin-inline:auto}
-  #main .hero-paint h1,#main .hero-paint .hero-description{margin-inline:auto;text-align:center}
+  #main .hero-paint h1{max-width:15ch;font-size:clamp(28px,7.5vw,36px);line-height:1.1;margin-inline:auto;text-align:center}
+  #main .hero-paint h1 .line{display:inline;white-space:normal}
+  #main .hero-paint h1 .line>span{display:inline;white-space:normal}
+  #main .hero-paint h1 .line::after{content:' '}
+  #main .hero-paint .hero-description{margin-inline:auto;text-align:center}
   #main .hero-paint .hero-actions{justify-content:center}
   .mobile-compare-viewport{touch-action:pan-y;cursor:ew-resize}
   .mobile-compare-viewport input[type=range]{pointer-events:none}
